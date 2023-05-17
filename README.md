@@ -9,13 +9,16 @@ This uses React Native running on Expo.
 
 We will be using packages such as [react-native-maps](https://github.com/react-native-maps/react-native-maps)
 
-## Setup
+## Setup/Deployment
 
-Run npx expo start in order to start the app.
+First, run ```git clone``` to clone the repository.
 
-## Deployment
+Then, run ```cd project-nerve/rn-app``` and ```npm install``` to set up packages.
+
+Run ```npx expo start``` to start the app.
 
 This will be deployed on Expo and possibly TestFlight.
+
 
 ## Authors
 
