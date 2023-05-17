@@ -9,7 +9,7 @@ Our mobile app gamifies getting out of your comfort zone. It encourages people t
 
 This uses React Native running on Expo.
 
-Additional packages will be documented here.
+We will be using packages such as [react-native-maps](https://github.com/react-native-maps/react-native-maps)
 
 ## Setup
 
