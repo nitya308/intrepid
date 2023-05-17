@@ -24,3 +24,5 @@ This will be deployed on Expo and possibly TestFlight.
 TODO: list of authors
 
 ## Acknowledgments
+
+For our acknowledgements, We would like to thank our wonderful professor and TAs with providing us with the tools to build the app of our choosing.
