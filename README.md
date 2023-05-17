@@ -28,3 +28,5 @@ Nitya Agarwala
 Sarah Chacko
 
 ## Acknowledgments
+
+For our acknowledgements, We would like to thank our wonderful professor and TAs with providing us with the tools to build the app of our choosing.
