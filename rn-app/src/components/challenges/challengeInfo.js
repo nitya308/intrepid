@@ -7,7 +7,7 @@ const ChallengeInfo = ({navigation}) => {
     return (
         <View>
             <Text
-                onPress={() => {navigation.navigate('Feed Challenge')}}
+                onPress={() => {navigation.navigate('Video Album')}}
             >Challenge Info</Text>
         </View>
     )

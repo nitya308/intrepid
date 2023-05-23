@@ -3,12 +3,11 @@ import {
     StyleSheet, View, Text, Image,
 } from 'react-native';
 
-const FeedChallenge = (props) => {
+const UserRank = (props) => {
     return (
         <View>
-            <Text>Challenge Info from Feed Page</Text>
         </View>
     )
 }
 
-export default FeedChallenge;
+export default UserRank;

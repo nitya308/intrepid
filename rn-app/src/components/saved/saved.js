@@ -3,14 +3,14 @@ import {
     StyleSheet, View, Text, Image,
 } from 'react-native';
 
-const VideoItem = ({navigation}) => {
+const Saved = ({navigation}) => {
     return (
         <View>
             <Text
                 onPress={() => {navigation.navigate('Challenge Info')}}
-            >Video Item</Text>
+            >Saved Challenges</Text>
         </View>
     )
 }
 
-export default VideoItem;
+export default Saved;
