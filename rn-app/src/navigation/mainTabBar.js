@@ -20,14 +20,15 @@ const MainTabBar = () => {
                     tabBarIcon: ({ focused }) => {
                         let iconName;
 
-                        if (route.name === 'About') {
+                        if (route.name === 'Leaderboard') {
                             iconName = 'info-circle';
-                        } else if (route.name === 'Search') {
+                        } else if (route.name === 'Feed') {
                             iconName = 'search';
                         }
 
                         return <Ionicons name={iconName} size={26} color={focused ? '#58AADA' : 'grey'} />;
                     },
+                    headerShown: false,
                 })}
             >
                 <Tab.Screen name="Leaderboard" component={Leaderboard} />

@@ -6,9 +6,12 @@ import {
 const VideoItem = ({navigation}) => {
     return (
         <View>
-            <Text
-                onPress={() => {navigation.navigate('Challenge Info')}}
-            >Video Item</Text>
+            <Text>
+                Video on the feed
+            </Text>
+            <Text onPress={() => {navigation.navigate('Challenge Info')}}>
+                Try Button
+            </Text>
         </View>
     )
 }

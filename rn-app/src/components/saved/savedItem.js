@@ -2,14 +2,15 @@ import React from 'react';
 import {
     StyleSheet, View, Text, Image,
 } from 'react-native';
-import HistoryItem from './historyItem'
 
-const History = (props) => {
+const SavedItem = (props) => {
     return (
         <View>
-            <Text>History Page</Text>
+            <Text>
+                Nested component for a saved item
+            </Text>
         </View>
     )
 }
 
-export default History;
+export default SavedItem;
