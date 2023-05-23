@@ -1,6 +1,6 @@
 # Nerve
 
-![Team Photo](src/images/readme-team-photo.jpeg)
+![Team Photo](./rn-app/assets/images/readme-team-photo.jpeg)
 
 Our mobile app gamifies getting out of your comfort zone. It encourages people to take risks and do things that they wouldn't necessarily do otherwise. 
 
