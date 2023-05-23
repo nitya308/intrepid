@@ -11,7 +11,7 @@ const ChallengesStack = createStackNavigator();
 function ChallengesNavigator() {
     return (
         <ChallengesStack.Navigator screenOptions={{ headerShown: false }}>
-            <ChallengesStack.Screen name='Challenges' component={Challenges} />
+            <ChallengesStack.Screen name='Challenges Main' component={Challenges} />
             <ChallengesStack.Screen name='Create Challenge' component={CreateChallenge} />
             <ChallengesStack.Screen name='Challenge Info' component={ChallengeInfo} />
             <ChallengesStack.Screen name='Video Album' component={VideoAlbum} />

@@ -8,7 +8,7 @@ const SavedStack = createStackNavigator();
 function SavedNavigator() {
     return (
         <SavedStack.Navigator screenOptions={{ headerShown: false }}>
-            <SavedStack.Screen name='Saved' component={Saved} />
+            <SavedStack.Screen name='Saved Main' component={Saved} />
             <SavedStack.Screen name='Challenge Info' component={ChallengeInfo} />
         </SavedStack.Navigator>
         
