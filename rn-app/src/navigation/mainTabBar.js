@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 import About from '../components/about';
 import SearchTab from '../components/searchTab';
+import OverallChallenges from '../components/overallChallenges';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,6 +29,7 @@ const MainTabBar = () => {
                 })}
             >
                 <Tab.Screen name="Search" component={SearchTab} />
+                <Tab.Screen name="Challenges" component={OverallChallenges} />
                 <Tab.Screen name="About" component={About} />
             </Tab.Navigator>
         </NavigationContainer>
