@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity,
+    StyleSheet, View, Text, Image, TouchableOpacity, Pressable
 } from 'react-native';
+import Bookmark from '../../../assets/icons/bookmark.png';
+import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
+import BackButton from './../../../assets/icons/back-button.png';
 
 const ChallengeInfo = ({navigation}) => {
+
+    const [challengeSaved, setChallengeSaved] = useState(false);
+    const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
     return (
         <View style={styles.screen}>
             <TouchableOpacity onPress={() => {navigation.goBack()}}>
                 <Image 
                     style={styles.backButton}
-                    source={require('./../../../assets/icons/back-button.png')}
+                    source={BackButton}
                 />
             </TouchableOpacity>
 
             <Text style={styles.challengeTitle}>
                 DYE YOUR HAIR PINK
             </Text>
-                    
-            <Image 
-                style={styles.bookmark}
-                source={require('./../../../assets/icons/bookmark.png')}
-            />
+            
+            <Pressable onPress={() => {setChallengeSaved(challengeSaved ? false : true)}}>
+                <Image 
+                    style={styles.bookmark}
+                    source={challengeSaved ? BookmarkFilled : Bookmark}
+                />
+            </Pressable>
 
             <View style={styles.expirationAndPointValue}>
                 <Text style={styles.expiration}>Expires in 3 days</Text>
@@ -46,7 +54,6 @@ const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 35,
         paddingTop: 55,
-        backgroundColor: '#121212',
     },
 
     backButton: {

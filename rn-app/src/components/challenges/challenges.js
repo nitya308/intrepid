@@ -5,6 +5,7 @@ import {
 import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
 import ChallengeItem from './challengeItem';
+import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Challenges = ({navigation}) => {
 
@@ -20,7 +21,7 @@ const Challenges = ({navigation}) => {
         <ScrollView style={styles.container}>
             <Text 
                 onPress={() => {navigation.navigate('Challenge Info')}}
-                style={{ marginTop: '10%' }}
+                style={{ marginTop: '10%'}}
             >
                             Click challenge to see challenge info
                         </Text>
