@@ -6,11 +6,18 @@ import {
 const VideoAlbum = ({navigation}) => {
     return (
         <View>
-            <Text onPress={() => {navigation.navigate('Submit Challenge')}}>
-                Video Album
+            <Text style={styles.upload} onPress={() => {navigation.navigate('Submit Challenge')}}>
+                This is the Video Album page. Click to move to the Submit challenge screen
             </Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    upload: {
+        color: '#ffffff',
+        marginTop: 60,
+    }
+})
 
 export default VideoAlbum;
