@@ -10,7 +10,12 @@ const ChallengesStack = createStackNavigator();
 
 function ChallengesNavigator() {
     return (
-        <ChallengesStack.Navigator screenOptions={{ headerShown: false }}>
+        <ChallengesStack.Navigator 
+            screenOptions={{
+                headerShown: false,
+                cardStyle: { backgroundColor: '#fff' }
+            }}
+        >
             <ChallengesStack.Screen name='Challenges Main' component={Challenges} />
             <ChallengesStack.Screen name='Create Challenge' component={CreateChallenge} />
             <ChallengesStack.Screen name='Challenge Info' component={ChallengeInfo} />
