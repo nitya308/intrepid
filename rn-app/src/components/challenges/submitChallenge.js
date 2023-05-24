@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity
+    StyleSheet, View, Text, Image, TouchableOpacity, Modal
 } from 'react-native';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import SwapButton from './../../../assets/icons/swap-button.png';
 import SubmitButton from './../../../assets/icons/submit-button.png'
 
 const SubmitChallenge = ({navigation}) => {
+
+    const [exitModalVisible, setExitModalVisible] = useState('false');
+
+    const displayExitModal = () => {
+        if (exitModalVisible) {
+            return (
+                <Modal
+                    visible={exitModalVisible}>
+                </Modal>
+            )
+        }
+    }
     return (
         <View style={styles.screen}>
+            {displayExitModal}
+
             <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info')}}>
                 <Image 
                     style={styles.exitButton}
