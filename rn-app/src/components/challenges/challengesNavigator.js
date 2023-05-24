@@ -13,7 +13,7 @@ function ChallengesNavigator() {
         <ChallengesStack.Navigator 
             screenOptions={{
                 headerShown: false,
-                cardStyle: { backgroundColor: '#fff' }
+                cardStyle: { backgroundColor: '#121212' }
             }}
         >
             <ChallengesStack.Screen name='Challenges Main' component={Challenges} />
