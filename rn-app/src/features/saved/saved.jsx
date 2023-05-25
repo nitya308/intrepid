@@ -2,7 +2,7 @@ import React from 'react';
 import {
     StyleSheet, View, Text, Image,
 } from 'react-native';
-import SavedHeader from './../../../assets/images/saved-header.png'
+import SavedHeader from './../../../assets/images/saved-header.png';
 
 const Saved = ({navigation}) => {
     return (
@@ -28,10 +28,6 @@ const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 35,
         paddingTop: 55,
-    },
-
-    pointsContainer: {
-       
     },
 
     points: {
