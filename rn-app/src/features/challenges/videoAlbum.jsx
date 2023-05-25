@@ -2,6 +2,7 @@ import React from 'react';
 import {
     StyleSheet, View, Text, Image,
 } from 'react-native';
+import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 
 const VideoAlbum = ({navigation}) => {
     return (
