@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
-    StyleSheet, View, Text, Image, FlatList, SafeAreaView, Pressable
+    StyleSheet, View, Text, Image, FlatList, SafeAreaView, Pressable, RefreshControl
 } from 'react-native';
 import SavedHeader from './../../../assets/images/saved-header.png';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 
 const Saved = ({navigation}) => {
+
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }, []);
+
     const savedData = [
         {
             id: '1',
@@ -68,6 +78,13 @@ const Saved = ({navigation}) => {
                         />
                     }
                     keyExtractor={item => item.id}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                            tintColor='#ffffff'
+                        />
+                    }
                 />
             </SafeAreaView>
             
