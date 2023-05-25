@@ -40,10 +40,10 @@ const Saved = ({navigation}) => {
         return (
             <View style={styles.savedItem}>
                 <Text style={styles.title}>{title}</Text>
-                <View>
+                <View style={styles.expirationAndPointsAndBookmark}>
                     <Text style={styles.expiresAt}>Expires in 3 hours</Text>
-                    <View>
-                        <Text style={styles.points}>{points}</Text>
+                    <View style={styles.pointsAndBookmark}>
+                        <Text style={styles.points}>{points} PTS</Text>
                         <Pressable onPress={() => {setChallengeSaved(!challengedSaved)}}>
                             <Image
                                 style={styles.bookmark}
@@ -97,7 +97,7 @@ const Saved = ({navigation}) => {
 
 const styles = StyleSheet.create({
     screen: {
-        paddingHorizontal: 35,
+        paddingHorizontal: 30,
         paddingTop: 55,
     },
 
@@ -112,32 +112,57 @@ const styles = StyleSheet.create({
     },
 
     savedHeader: {
-        width: 150,
-        height: 52,
+        width: 130,
+        height: 45,
         marginTop: 10,
     },
 
     savedContainer: {
+        marginTop: 20,
     },
 
     savedList: {
-
     },
 
     savedItem: {
-
+        backgroundColor: '#262626',
+        borderRadius: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        marginBottom: 20,
     },
 
     title: {
         color: '#ffffff',
+        fontSize: 22,
+        fontWeight: 700,
+        width: 170,
+        textAlign: 'center',
+    },
+
+    expirationAndPointsAndBookmark: {
+        alignItems: 'flex-end',
+        rowGap: 5,
     },
 
     expiresAt: {
-        color: '#ffffff'
+        color: '#ffffff',
+        fontSize: 17,
+    },
+
+    pointsAndBookmark: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 10,
     },
 
     points: {
         color: '#ffffff',
+        fontSize: 25,
+        fontWeight: 700,
     },
 
     bookmark: {
