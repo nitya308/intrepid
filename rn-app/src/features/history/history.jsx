@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
 
     expirationAndPoints: {
         alignItems: 'flex-end',
+        rowGap: 5,
     },
 
     expiresAt: {
