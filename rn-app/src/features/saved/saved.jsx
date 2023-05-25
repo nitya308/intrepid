@@ -5,6 +5,7 @@ import {
 import SavedHeader from './../../../assets/images/saved-header.png';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
+import PointsBox from '../pointsBox';
 
 const Saved = ({navigation}) => {
 
@@ -60,9 +61,7 @@ const Saved = ({navigation}) => {
     
     return (
         <View style={styles.screen}>
-            <View style={styles.pointsContainer}>
-                <Text style={styles.currentPoints}>50 pts</Text>
-            </View>
+            <PointsBox />
             <Image 
                 source={SavedHeader}
                 style={styles.savedHeader}
@@ -102,16 +101,6 @@ const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 30,
         paddingTop: 55,
-    },
-
-    currentPoints: {
-        color: '#99F9FF',
-        borderWidth: 1,
-        borderColor: '#7BF7FF',
-        borderRadius: 2,
-        alignSelf: 'flex-end',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
     },
 
     savedHeader: {
