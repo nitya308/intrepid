@@ -15,7 +15,7 @@ First, run ```git clone``` to clone the repository.
 
 Then, run ```cd project-nerve/rn-app``` and ```npm install``` to set up packages.
 
-Run ```npx expo start``` to start the app.
+Run ```npx expo start``` to start the app. If it doesn't load on your phone and recommends tunneling, run ```expo start --tunnel``` in the rn-app directory.
 
 This will be deployed on Expo and possibly TestFlight.
 
