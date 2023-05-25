@@ -7,7 +7,10 @@ const SavedStack = createStackNavigator();
 
 function SavedNavigator() {
     return (
-        <SavedStack.Navigator screenOptions={{ headerShown: false }}>
+        <SavedStack.Navigator screenOptions={{ 
+            headerShown: false,
+            cardStyle: { backgroundColor: '#121212' }
+        }}>
             <SavedStack.Screen name='Saved Main' component={Saved} />
             <SavedStack.Screen name='Challenge Info' component={ChallengeInfo} />
         </SavedStack.Navigator>
