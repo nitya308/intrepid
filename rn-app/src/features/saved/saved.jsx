@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import {
-    StyleSheet, View, Text, Image, FlatList, SafeAreaView, Pressable, RefreshControl
+    StyleSheet, View, Text, Image, FlatList, SafeAreaView, Pressable, RefreshControl, TouchableOpacity
 } from 'react-native';
 import SavedHeader from './../../../assets/images/saved-header.png';
 import Bookmark from '../../../assets/icons/bookmark.png';
@@ -34,25 +34,27 @@ const Saved = ({navigation}) => {
 
     ];
 
-    const SavedItem = ({ title, expiresAt, points }) => {
+    const SavedItem = ({ id, title, expiresAt, points }) => {
         const [challengedSaved, setChallengeSaved] = useState(true);
 
         return (
-            <View style={styles.savedItem}>
-                <Text style={styles.title}>{title}</Text>
-                <View style={styles.expirationAndPointsAndBookmark}>
-                    <Text style={styles.expiresAt}>Expires in 3 hours</Text>
-                    <View style={styles.pointsAndBookmark}>
-                        <Text style={styles.points}>{points} PTS</Text>
-                        <Pressable onPress={() => {setChallengeSaved(!challengedSaved)}}>
-                            <Image
-                                style={styles.bookmark}
-                                source={challengedSaved ? BookmarkFilled : Bookmark}
-                            />
-                        </Pressable>
+            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {paramKey: id,})}}>
+                <View style={styles.savedItem}>
+                    <Text style={styles.title}>{title}</Text>
+                    <View style={styles.expirationAndPointsAndBookmark}>
+                        <Text style={styles.expiresAt}>Expires in 3 hours</Text>
+                        <View style={styles.pointsAndBookmark}>
+                            <Text style={styles.points}>{points} PTS</Text>
+                            <Pressable onPress={() => {setChallengeSaved(!challengedSaved)}}>
+                                <Image
+                                    style={styles.bookmark}
+                                    source={challengedSaved ? BookmarkFilled : Bookmark}
+                                />
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     };
     
@@ -72,6 +74,7 @@ const Saved = ({navigation}) => {
                     data={savedData}
                     renderItem={({item}) => 
                         <SavedItem
+                            id={item.id}
                             title={item.title}
                             expiresAt={item.expiresAt}
                             points={item.points}
@@ -88,9 +91,9 @@ const Saved = ({navigation}) => {
                 />
             </SafeAreaView>
             
-            {/* <Text onPress={() => {navigation.navigate('Challenge Info')}}>
+            <Text onPress={() => {navigation.navigate('Challenge Info')}}>
                 Click on a saved challenge to see info about it
-            </Text> */}
+            </Text>
         </View>
     )
 }
