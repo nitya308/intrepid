@@ -16,6 +16,36 @@ const Challenges = ({navigation}) => {
     ]);
 
     
+    const [trendingChallenges, setTrendingChallenges] = useState([
+        {
+            title: 'Dye your hair blue',
+            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+            date: new Date('August 19, 1975 23:15:30'),
+            points:120,
+        },
+        {
+            title: 'Compliment a stranger',
+            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+            date: new Date('August 19, 1975 23:15:30'),
+            points:120,
+        },
+    ]);
+
+    const [allChallenges, setAllChallenges] = useState([
+        {
+            title: 'Dye your hair blue',
+            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+            date: new Date('August 19, 1975 23:15:30'),
+            points:120,
+        },
+        {
+            title: 'Compliment a stranger',
+            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+            date: new Date('August 19, 1975 23:15:30'),
+            points:120,
+        },
+    ]);
+
     return (
         <ScrollView style={styles.container}>
             <Text 
@@ -39,20 +69,25 @@ const Challenges = ({navigation}) => {
                 snapToInterval={312} //your element width
                 snapToAlignment={"center"}
                 style={styles.trendingScroll} >
-                    <View 
-                        style={[styles.trendingBox, styles.neonRed]}
-                    > 
+
+                    
+                    <View style={[styles.trendingBox, styles.neonRed]} > 
                         <Text style={styles.cTitle} >DYE YOUR HAIR PINK</Text>
                         <Text style={styles.cExpiry} >Expires in 3 days </Text>
                         <Text style={styles.cDescription} >Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink! </Text>
                         <Text style={styles.cPoints} >125 PTS </Text>
                     </View>
-                    <View style={[styles.trendingBox, styles.neonPurple]} > 
-                        <Text> Challenge2 </Text>
-                    </View>
-                    <View style={styles.trendingBox} > 
-                        <Text> Challenge3 </Text>
-                    </View>
+
+                    {trendingChallenges.map((challenge, index) => {
+                        return (
+                            <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple] } key={challenge.id} > 
+                                <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
+                                {/* <Text style={styles.cExpiry} >Expires in {challenge.date.toString()}</Text> */}
+                                <Text style={styles.cDescription} >{challenge.description} </Text>
+                                <Text style={styles.cPoints} >{challenge.points} PTS </Text>
+                            </View>
+                        )
+                        })}
                 </ScrollView>
             </View>
 
@@ -85,19 +120,26 @@ const Challenges = ({navigation}) => {
                     />
 
                 <View nativeId='allChallengeList' style={styles.allChallengeList} >
-                    <View style={styles.allChallengeBox } > 
+                    {/* <View style={styles.allChallengeBox } > 
                         <Text style = {styles.allTitle}>COMPLIMENT A STRANGER </Text>
                         <View style={styles.allRight } >
                             <Text style={styles.cExpiry}> Expires in 3 hours</Text>
                             <Text style={styles.aPoints}>10 PTS</Text>
                         </View>
+                    </View> */}
+
+                    {allChallenges.map((challenge, index) => {
+                        return (
+                            <View style={styles.allChallengeBox } key={challenge.id} > 
+                        <Text style = {styles.allTitle}>{challenge.title.toUpperCase()} </Text>
+                        <View style={styles.allRight } >
+                            <Text style={styles.cExpiry}> Expires in 3 hours</Text>
+                            <Text style={styles.aPoints}>{challenge.points} PTS</Text>
+                        </View>
                     </View>
-                    <View style={styles.allChallengeBox} > 
-                        <Text>Challenge2 </Text>
-                    </View>
-                    <View style={styles.allChallengeBox} > 
-                        <Text>Challenge3 </Text>
-                    </View>
+                        )
+                        })}
+
                 </View>
                 
             </View>   

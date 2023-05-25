@@ -7,6 +7,7 @@ const CreateChallenge = ({navigation}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [points, setPoints] = useState('0');
+    
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', margin:10}}>
@@ -14,9 +15,9 @@ const CreateChallenge = ({navigation}) => {
                 onPress={() => {navigation.navigate('Challenge Info')}}
             >Create Challenge</Text>
             <View styles={styles.createChallengeContainer}> 
-                <Text style = {styles.h1}> CREATE CHALLENGE </Text>
+                <Text style = {styles.h1}> CREATE A CHALLENGE </Text>
                 <View style={styles.illegalWarning}>
-                    <Text> Warning</Text>
+                    <Text style={styles.text}> Challenges involving illegal activities or encouraging users to harm themselves or others will be removed. </Text>
                 </View>
 
                 <View style={styles.inputContainer}> 
@@ -50,12 +51,12 @@ const CreateChallenge = ({navigation}) => {
                 </View>
 
                 <View style={styles.pointsWarning}>
-                    <Text> Warning</Text>
+                    <Text  style={styles.text}> You don't have enough points to create this challenge.</Text>
                 </View>
 
                 <TouchableOpacity style={styles.buttonStyleCreate}>
-                        <Text style={styles.buttonTextCreate}>CREATE</Text>
-          </TouchableOpacity>
+                        <Text style={styles.buttonTextCreate}>Create</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )
@@ -75,9 +76,12 @@ const styles = StyleSheet.create({
         backgroundColor:'pink',
     },
     h1: {
-        fontSize: 35,
+        fontSize: 25,
         marginTop: 25,
         marginBottom: 25,
+        color: 'white',
+        fontWeight:'bold',
+        fontStyle:'italic',
     },
     illegalWarning: {
         borderStyle:'solid',
@@ -85,32 +89,43 @@ const styles = StyleSheet.create({
         borderColor:'black',
         width:336,
         height:75,
+        backgroundColor: '#262626',
+        display:'flex',
+        flexDirection:'row',
+    },
+    text: {
+        fontSize:13,
+        color:'white',
+        flex:.7,
     },
     inputContainer: {
         marginTop:20,
+        
     },
     inputLabel: {
         fontSize: 14,
+        color:'white',
     },
     input: {
-        height: 54,
+        
       borderColor: '#CCCCCC',
       borderWidth: 1,
       paddingHorizontal: 10,
-      backgroundColor: '#E8E8E8',
+      backgroundColor: 'black',
       marginTop: 5,
-      color: '#CACCCF',
+      color: 'white',
       borderRadius: 10,
       width: 335,
+      height:28,
     },
     inputDescription: {
         height: 143,
       borderColor: '#CCCCCC',
       borderWidth: 1,
       paddingHorizontal: 10,
-      backgroundColor: '#E8E8E8',
+      backgroundColor: 'black',
       marginTop: 5,
-      color: '#CACCCF',
+      color: 'white',
       borderRadius: 10,
       width: 335,
     },
@@ -122,9 +137,9 @@ const styles = StyleSheet.create({
       borderColor: '#CCCCCC',
       borderWidth: 1,
       paddingHorizontal: 10,
-      backgroundColor: '#E8E8E8',
+      backgroundColor: 'black',
       marginTop: 5,
-      color: '#CACCCF',
+      color: 'white',
       borderRadius: 10,
       width: 60,
     },
@@ -136,6 +151,7 @@ const styles = StyleSheet.create({
         height:57,
         borderRadius:6,
         marginTop:20,
+        backgroundColor: '#262626',
     },
     buttonStyleCreate: {
         width: 129,
@@ -152,6 +168,8 @@ const styles = StyleSheet.create({
     buttonTextCreate: {
         fontSize: 18,
         textAlign: 'center',
+
     },
+    
 });
 export default CreateChallenge;
