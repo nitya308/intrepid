@@ -6,13 +6,37 @@ const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
 export const savedSlice = createSlice({
     name: 'saved',
     initialState: {
-
+        challenges: [],
     },
     reducers: {
-
+        setChallenges: (state, action) => {
+            state.challenges = action.payload;
+        }
     },
 });
 
-export const { } = savedSlice.actions;
+export const { setChallenges } = savedSlice.actions;
+
+const api = axios.create({
+    baseURL: "http://localhost:9090/",
+    withCredentials: false,
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+});
+
+export function fetchSaved(userId) {
+    return async (dispatch) => {
+        api
+            .get(`/users/${userId}/saved`)
+            .then((response) => {
+                dispatch(setChallenges(response.data));
+            })
+            .catch((er) => {
+                dispatch(setError());
+            });
+    };
+}
 
 export default savedSlice.reducer;
