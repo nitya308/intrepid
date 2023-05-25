@@ -5,6 +5,8 @@ import {
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
+import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
+import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 
 const ChallengeInfo = ({ navigation }) => {
 
@@ -40,12 +42,27 @@ const ChallengeInfo = ({ navigation }) => {
                 Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
-            <TouchableOpacity
-                style={styles.submitButton}
-                onPress={() => { navigation.navigate('Video Album') }}
-            >
-                <Text style={styles.submitButtonText}>Submit Challenge</Text>
-            </TouchableOpacity>
+            <View style={styles.submitChallengeButtonContainer}>
+                <TouchableOpacity
+                    onPress={() => { navigation.navigate('Video Album') }}
+                >
+                    <Image
+                        style={styles.submitChallengeButton}
+                        source={SubmitChallengeButton}
+                    />
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.videoUploadedCard}>
+                <Image
+                    source={VideoUploaded}
+                    style={styles.videoUploaded}
+                />
+                <View style={styles.votingInfo}>
+                    <Text style={styles.votingTime}>23: 59: 59</Text>
+                    <Text style={styles.votingEnds}>until voting ends</Text>
+                </View>
+            </View>
         </View>
     )
 }
@@ -97,19 +114,44 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
 
-    submitButton: {
-        borderWidth: 1,
-        borderColor: '#ffffff',
+    submitChallengeButtonContainer: {
         alignItems: 'center',
-        padding: 10,
-        marginTop: 20,
-        width: 200,
     },
 
-    submitButtonText: {
+    submitChallengeButton: {
+        marginTop: 20,
+        width: 200,
+        height: 44,
+    },
+
+    videoUploadedCard: {
+        borderWidth: 1,
+        borderColor: '#C8FCFF',
+        borderRadius: 10,
+        alignItems: 'center',
+        paddingVertical: 30,
+        marginHorizontal: 20,
+    },
+
+    videoUploaded: {
+        width: 170,
+        height: 17.7,
+    },
+
+    votingInfo: {
+
+    },
+
+    votingTime: {
         color: '#ffffff',
-        fontSize: 18,
-    }
+        textAlign: 'center',
+    },
+
+    votingEnds: {
+        color: '#ffffff',
+        textAlign: 'center',
+        fontSize: 20,
+    },
 })
 
 export default ChallengeInfo;
