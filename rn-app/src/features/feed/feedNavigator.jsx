@@ -11,7 +11,7 @@ function FeedNavigator() {
             <FeedStack.Screen name='Video Item' component={VideoItem} />
             <FeedStack.Screen name='Challenge Info' component={ChallengeInfo} />
         </FeedStack.Navigator>
-        
+
     )
 }
 

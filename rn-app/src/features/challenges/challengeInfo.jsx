@@ -4,17 +4,17 @@ import {
 } from 'react-native';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
-import BackButton from './../../../assets/icons/back-button.png';
+import BackButton from '../../../assets/icons/back-button.png';
 
-const ChallengeInfo = ({navigation}) => {
+const ChallengeInfo = ({ navigation }) => {
 
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
     return (
         <View style={styles.screen}>
-            <TouchableOpacity onPress={() => {navigation.goBack()}}>
-                <Image 
+            <TouchableOpacity onPress={() => { navigation.goBack() }}>
+                <Image
                     style={styles.backButton}
                     source={BackButton}
                 />
@@ -23,9 +23,9 @@ const ChallengeInfo = ({navigation}) => {
             <Text style={styles.challengeTitle}>
                 DYE YOUR HAIR PINK
             </Text>
-            
-            <Pressable onPress={() => {setChallengeSaved(challengeSaved ? false : true)}}>
-                <Image 
+
+            <Pressable onPress={() => { setChallengeSaved(challengeSaved ? false : true) }}>
+                <Image
                     style={styles.bookmark}
                     source={challengeSaved ? BookmarkFilled : Bookmark}
                 />
@@ -42,7 +42,7 @@ const ChallengeInfo = ({navigation}) => {
 
             <TouchableOpacity
                 style={styles.submitButton}
-                onPress={() => {navigation.navigate('Video Album')}}
+                onPress={() => { navigation.navigate('Video Album') }}
             >
                 <Text style={styles.submitButtonText}>Submit Challenge</Text>
             </TouchableOpacity>

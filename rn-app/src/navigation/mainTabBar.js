@@ -3,11 +3,11 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
-import Leaderboard from '../components/leaderboard/leaderboard';
-import FeedNavigator from '../components/feed/feedNavigator';
-import ChallengesNavigator from '../components/challenges/challengesNavigator';
-import History from '../components/history/history';
-import SavedNavigator from '../components/saved/savedNavigator';
+import Leaderboard from '../features/leaderboard/leaderboard';
+import FeedNavigator from '../features/feed/feedNavigator';
+import ChallengesNavigator from '../features/challenges/challengesNavigator';
+import History from '../features/history/history';
+import SavedNavigator from '../features/saved/savedNavigator';
 
 const Tab = createBottomTabNavigator();
 
