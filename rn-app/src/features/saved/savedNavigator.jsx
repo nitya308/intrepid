@@ -11,7 +11,7 @@ function SavedNavigator() {
             <SavedStack.Screen name='Saved Main' component={Saved} />
             <SavedStack.Screen name='Challenge Info' component={ChallengeInfo} />
         </SavedStack.Navigator>
-        
+
     )
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import VideoList from './videoList';
-import VideoDetail from './videoDetail';
+import VideoList from '../../components/videoList';
+import VideoDetail from '../video/videoDetail';
 
 // import VideoList from '../components/video_list';
 // import VideoDetail from '../components/video_detail';
