@@ -8,7 +8,7 @@ import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 
-const ChallengeInfo = ({ navigation }) => {
+const ChallengeInfo = ({ navigation, route }) => {
 
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
