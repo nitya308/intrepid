@@ -13,6 +13,39 @@ const ChallengeInfo = ({ navigation }) => {
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
+    const ChallengeInfoCTA = ({submitted}) => {
+        let content;
+
+        if (!submitted) {
+            content = (
+                <View style={styles.submitChallengeButtonContainer}>
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Video Album') }}
+                    >
+                        <Image
+                            style={styles.submitChallengeButton}
+                            source={SubmitChallengeButton}
+                        />
+                    </TouchableOpacity>
+                </View>
+            )
+        } else {
+            content = (
+                <View style={styles.videoUploadedCard}>
+                    <Image
+                        source={VideoUploaded}
+                        style={styles.videoUploaded}
+                    />
+                    <View style={styles.votingInfo}>
+                        <Text style={styles.votingTime}>23: 59: 59</Text>
+                        <Text style={styles.votingEnds}>until voting ends</Text>
+                    </View>
+                </View>
+            )
+        }
+        return content;
+    }
+
     return (
         <View style={styles.screen}>
             <TouchableOpacity onPress={() => { navigation.goBack() }}>
@@ -42,27 +75,7 @@ const ChallengeInfo = ({ navigation }) => {
                 Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
-            <View style={styles.submitChallengeButtonContainer}>
-                <TouchableOpacity
-                    onPress={() => { navigation.navigate('Video Album') }}
-                >
-                    <Image
-                        style={styles.submitChallengeButton}
-                        source={SubmitChallengeButton}
-                    />
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.videoUploadedCard}>
-                <Image
-                    source={VideoUploaded}
-                    style={styles.videoUploaded}
-                />
-                <View style={styles.votingInfo}>
-                    <Text style={styles.votingTime}>23: 59: 59</Text>
-                    <Text style={styles.votingEnds}>until voting ends</Text>
-                </View>
-            </View>
+            <ChallengeInfoCTA submitted={challengeSubmitted}/>
         </View>
     )
 }
@@ -116,10 +129,10 @@ const styles = StyleSheet.create({
 
     submitChallengeButtonContainer: {
         alignItems: 'center',
+        marginTop: 70,
     },
 
     submitChallengeButton: {
-        marginTop: 20,
         width: 200,
         height: 44,
     },
@@ -131,6 +144,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 30,
         marginHorizontal: 20,
+        rowGap: 30,
+        marginTop: 70,
     },
 
     videoUploaded: {
@@ -139,11 +154,13 @@ const styles = StyleSheet.create({
     },
 
     votingInfo: {
-
+        rowGap: 5,
     },
 
     votingTime: {
         color: '#ffffff',
+        fontSize: 50,
+        fontWeight: 700,
         textAlign: 'center',
     },
 
