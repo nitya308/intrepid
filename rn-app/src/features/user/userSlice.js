@@ -6,9 +6,7 @@ const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        user: {
-            name: 'Test User',
-        },
+        userId: 0,
     },
     reducers: {
         login: (state, action) => {
