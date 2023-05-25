@@ -39,7 +39,9 @@ const Challenges = ({navigation}) => {
                 snapToInterval={312} //your element width
                 snapToAlignment={"center"}
                 style={styles.trendingScroll} >
-                    <View style={[styles.trendingBox, styles.neonRed]} > 
+                    <View 
+                        style={[styles.trendingBox, styles.neonRed]}
+                    > 
                         <Text style={styles.cTitle} >DYE YOUR HAIR PINK</Text>
                         <Text style={styles.cExpiry} >Expires in 3 days </Text>
                         <Text style={styles.cDescription} >Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink! </Text>
