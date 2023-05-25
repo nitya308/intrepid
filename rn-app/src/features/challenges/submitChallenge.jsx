@@ -1,29 +1,46 @@
 import React, { useState } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity, Modal
+    StyleSheet, View, Text, Image, TouchableOpacity,
 } from 'react-native';
+import Modal from "react-native-modal";
+import StayButton from './../../../assets/icons/stay-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import SwapButton from './../../../assets/icons/swap-button.png';
 import SubmitButton from './../../../assets/icons/submit-button.png'
 
 const SubmitChallenge = ({navigation}) => {
 
-    const [exitModalVisible, setExitModalVisible] = useState('false');
+    const [exitModalVisible, setExitModalVisible] = useState(false);
 
-    const displayExitModal = () => {
-        if (exitModalVisible) {
-            return (
-                <Modal
-                    visible={exitModalVisible}>
-                </Modal>
-            )
-        }
-    }
     return (
         <View style={styles.screen}>
-            {displayExitModal}
+            
+            <Modal
+                isVisible={exitModalVisible}
+                style={styles.exitModal}
+                backdropOpacity={0.70}
+                animationIn={'fadeIn'}
+                animationInTiming={100}
+                animationOut={'fadeOut'}
+                animationOutTiming={100}
+            >
+                <Text
+                    style={styles.editModalText}>Are you sure you want to stop uploading?</Text>
+                <View style={styles.exitModalActions}>
+                    <Text
+                        style={styles.exitModalExitText}
+                        onPress={() => (navigation.navigate('Challenge Info'))}
+                    >Exit</Text>
+                    <TouchableOpacity onPress={() => {setExitModalVisible(false)}}>
+                        <Image 
+                            style={styles.stayButton}
+                            source={StayButton}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </Modal>
 
-            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info')}}>
+            <TouchableOpacity onPress={() => {setExitModalVisible(true)}}>
                 <Image 
                     style={styles.exitButton}
                     source={ExitButton}
@@ -66,6 +83,40 @@ const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 35,
         paddingTop: 55,
+    },
+
+    exitModal: {
+        backgroundColor: '#303030',
+        borderRadius: 15,
+        marginVertical: 320,
+        marginHorizontal: 50,
+        paddingHorizontal: 40,
+        rowGap: 40,
+    },
+
+    editModalText: {
+        color: '#ffffff',
+        fontSize: 23,
+        fontWeight: 500,
+        textAlign: 'center',
+        lineHeight: 35,
+    },
+
+    exitModalActions: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+
+    exitModalExitText: {
+        color: '#99F9FF',
+        fontSize: 23,
+        fontWeight: 500,
+    },
+
+    stayButton: {
+        width: 115,
+        height: 45,
     },
 
     exitButton: {
