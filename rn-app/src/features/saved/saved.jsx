@@ -89,10 +89,6 @@ const Saved = ({navigation}) => {
                     }
                 />
             </SafeAreaView>
-            
-            <Text onPress={() => {navigation.navigate('Challenge Info')}}>
-                Click on a saved challenge to see info about it
-            </Text>
         </View>
     )
 }
