@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet, View, Text, Image, TouchableOpacity, Pressable
 } from 'react-native';
@@ -19,6 +19,14 @@ const ChallengeInfo = ({ navigation, route }) => {
 
     const currentChallenge = useSelector((state) => state.currentChallenge);
 
+    const mockCurrentChallenge = {
+        title: 'Dye your hair pink',
+        description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+        points: 125,
+        expiresAt: {},
+        isExpired: false,
+    }
+
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
@@ -29,7 +37,7 @@ const ChallengeInfo = ({ navigation, route }) => {
             content = (
                 <View style={styles.submitChallengeButtonContainer}>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate('Submit Challenge') }}
+                        onPress={() => { navigation.navigate('Submit Challenge', {paramKey: route.params.paramKey}) }}
                     >
                         <Image
                             style={styles.submitChallengeButton}

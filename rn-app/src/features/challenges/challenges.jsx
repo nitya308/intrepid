@@ -48,12 +48,6 @@ const Challenges = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text
-                onPress={() => { navigation.navigate('Challenge Info') }}
-                style={{ marginTop: '10%', color: 'white' }}
-            >
-                Click challenge to see challenge info
-            </Text>
             <Text onPress={() => { navigation.navigate('Create Challenge') }} style={{ color: 'white' }}>
                 Create Challenge Button </Text>
 

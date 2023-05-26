@@ -18,11 +18,13 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "expo": "~48.0.15",
+    "expo-av": "~13.2.1",
     "expo-image-picker": "~14.1.1",
     "expo-status-bar": "~1.4.4",
     "expo-updates": "~0.16.4",
     "lodash.debounce": "^4.0.8",
     "react": "18.2.0",
+    "react-date-object": "^2.1.7",
     "react-native": "0.71.8",
     "react-native-asset": "^2.1.1",
     "react-native-dropdown-picker": "^5.4.6",
@@ -34,8 +36,7 @@
     "react-native-screens": "~3.20.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-webview": "11.26.0",
-    "react-redux": "^8.0.5",
-    "expo-av": "~13.2.1"
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
