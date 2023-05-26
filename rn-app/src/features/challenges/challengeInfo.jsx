@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {
     StyleSheet, View, Text, Image, TouchableOpacity, Pressable
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchChallenge } from '../challenges/challengesSlice';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
@@ -9,6 +11,13 @@ import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 
 const ChallengeInfo = ({ navigation, route }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchChallenge(route.params.paramKey))
+    }, [])
+
+    const currentChallenge = useSelector((state) => state.currentChallenge);
 
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
