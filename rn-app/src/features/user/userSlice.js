@@ -43,6 +43,19 @@ export function fetchUsers() {
     };
 }
 
+export function fetchUser(id) {
+    return async (dispatch) => {
+        api
+            .get(`/users/${id}`)
+            .then((response) => {
+                dispatch(setUser(response.data));
+            })
+            .catch((er) => {
+                dispatch(setError());
+            });
+    };
+}
+
 export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;
