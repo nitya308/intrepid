@@ -12,9 +12,12 @@ export const userSlice = createSlice({
         points: 0,
     },
     reducers: {
-        login: (state, action) => {
-            state.user = action.payload;
-        }
+        setUser: (state, action) => {
+            state.userId = action.payload.userId;
+            state.username = action.payload.username;
+            state.email = action.payload.email;
+            state.points = action.payload.points;
+        },
     },
 });
 
@@ -40,6 +43,6 @@ export function fetchUsers() {
     };
 }
 
-export const { login } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;
