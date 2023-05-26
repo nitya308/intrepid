@@ -5,6 +5,7 @@ import {
 import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
 import ChallengeItem from './challengeItem';
+import BackButton from '../../../assets/icons/back-button.png';
 
 const Challenges = ({ navigation }) => {
 
@@ -48,13 +49,19 @@ const Challenges = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text onPress={() => { navigation.navigate('Create Challenge') }} style={{ color: 'white' }}>
+            <Text 
+                onPress={() => {navigation.navigate('Challenge Info')}}
+                style={{ marginTop: '10%', color:'white' }}
+            >
+                            Click challenge to see challenge info
+                        </Text>
+            <Text onPress={() => {navigation.navigate('Create Challenge')}} style={{color:'white'}}>
                 Create Challenge Button </Text>
-
-            <Text style={styles.h1}> CHALLENGES </Text>
+                
+            <Text style = {styles.h1}> CHALLENGES </Text>
             <View style={styles.trendingContainer}>
-                <View style={{ flexDirection: 'row', marginBottom: 10, }}>
-                    <View style={{ backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center' }} />
+            <View style={{flexDirection: 'row', marginBottom:10,}}>
+                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
                     <Text style={styles.h2}> TRENDING </Text>
                     <View style={{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }} />
                 </View>
@@ -78,6 +85,7 @@ const Challenges = ({ navigation }) => {
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} key={challenge.id} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
+                                    <Text style={styles.cExpiry} >Expires in 3 days </Text>
                                     {/* <Text style={styles.cExpiry} >Expires in {challenge.date.toString()}</Text> */}
                                     <Text style={styles.cDescription} >{challenge.description} </Text>
                                     <Text style={styles.cPoints} >{challenge.points} PTS </Text>
@@ -89,14 +97,14 @@ const Challenges = ({ navigation }) => {
             </View>
 
             <View style={styles.allContainer}>
-
-                <View style={{ flexDirection: 'row', marginBottom: 10, }}>
-                    <View style={{ backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center' }} />
+            
+                <View style={{flexDirection: 'row', marginBottom:10,}}>
+                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
                     <Text style={styles.h2}> ALL </Text>
-                    <View style={{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }} />
+                    <View style={{backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center'}} />
                 </View>
 
-                <DropDownPicker
+                {/* <DropDownPicker
                     open={open}
                     value={value}
                     items={items}
@@ -114,7 +122,7 @@ const Challenges = ({ navigation }) => {
                         margin: 10,
                     }}
 
-                />
+                /> */}
 
                 <View nativeId='allChallengeList' style={styles.allChallengeList} >
                     {/* <View style={styles.allChallengeBox } > 
@@ -157,6 +165,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'black',
+    },
+    backButton: {
+        width: 20,
+        height: 40,
     },
     h1: {
         fontSize: 35,
