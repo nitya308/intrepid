@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {
     StyleSheet, View, Text, Image, TouchableOpacity, Button
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchChallenge } from '../challenges/challengesSlice';
 import Modal from "react-native-modal";
 import StayButton from './../../../assets/icons/stay-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
@@ -11,7 +13,14 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { ResizeMode, Video } from 'expo-av';
 
-const SubmitChallenge = ({ navigation }) => {
+const SubmitChallenge = ({ navigation, route }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchChallenge(route.params.paramKey))
+    }, [])
+
+    const currentChallenge = useSelector((state) => state.currentChallenge);
 
     const [exitModalVisible, setExitModalVisible] = useState(false);
     const [video, setVideo] = useState(null);
@@ -54,7 +63,7 @@ const SubmitChallenge = ({ navigation }) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info'))}
+                        onPress={() => (navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}))}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -106,7 +115,7 @@ const SubmitChallenge = ({ navigation }) => {
             </View>
 
             <View style={styles.submitButtonContainer}>
-                <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info') }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}) }}>
                     <Image
                         style={styles.submitButton}
                         source={SubmitButton}
