@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
 
     scrollContainer: {
         height: Dimensions.get('window').height,
-        scrollEnabled: {scrollEnabled},
         overflow: "scroll",
         snapToInterval: Dimensions.get('window').height,
         snapToAlignment: "center",
@@ -45,12 +44,12 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         snapToAlignment: "start",
         background: "#000",
-        position: relative,
+        // position: relative,
         border: "1px solid transparent"
     },
       
     video: {
-        position: absolute,
+        // position: absolute,
         width: 100,
         height: 100,
         resizeMode: "cover",
@@ -58,13 +57,13 @@ const styles = StyleSheet.create({
 
     videoContent: {
         padding: 10,
-        position: relative,
+        // position: relative,
         top: 85,
         color: "#fff"
     },
 
     tryButton: {
-        position: fixed,
+        // position: fixed,
         left: 300,
         // display: flex,
         // justifyContent: space-between,

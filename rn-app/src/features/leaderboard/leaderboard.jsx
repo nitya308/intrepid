@@ -8,11 +8,12 @@ import { fetchTopUsers } from './leaderboardSlice';
 import { useSelector, useDispatch } from "react-redux";
 
 const Leaderboard = (props) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTopUsers());
   }, []);
 
-  const useDispatch = useDispatch();
+  c
 
 //   const ranking = props.topUsers.map((rank) => (
 //     <UserRank rank={rank} />
@@ -45,12 +46,18 @@ const styles = StyleSheet.create({
         paddingTop: 55,
     },
 
-    title: {
-        color: '#ffffff',
-        fontSize: 40,
-        fontWeight: 700,
-        marginTop: 30,
+    savedHeader: {
+        width: 130,
+        height: 45,
+        marginTop: 10,
     },
+
+    // title: {
+    //     color: '#ffffff',
+    //     fontSize: 40,
+    //     fontWeight: 700,
+    //     marginTop: 30,
+    // },
 
     ranking: {
         marginTop: 30,
