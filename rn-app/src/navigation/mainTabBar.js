@@ -8,6 +8,7 @@ import FeedNavigator from '../features/feed/feedNavigator';
 import ChallengesNavigator from '../features/challenges/challengesNavigator';
 import History from '../features/history/history';
 import SavedNavigator from '../features/saved/savedNavigator';
+import HistoryNavigator from '../features/history/historyNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +36,7 @@ const MainTabBar = () => {
                 <Tab.Screen name="Feed" component={FeedNavigator} />
                 <Tab.Screen name="Challenges" component={ChallengesNavigator} />
                 <Tab.Screen name="Saved" component={SavedNavigator} />
-                <Tab.Screen name="History" component={History} />
+                <Tab.Screen name="History" component={HistoryNavigator} />
             </Tab.Navigator>
         </NavigationContainer>
     );
