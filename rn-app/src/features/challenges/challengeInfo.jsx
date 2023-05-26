@@ -13,14 +13,14 @@ const ChallengeInfo = ({ navigation, route }) => {
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
-    const ChallengeInfoCTA = ({submitted}) => {
+    const ChallengeInfoCTA = ({ submitted }) => {
         let content;
 
         if (!submitted) {
             content = (
                 <View style={styles.submitChallengeButtonContainer}>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate('Video Album') }}
+                        onPress={() => { navigation.navigate('Submit Challenge') }}
                     >
                         <Image
                             style={styles.submitChallengeButton}
@@ -75,7 +75,7 @@ const ChallengeInfo = ({ navigation, route }) => {
                 Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
-            <ChallengeInfoCTA submitted={challengeSubmitted}/>
+            <ChallengeInfoCTA submitted={challengeSubmitted} />
         </View>
     )
 }
