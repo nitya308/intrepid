@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
+const ROOT_URL = 'https://project-api-nerve.onrender.com';
 
 export const userSlice = createSlice({
     name: 'user',
@@ -38,7 +38,7 @@ export function fetchUsers() {
                 dispatch(setItems(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }

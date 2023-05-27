@@ -1,12 +1,19 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {
-    StyleSheet, View, Text, Image, ScrollView
+    StyleSheet, View, Text, Image, ScrollView, TouchableOpacity
 } from 'react-native';
+import { fetchChallenges } from './challengesSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
 import ChallengeItem from './challengeItem';
+import BackButton from '../../../assets/icons/back-button.png';
 
 const Challenges = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => { dispatch(fetchChallenges()) }, []);
+    // const allChallenges = useSelector((state) => state.challenges.challenges);
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
@@ -22,12 +29,14 @@ const Challenges = ({ navigation }) => {
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 1,
         },
         {
             title: 'Compliment a stranger',
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 2,
         },
     ]);
 
@@ -37,12 +46,14 @@ const Challenges = ({ navigation }) => {
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 1,
         },
         {
             title: 'Compliment a stranger',
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 2,
         },
     ]);
 
@@ -70,22 +81,26 @@ const Challenges = ({ navigation }) => {
                     snapToAlignment={"center"}
                     style={styles.trendingScroll} >
 
-
-                    <View style={[styles.trendingBox, styles.neonRed]} >
-                        <Text style={styles.cTitle} >DYE YOUR HAIR PINK</Text>
-                        <Text style={styles.cExpiry} >Expires in 3 days </Text>
-                        <Text style={styles.cDescription} >Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink! </Text>
-                        <Text style={styles.cPoints} >125 PTS </Text>
-                    </View>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }}>
+                        <View style={[styles.trendingBox, styles.neonRed]} >
+                            <Text style={styles.cTitle} >DYE YOUR HAIR PINK</Text>
+                            <Text style={styles.cExpiry} >Expires in 3 days </Text>
+                            <Text style={styles.cDescription} >Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink! </Text>
+                            <Text style={styles.cPoints} >125 PTS </Text>
+                        </View>
+                    </TouchableOpacity>
 
                     {trendingChallenges.map((challenge, index) => {
                         return (
-                            <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} key={challenge.id} >
-                                <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
-                                {/* <Text style={styles.cExpiry} >Expires in {challenge.date.toString()}</Text> */}
-                                <Text style={styles.cDescription} >{challenge.description} </Text>
-                                <Text style={styles.cPoints} >{challenge.points} PTS </Text>
-                            </View>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }} key={challenge.id} >
+                                <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} >
+                                    <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
+                                    <Text style={styles.cExpiry} >Expires in 3 days </Text>
+                                    {/* <Text style={styles.cExpiry} >Expires in {challenge.date.toString()}</Text> */}
+                                    <Text style={styles.cDescription} >{challenge.description} </Text>
+                                    <Text style={styles.cPoints} >{challenge.points} PTS </Text>
+                                </View>
+                            </TouchableOpacity>
                         )
                     })}
                 </ScrollView>
@@ -99,7 +114,7 @@ const Challenges = ({ navigation }) => {
                     <View style={{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }} />
                 </View>
 
-                <DropDownPicker
+                {/* <DropDownPicker
                     open={open}
                     value={value}
                     items={items}
@@ -117,7 +132,7 @@ const Challenges = ({ navigation }) => {
                         margin: 10,
                     }}
 
-                />
+                /> */}
 
                 <View nativeId='allChallengeList' style={styles.allChallengeList} >
                     {/* <View style={styles.allChallengeBox } > 
@@ -130,13 +145,15 @@ const Challenges = ({ navigation }) => {
 
                     {allChallenges.map((challenge, index) => {
                         return (
-                            <View style={styles.allChallengeBox} key={challenge.id} >
-                                <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
-                                <View style={styles.allRight} >
-                                    <Text style={styles.cExpiry}> Expires in 3 hours</Text>
-                                    <Text style={styles.aPoints}>{challenge.points} PTS</Text>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }} key={challenge.id} >
+                                <View style={styles.allChallengeBox} >
+                                    <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
+                                    <View style={styles.allRight} >
+                                        <Text style={styles.cExpiry}> Expires in 3 hours</Text>
+                                        <Text style={styles.aPoints}>{challenge.points} PTS</Text>
+                                    </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         )
                     })}
 
@@ -158,6 +175,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'black',
+    },
+    backButton: {
+        width: 20,
+        height: 40,
     },
     h1: {
         fontSize: 35,

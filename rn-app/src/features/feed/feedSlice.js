@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
+const ROOT_URL = 'https://project-api-nerve.onrender.com';
 
 export const feedSlice = createSlice({
     name: 'leaderboard',
@@ -34,7 +34,7 @@ export function fetchFeed(userId) {
                 dispatch(setSubmissions(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }
@@ -50,7 +50,7 @@ export function submitVote(challengeId, userId, voteScore) {
                 dispatch(fetchFeed());
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }

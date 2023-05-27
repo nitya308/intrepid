@@ -1,20 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity,
+    StyleSheet, View, Text, Image, TouchableOpacity, Button
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchChallenge } from '../challenges/challengesSlice';
 import Modal from "react-native-modal";
 import StayButton from './../../../assets/icons/stay-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import SwapButton from './../../../assets/icons/swap-button.png';
 import SubmitButton from './../../../assets/icons/submit-button.png'
+import * as ImagePicker from 'expo-image-picker';
 
-const SubmitChallenge = ({navigation}) => {
+import { ResizeMode, Video } from 'expo-av';
+
+const SubmitChallenge = ({ navigation, route }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchChallenge(route.params.paramKey))
+    }, [])
+
+    const currentChallenge = useSelector((state) => state.currentChallenge);
 
     const [exitModalVisible, setExitModalVisible] = useState(false);
+    const [video, setVideo] = useState(null);
+    const [status, setStatus] = useState({});
 
+    const pickVideo = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setVideo(result.assets[0]);
+        }
+    };
+
+
+    useEffect(() => {
+        pickVideo();
+    }, []);
     return (
         <View style={styles.screen}>
-            
+
             <Modal
                 isVisible={exitModalVisible}
                 style={styles.exitModal}
@@ -29,10 +63,10 @@ const SubmitChallenge = ({navigation}) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info'))}
+                        onPress={() => (navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}))}
                     >Exit</Text>
-                    <TouchableOpacity onPress={() => {setExitModalVisible(false)}}>
-                        <Image 
+                    <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
+                        <Image
                             style={styles.stayButton}
                             source={StayButton}
                         />
@@ -40,8 +74,8 @@ const SubmitChallenge = ({navigation}) => {
                 </View>
             </Modal>
 
-            <TouchableOpacity onPress={() => {setExitModalVisible(true)}}>
-                <Image 
+            <TouchableOpacity onPress={() => { setExitModalVisible(true) }}>
+                <Image
                     style={styles.exitButton}
                     source={ExitButton}
                 />
@@ -57,9 +91,23 @@ const SubmitChallenge = ({navigation}) => {
                 Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
+            {
+                video &&
+                <Video
+                    style={styles.video}
+                    source={{ uri: video.uri }}
+                    useNativeControls
+                    resizeMode={ResizeMode.CONTAIN}
+                    isLooping
+                    onPlaybackStatusUpdate={status => setStatus(() => status)}
+
+                />
+            }
+
+
             <View style={styles.swapButtonContainer}>
                 <TouchableOpacity>
-                    <Image 
+                    <Image
                         style={styles.swapButton}
                         source={SwapButton}
                     />
@@ -67,14 +115,14 @@ const SubmitChallenge = ({navigation}) => {
             </View>
 
             <View style={styles.submitButtonContainer}>
-                <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info')}}>
-                    <Image 
+                <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}) }}>
+                    <Image
                         style={styles.submitButton}
                         source={SubmitButton}
                     />
                 </TouchableOpacity>
             </View>
-            
+
         </View>
     )
 }
@@ -152,6 +200,7 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 20,
         marginTop: 20,
+        marginBottom: 20,
     },
 
     swapButtonContainer: {
@@ -176,7 +225,14 @@ const styles = StyleSheet.create({
 
     next: {
         color: '#ffffff',
+    },
+
+    video: {
+        width: '100%',
+        height: '30%',
+        backgroundColor: 'black',
     }
+
 })
 
 export default SubmitChallenge;
