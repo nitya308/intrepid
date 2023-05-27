@@ -1,13 +1,19 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import {
     StyleSheet, View, Text, Image, ScrollView, TouchableOpacity
 } from 'react-native';
+import { fetchChallenges } from './challengesSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
 import ChallengeItem from './challengeItem';
 import BackButton from '../../../assets/icons/back-button.png';
 
 const Challenges = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => { dispatch(fetchChallenges()) }, []);
+    // const allChallenges = useSelector((state) => state.challenges.challenges);
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
@@ -23,12 +29,14 @@ const Challenges = ({ navigation }) => {
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 1,
         },
         {
             title: 'Compliment a stranger',
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 2,
         },
     ]);
 
@@ -38,30 +46,32 @@ const Challenges = ({ navigation }) => {
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 1,
         },
         {
             title: 'Compliment a stranger',
             description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
             date: new Date('August 19, 1975 23:15:30'),
             points: 120,
+            id: 2,
         },
     ]);
 
     return (
         <ScrollView style={styles.container}>
-            <Text 
-                onPress={() => {navigation.navigate('Challenge Info')}}
-                style={{ marginTop: '10%', color:'white' }}
+            <Text
+                onPress={() => { navigation.navigate('Challenge Info') }}
+                style={{ marginTop: '10%', color: 'white' }}
             >
-                            Click challenge to see challenge info
-                        </Text>
-            <Text onPress={() => {navigation.navigate('Create Challenge')}} style={{color:'white'}}>
+                Click challenge to see challenge info
+            </Text>
+            <Text onPress={() => { navigation.navigate('Create Challenge') }} style={{ color: 'white' }}>
                 Create Challenge Button </Text>
-                
-            <Text style = {styles.h1}> CHALLENGES </Text>
+
+            <Text style={styles.h1}> CHALLENGES </Text>
             <View style={styles.trendingContainer}>
-            <View style={{flexDirection: 'row', marginBottom:10,}}>
-                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
+                <View style={{ flexDirection: 'row', marginBottom: 10, }}>
+                    <View style={{ backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center' }} />
                     <Text style={styles.h2}> TRENDING </Text>
                     <View style={{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }} />
                 </View>
@@ -71,7 +81,7 @@ const Challenges = ({ navigation }) => {
                     snapToAlignment={"center"}
                     style={styles.trendingScroll} >
 
-                    <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }}>
                         <View style={[styles.trendingBox, styles.neonRed]} >
                             <Text style={styles.cTitle} >DYE YOUR HAIR PINK</Text>
                             <Text style={styles.cExpiry} >Expires in 3 days </Text>
@@ -82,8 +92,8 @@ const Challenges = ({ navigation }) => {
 
                     {trendingChallenges.map((challenge, index) => {
                         return (
-                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
-                                <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} key={challenge.id} >
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }} key={challenge.id} >
+                                <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
                                     <Text style={styles.cExpiry} >Expires in 3 days </Text>
                                     {/* <Text style={styles.cExpiry} >Expires in {challenge.date.toString()}</Text> */}
@@ -97,11 +107,11 @@ const Challenges = ({ navigation }) => {
             </View>
 
             <View style={styles.allContainer}>
-            
-                <View style={{flexDirection: 'row', marginBottom:10,}}>
-                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
+
+                <View style={{ flexDirection: 'row', marginBottom: 10, }}>
+                    <View style={{ backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center' }} />
                     <Text style={styles.h2}> ALL </Text>
-                    <View style={{backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center'}} />
+                    <View style={{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }} />
                 </View>
 
                 {/* <DropDownPicker
@@ -135,8 +145,8 @@ const Challenges = ({ navigation }) => {
 
                     {allChallenges.map((challenge, index) => {
                         return (
-                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
-                                <View style={styles.allChallengeBox} key={challenge.id} >
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }} key={challenge.id} >
+                                <View style={styles.allChallengeBox} >
                                     <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
                                     <View style={styles.allRight} >
                                         <Text style={styles.cExpiry}> Expires in 3 hours</Text>
