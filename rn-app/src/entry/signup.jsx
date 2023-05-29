@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity, Button, SafeAreaView, TextInput,
+    StyleSheet, View, Text, Image, TouchableOpacity, SafeAreaView, TextInput,
 } from 'react-native';
 import BackButton from './../../assets/icons/back-button.png'
 import SignupHeader from './../../assets/images/signup-header.png'
