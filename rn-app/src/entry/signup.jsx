@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
     StyleSheet, View, Text, Image, TouchableOpacity, Button, SafeAreaView, TextInput,
 } from 'react-native';
+import BackButton from './../../assets/icons/back-button.png'
+import SignupHeader from './../../assets/images/signup-header.png'
+import SignupButton from './../../assets/images/sign-up-button.png'
+
 
 const Signup = ({navigation}) => {
     const [username, onChangeUsername] = useState('');
@@ -9,40 +13,77 @@ const Signup = ({navigation}) => {
     const [password, onChangePassword] = useState('');
 
     return (
-        <SafeAreaView style={styles.inputContainer}>
-            <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Username</Text>
-                <TextInput
-                    style={styles.inputField}
-                    onChangeText={onChangeUsername}
-                    value={username}
+        <SafeAreaView>
+            <TouchableOpacity onPress={() => {navigation.goBack()}}>
+                <Image
+                    style={styles.backButton}
+                    source={BackButton}
                 />
+            </TouchableOpacity>
+
+            <Image
+                style={styles.signupHeader}
+                source={SignupHeader}
+            />
+
+            <View style={styles.inputContainer}>
+                <View style={styles.inputSection}>
+                    <Text style={styles.inputLabel}>Username</Text>
+                    <TextInput
+                        style={styles.inputField}
+                        onChangeText={onChangeUsername}
+                        value={username}
+                    />
+                </View>
+
+                <View style={styles.inputSection}>
+                    <Text style={styles.inputLabel}>Email</Text>
+                    <TextInput
+                        style={styles.inputField}
+                        onChangeText={onChangeEmail}
+                        value={email}
+                    />
+                </View>
+
+                <View style={styles.inputSection}>
+                    <Text style={styles.inputLabel}>Password</Text>
+                    <TextInput
+                        style={styles.inputField}
+                        onChangeText={onChangePassword}
+                        value={password}
+                    />
+                </View>
             </View>
 
-            <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Email</Text>
-                <TextInput
-                    style={styles.inputField}
-                    onChangeText={onChangeEmail}
-                    value={email}
-                />
-            </View>
-
-            <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Password</Text>
-                <TextInput
-                    style={styles.inputField}
-                    onChangeText={onChangePassword}
-                    value={password}
-                />
+            <View style={styles.signupButtonContainer}>
+                <TouchableOpacity>
+                    <Image
+                        source={SignupButton}
+                        style={styles.signupButton}
+                    />
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    backButton: {
+        width: 20,
+        height: 40,
+        marginLeft: 30,
+    },
+
+    signupHeader: {
+        marginLeft: 60,
+        width: 170,
+        height: 50,
+        marginTop: 50,
+    },
+
     inputContainer: {
         rowGap: 25,
+        marginTop: 50,
     },
 
     inputSection: {
@@ -63,6 +104,16 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         paddingHorizontal: 10,
         fontSize: 17,
+    },
+
+    signupButtonContainer: {
+        alignItems: 'center',
+        marginTop: 100,
+    },
+
+    signupButton: {
+        width: 200,
+        height: 59,
     }
 })
 
