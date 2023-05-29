@@ -11,13 +11,12 @@ LogBox.ignoreAllLogs();
 
 const App = (props) => {
 
-    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [isSignedIn, setIsSignedIn] = useState(true);
     console.log(isSignedIn);
 
     return (
         <Provider store={store}>
             {isSignedIn ? <MainTabBar /> : <EntryNavigator />}
-            {/* <MainTabBar /> */}
         </Provider>
     )
 };
