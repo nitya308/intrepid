@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity, Button
+    StyleSheet, View, Text, Image, TouchableOpacity,
 } from 'react-native';
 import EntryLogo from './../../assets/images/entry-logo.png'
 import SignupButton from './../../assets/images/sign-up-button.png'
