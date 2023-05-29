@@ -11,9 +11,24 @@ import BackButton from '../../../assets/icons/back-button.png';
 
 const Challenges = ({ navigation }) => {
 
+    // useEffect(() => {
+    //     const fetcher = async () => {
+    //         fetch("https://project-api-nerve.onrender.com/api/challenges")
+    //             .then((response) => response.json())
+    //             .then((json) => {
+    //                 console.log(json)
+    //             })
+    //             .catch((error) => {
+    //                 console.log(error)
+    //             })
+    //     }
+    //     fetcher();
+    // }, []);
+
     const dispatch = useDispatch();
-    useEffect(() => { dispatch(fetchChallenges()) }, []);
-    // const allChallenges = useSelector((state) => state.challenges.challenges);
+    useEffect(() => {
+        dispatch(fetchChallenges());
+    }, []);
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);

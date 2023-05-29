@@ -7,9 +7,7 @@ import {
 const UserRank = (props) => {
 
     const userObj = props.userObj;
-    console.log("username", userObj);
     const rank = props.rank;
-    console.log(rank);
 
     // alternateStyle = (rank) => {
     //     if (rank % 2 === 0) {
@@ -43,12 +41,12 @@ const styles = StyleSheet.create({
     },
 
     rank: {
-      flex: 1,
-      justifyContent: "flex-start",
-      alignItems: "center",
-      fontSize: 40,
-      color: '#ffffff',
-      paddingTop: 9,
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        fontSize: 40,
+        color: '#ffffff',
+        paddingTop: 9,
     },
 
     username: {
@@ -101,6 +99,6 @@ const styles = StyleSheet.create({
         fontSize: 25
     }
 
-  })
+})
 
 export default UserRank;

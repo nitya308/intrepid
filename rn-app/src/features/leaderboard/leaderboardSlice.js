@@ -28,8 +28,8 @@ const api = axios.create({
 
 export function fetchTopUsers() {
     return async (dispatch) => {
-        api
-            .get("/leaderboard")
+        axios
+            .get(`${ROOT_URL}/leaderboard`)
             .then((response) => {
                 dispatch(setTopUsers(response.data));
             })

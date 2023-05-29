@@ -35,8 +35,6 @@ const SubmitChallenge = ({ navigation, route }) => {
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.canceled) {
             setVideo(result.assets[0]);
         }
@@ -63,7 +61,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}))}
+                        onPress={() => (navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }))}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -115,7 +113,7 @@ const SubmitChallenge = ({ navigation, route }) => {
             </View>
 
             <View style={styles.submitButtonContainer}>
-                <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}) }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }) }}>
                     <Image
                         style={styles.submitButton}
                         source={SubmitButton}
