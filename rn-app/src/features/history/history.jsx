@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
 
     pointsStrikethrough: {
         textDecorationLine: 'line-through',
-        textDecorationColor: '#FF6867',
+        textDecorationColor: '#FF0201',
     }
 })
 export default History;

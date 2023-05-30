@@ -142,7 +142,9 @@ const styles = StyleSheet.create({
     },
 
     expiresAt: {
-        color: '#ffffff',
+        color: '#fff',
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
         fontFamily: 'Exo-Medium',
         fontSize: 17,
     },

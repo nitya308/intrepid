@@ -189,6 +189,8 @@ const styles = StyleSheet.create({
 
     expiration: {
         color: '#ffffff',
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
         fontFamily: 'Exo-Medium',
         fontSize: 22,
     },
