@@ -21,7 +21,7 @@ const Leaderboard = (props) => {
         {
             rank: 1,
             userObj: {
-                username: 'user1',
+                username: 'JACKIECHAN',
                 totalPoints: 1000,
                 numChallengesSucceeded: 10,
             }
@@ -29,7 +29,7 @@ const Leaderboard = (props) => {
         {
             rank: 2,
             userObj: {
-                username: 'user2',
+                username: 'NINJATURTLE',
                 totalPoints: 900,
                 numChallengesSucceeded: 10,
             }
@@ -37,7 +37,7 @@ const Leaderboard = (props) => {
         {
             rank: 3,
             userObj: {
-                username: 'user3',
+                username: 'SNEAKYBOI',
                 totalPoints: 800,
                 numChallengesSucceeded: 9,
             }
@@ -45,7 +45,7 @@ const Leaderboard = (props) => {
         {
             rank: 4,
             userObj: {
-                username: 'user4',
+                username: 'IMBROKE',
                 totalPoints: 740,
                 numChallengesSucceeded: 8,
             }
@@ -53,7 +53,7 @@ const Leaderboard = (props) => {
         {
             rank: 5,
             userObj: {
-                username: 'user5',
+                username: 'MONEYBAGS',
                 totalPoints: 700,
                 numChallengesSucceeded: 7,
             }
@@ -61,7 +61,7 @@ const Leaderboard = (props) => {
         {
             rank: 6,
             userObj: {
-                username: 'user6',
+                username: 'BROKEASS',
                 totalPoints: 690,
                 numChallengesSucceeded: 7,
             }
@@ -69,7 +69,7 @@ const Leaderboard = (props) => {
         {
             rank: 7,
             userObj: {
-                username: 'user7',
+                username: 'FREELOADER',
                 totalPoints: 650,
                 numChallengesSucceeded: 8,
             }
@@ -77,7 +77,7 @@ const Leaderboard = (props) => {
         {
             rank: 8,
             userObj: {
-                username: 'user8',
+                username: 'GAMERGIRL',
                 totalPoints: 600,
                 numChallengesSucceeded: 6,
             }
@@ -85,7 +85,7 @@ const Leaderboard = (props) => {
         {
             rank: 9,
             userObj: {
-                username: 'user9',
+                username: 'HACKERMAN',
                 totalPoints: 580,
                 numChallengesSucceeded: 6,
             }
@@ -93,7 +93,7 @@ const Leaderboard = (props) => {
         {
             rank: 10,
             userObj: {
-                username: 'user10',
+                username: 'IMTHEBEST',
                 totalPoints: 570,
                 numChallengesSucceeded: 5,
             }
