@@ -33,7 +33,7 @@ const App = (props) => {
         'Exo-ExtraBoldItalic': require('./../assets/fonts/exo/Exo-ExtraBoldItalic.ttf'),
         'Exo-BlackItalic': require('./../assets/fonts/exo/Exo-BlackItalic.ttf'),
     })
-    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [isSignedIn, setIsSignedIn] = useState(true);
     console.log(isSignedIn);
 
     return (
