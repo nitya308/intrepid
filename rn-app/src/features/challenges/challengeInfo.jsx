@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet, View, Text, Image, TouchableOpacity, Pressable
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchChallenge } from '../challenges/challengesSlice';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
@@ -9,6 +11,21 @@ import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 
 const ChallengeInfo = ({ navigation, route }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchChallenge(route.params.paramKey))
+    }, [])
+
+    const currentChallenge = useSelector((state) => state.currentChallenge);
+
+    const mockCurrentChallenge = {
+        title: 'Dye your hair pink',
+        description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+        points: 125,
+        expiresAt: {},
+        isExpired: false,
+    }
 
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
@@ -20,7 +37,7 @@ const ChallengeInfo = ({ navigation, route }) => {
             content = (
                 <View style={styles.submitChallengeButtonContainer}>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate('Submit Challenge') }}
+                        onPress={() => { navigation.navigate('Submit Challenge', {paramKey: route.params.paramKey}) }}
                     >
                         <Image
                             style={styles.submitChallengeButton}

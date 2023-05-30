@@ -9,7 +9,7 @@ import userReducer from '../features/user/userSlice';
 import videoReducer from '../features/video/videoSlice';
 
 
-export default configureStore({
+const store = configureStore({
     reducer: {
         challenges: challengesReducer,
         feed: feedReducer,
@@ -21,3 +21,5 @@ export default configureStore({
         video: videoReducer,
     },
 });
+
+export default store;

@@ -2,21 +2,44 @@ import React, {useState} from 'react';
 import {
     StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity
 } from 'react-native';
+import WhiteExclamation from '../../../assets/icons/exclamation_white.png';
+import RedExclamation from '../../../assets/icons/exclamation_red.png';
 
 const CreateChallenge = ({navigation}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [points, setPoints] = useState('0');
+    const [enoughPoints, setEnoughPoints] = useState('false');
+
     
+    const submitChallenge = () => {
+        // submit challenge with title, description, points, and 
+    }
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', margin:10}}>
             <Text
                 onPress={() => {navigation.navigate('Challenge Info')}}
             >Create Challenge</Text>
+            <View style={styles.topRow}>
+                {/* <TouchableOpacity onPress={() => { navigation.navigate('Challenges')}}>
+                    <Image
+                        style={styles.backButton}
+                        source={BackButton}
+                    />
+                </TouchableOpacity> */}
+
+                <TouchableOpacity style={styles.pointsContainer} >
+                    <Text style={styles.points}>50 pts</Text>
+                </TouchableOpacity>
+            </View>
             <View styles={styles.createChallengeContainer}> 
                 <Text style = {styles.h1}> CREATE A CHALLENGE </Text>
                 <View style={styles.illegalWarning}>
+                <Image
+                            style={styles.red_exclamation}
+                            source={RedExclamation}
+                        />
                     <Text style={styles.text}> Challenges involving illegal activities or encouraging users to harm themselves or others will be removed. </Text>
                 </View>
 
@@ -37,6 +60,7 @@ const CreateChallenge = ({navigation}) => {
                       value={description}
                       onChangeText={setDescription}
                       placeholder="Input a description"
+                      multiline={true}
                   />
                 </View>
 
@@ -49,14 +73,22 @@ const CreateChallenge = ({navigation}) => {
                       
                   />
                 </View>
-
-                <View style={styles.pointsWarning}>
-                    <Text  style={styles.text}> You don't have enough points to create this challenge.</Text>
-                </View>
-
-                <TouchableOpacity style={styles.buttonStyleCreate}>
+           
+                {points>20 ? (
+                        <View style={styles.pointsWarning}>
+                            <Image
+                            style={styles.white_exclamation}
+                            source={WhiteExclamation}
+                        />
+                        <Text  style={styles.text}>You don't have enough points to create this challenge.</Text>
+                    </View>
+                    ):(null)}
+                <TouchableOpacity style={styles.buttonStyleCreate} onPress = {submitChallenge}>
                         <Text style={styles.buttonTextCreate}>Create</Text>
                 </TouchableOpacity>
+                
+
+                
             </View>
         </ScrollView>
     )
@@ -66,6 +98,25 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'column',
+    },
+    points: {
+        color: '#99F9FF',
+        borderWidth: 1,
+        borderColor: '#7BF7FF',
+        borderRadius: 2,
+        alignSelf: 'flex-end',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    },
+    topRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        
+    },
+    backButton: {
+        width: 20,
+        height: 40,
+        marginHorizontal:140,
     },
     createChallengeContainer: {
         display: 'flex',
@@ -92,6 +143,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#262626',
         display:'flex',
         flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
     },
     text: {
         fontSize:13,
@@ -128,6 +181,8 @@ const styles = StyleSheet.create({
       color: 'white',
       borderRadius: 10,
       width: 335,
+      
+paddingBottom: 0,
     },
     inputLabelPoints: {
         fontSize: 25,
@@ -152,13 +207,27 @@ const styles = StyleSheet.create({
         borderRadius:6,
         marginTop:20,
         backgroundColor: '#262626',
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    white_exclamation: {
+        height:30,
+        width:30,
+        marginRight:20,
+    },
+    red_exclamation: {
+        height:30,
+        width:30,
+        marginRight:20,
     },
     buttonStyleCreate: {
         width: 129,
         height:43,
         borderStyle:'solid',
         borderWidth:1,
-        borderColor:'black',
+        borderColor:'white',
         marginTop:15,
         alignSelf:'center',
         display:'flex',
@@ -168,6 +237,7 @@ const styles = StyleSheet.create({
     buttonTextCreate: {
         fontSize: 18,
         textAlign: 'center',
+        color:'white',
 
     },
     
