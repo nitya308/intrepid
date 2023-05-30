@@ -3,7 +3,7 @@ import {
     StyleSheet, View, Text, Image, TouchableOpacity, Button
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge } from '../challenges/challengesSlice';
+import { fetchChallenge, submitChallenge } from '../challenges/challengesSlice';
 import Modal from "react-native-modal";
 import StayButton from './../../../assets/icons/stay-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
@@ -12,6 +12,7 @@ import SelectVideoButton from './../../../assets/icons/select-video-button.png';
 import SubmitButton from './../../../assets/icons/submit-button.png'
 import * as ImagePicker from 'expo-image-picker';
 import uploadImage from '../../frontendS3';
+import { Alert } from 'react-native';
 // import fs from 'react-native-fs';
 
 import { ResizeMode, Video } from 'expo-av';
@@ -20,7 +21,7 @@ const SubmitChallenge = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenge(route.params.paramKey))
+        dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
     const currentChallenge = useSelector((state) => state.currentChallenge);
@@ -66,8 +67,44 @@ const SubmitChallenge = ({ navigation, route }) => {
 
     };
 
+    const handleSubmit = async () => {
+        if (!video) {
+            Alert.alert(
+                'No Video Selected',
+                'Please select a video.',
+                [
+                    { text: 'OK', onPress: () => pickVideo() }
+                ]
+            );
+            return;
+        }
+
+        try {
+
+            const response = await fetch(video.uri);
+            const blob = await response.blob();
+            const fileName = video.uri.split('/').pop();
+            blob.name = fileName;
+            const url = await uploadImage(blob);
+            console.log('url at handleSubmit', url);
+            // create a new submission object with the url
+            // dispatch(submitChallenge(route.params.challengeId, url));
+        } catch (error) {
+            Alert.alert(
+                'Error',
+                'There was an error submitting your video. Try again later.',
+                [
+                    { text: 'OK', onPress: () => navigation.navigate('Challenge Info', { challengeId: route.params.challengeId }) }
+                ]
+            );
+        }
+
+
+    }
+
     useEffect(() => {
-        pickVideo();
+        // pickVideo();
+        // setTestURL();
     }, []);
     return (
         <View style={styles.screen}>
@@ -86,7 +123,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}))}
+                        onPress={() => (navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }))}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -117,6 +154,7 @@ const SubmitChallenge = ({ navigation, route }) => {
             <Video
                 style={styles.video}
                 source={{ uri: video?.uri }}
+                // source={{ uri: 'https://swerve-bucket.s3.amazonaws.com/2F4688A4-F1CE-4518-826C-DFCCE16CFCCA.mov' }}
                 useNativeControls
                 resizeMode={ResizeMode.CONTAIN}
                 isLooping
@@ -135,7 +173,7 @@ const SubmitChallenge = ({ navigation, route }) => {
             </View>
 
             <View style={styles.submitButtonContainer}>
-                <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}) }}>
+                <TouchableOpacity onPress={handleSubmit}>
                     <Image
                         style={styles.submitButton}
                         source={SubmitButton}
