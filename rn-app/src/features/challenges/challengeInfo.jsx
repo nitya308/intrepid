@@ -11,7 +11,6 @@ import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 
 const ChallengeInfo = ({ navigation, route }) => {
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchChallenge(route.params.paramKey))
@@ -26,6 +25,10 @@ const ChallengeInfo = ({ navigation, route }) => {
         expiresAt: {},
         isExpired: false,
     }
+
+    // let [fontsLoaded] = useFonts({
+    //     'Glitch-Goblin': require('./../../../assets/fonts/glitchGoblin/GlitchGoblin.ttf'),
+    // })
 
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
 
     challengeTitle: {
         color: '#ffffff',
+        fontFamily: 'Glitch-Goblin',
         fontSize: 40,
         fontWeight: 700,
         marginTop: 30,
@@ -130,16 +134,21 @@ const styles = StyleSheet.create({
 
     expiration: {
         color: '#ffffff',
-        fontSize: 20,
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 22,
     },
 
     pointValue: {
         color: '#ffffff',
-        fontSize: 30,
+        fontFamily: 'Glitch-Goblin',
+        fontSize: 35,
     },
 
     description: {
         color: '#ffffff',
+        fontFamily: 'Exo-Regular',
         fontSize: 20,
         marginTop: 20,
     },
