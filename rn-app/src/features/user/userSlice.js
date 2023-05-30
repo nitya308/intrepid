@@ -25,7 +25,6 @@ export const userSlice = createSlice({
             state.points = 0;
         },
         authUser: (state, action) => {
-            console.log(`authUser: ${JSON.stringify(action.payload)}`);
             loading = false;
             state.authenticated = true;
             state.token = action.payload;

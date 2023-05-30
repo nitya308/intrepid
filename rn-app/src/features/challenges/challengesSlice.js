@@ -38,9 +38,9 @@ export function fetchChallenges() {
     };
 }
 
-export function fetchTrendingChallenges() {
+export function fetchTrendingChallenges(headers) {
     return async (dispatch) => {
-        fetch(`${ROOT_URL}/api/challenges/trending`, {method: 'GET', ...getRequestHeaders()})
+        fetch(`${ROOT_URL}/api/challenges/trending`, {method: 'GET', ...headers})
             .then((response) => response.json())
             .then((data) => {
                 dispatch(setTrendingChallenges(data));
