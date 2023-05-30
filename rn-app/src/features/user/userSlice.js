@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setToken } from '../../app/utils';
 
-// const ROOT_URL = 'https://project-api-nerve.onrender.com';
-const ROOT_URL = 'http://129.170.212.19:9090';
+const ROOT_URL = 'https://project-api-nerve.onrender.com';
+// const ROOT_URL = 'http://129.170.212.19:9090';
 
 export const userSlice = createSlice({
     name: 'user',

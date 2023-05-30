@@ -1,8 +1,8 @@
 import { setAllChallenges, setTrendingChallenges, setCurrentChallenge } from './challengesSlice';
 import { getHeaders } from '../../app/store';
 
-// const ROOT_URL = 'https://project-api-nerve.onrender.com';
-const ROOT_URL = 'http://129.170.212.19:9090';
+const ROOT_URL = 'https://project-api-nerve.onrender.com';
+// const ROOT_URL = 'http://129.170.212.19:9090';
 
 export function fetchChallenges() {
     return async (dispatch) => {
@@ -20,8 +20,7 @@ export function fetchChallenges() {
 export function fetchTrendingChallenges() {
     return async (dispatch) => {
         const headers = getHeaders();
-        console.log(`headers: ${JSON.stringify(headers)}`);
-        fetch(`${ROOT_URL}/api/challenges/trending`, headers)
+        fetch(`${ROOT_URL}/api/trending`, headers)
             .then((response) => response.json())
             .then((data) => {
                 dispatch(setTrendingChallenges(data));

@@ -44,7 +44,6 @@ const Challenges = ({ navigation }) => {
 
     const allChallenges = useSelector((state) => state.challenges.allChallenges) || [];
     const trendingChallenges = useSelector((state) => state.challenges.trendingChallenges) || [];
-    console.log(`trendingChallenges: ${JSON.stringify(trendingChallenges)}`)
 
     // const [allChallenges, setAllChallenges] = useState([
     //     {
@@ -87,18 +86,9 @@ const Challenges = ({ navigation }) => {
                     snapToAlignment={"center"}
                     style={styles.trendingScroll} >
 
-                    <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }}>
-                        <View style={[styles.trendingBox, styles.neonRed]} >
-                            <Text style={styles.cTitle} >DYE YOUR HAIR PINK</Text>
-                            <Text style={styles.cExpiry} >Expires in 3 days </Text>
-                            <Text style={styles.cDescription} >Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink! </Text>
-                            <Text style={styles.cPoints} >125 PTS </Text>
-                        </View>
-                    </TouchableOpacity>
-
                     {trendingChallenges.map((challenge, index) => {
                         return (
-                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: 'placeholderID' }) }} key={challenge.id} >
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', { paramKey: challenge.id }) }} key={challenge.id} >
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
                                     <Text style={styles.cExpiry} >Expires in 3 days </Text>

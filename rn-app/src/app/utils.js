@@ -13,7 +13,6 @@ export const setToken = async (token, authUser, dispatch) => {
         
 
 export const getToken = async (authUser, authFailed, dispatch) => {
-    console.log(authFailed);
     await SecureStore.getItemAsync('token')
         .then((token) => {
             if (!token) {

@@ -27,7 +27,7 @@ export const getHeaders = () => {
     const token = state.user.token;
     return {
         headers: {
-            authorization: token,
+            Authorization: token,
         },
     };
 };

@@ -3,7 +3,7 @@ import {
     StyleSheet, View, Text, Image, TouchableOpacity, Pressable
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge } from '../challenges/challengesSlice';
+import { fetchChallenge } from '../challenges/challengesRequests';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
@@ -17,7 +17,7 @@ const ChallengeInfo = ({ navigation, route }) => {
         dispatch(fetchChallenge(route.params.paramKey))
     }, [])
 
-    const currentChallenge = useSelector((state) => state.currentChallenge);
+    const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
 
     const mockCurrentChallenge = {
         title: 'Dye your hair pink',
@@ -63,6 +63,8 @@ const ChallengeInfo = ({ navigation, route }) => {
         return content;
     }
 
+    // TODO: EXPIRATION STRING
+    if (currentChallenge) {
     return (
         <View style={styles.screen}>
             <TouchableOpacity onPress={() => { navigation.goBack() }}>
@@ -73,7 +75,7 @@ const ChallengeInfo = ({ navigation, route }) => {
             </TouchableOpacity>
 
             <Text style={styles.challengeTitle}>
-                DYE YOUR HAIR PINK
+                {currentChallenge.title}
             </Text>
 
             <Pressable onPress={() => { setChallengeSaved(challengeSaved ? false : true) }}>
@@ -85,16 +87,23 @@ const ChallengeInfo = ({ navigation, route }) => {
 
             <View style={styles.expirationAndPointValue}>
                 <Text style={styles.expiration}>Expires in 3 days</Text>
-                <Text style={styles.pointValue}>125 PTS</Text>
+                <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
             </View>
 
             <Text style={styles.description}>
-                Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
+                {currentChallenge.description}
             </Text>
 
             <ChallengeInfoCTA submitted={challengeSubmitted} />
         </View>
-    )
+    )} else {
+        // TODO: MAKE THIS LOOK NICER
+        return (
+            <View style={styles.screen}>
+                <Text style={styles.description}>Loading...</Text>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
