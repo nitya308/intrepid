@@ -24,7 +24,7 @@ export function fetchFeed(userId) {
                 dispatch(setSubmissions(response.data));
             })
             .catch((er) => {
-                console.log(er);
+                throw er;
             });
     };
 }

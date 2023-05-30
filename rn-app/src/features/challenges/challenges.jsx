@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import {
     StyleSheet, View, Text, Image, ScrollView, TouchableOpacity
 } from 'react-native';
-import { fetchChallenges } from './challengesSlice';
+import { fetchChallenges, fetchTrendingChallenges } from './challengesSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
@@ -11,23 +11,10 @@ import BackButton from '../../../assets/icons/back-button.png';
 
 const Challenges = ({ navigation }) => {
 
-    // useEffect(() => {
-    //     const fetcher = async () => {
-    //         fetch("https://project-api-nerve.onrender.com/api/challenges")
-    //             .then((response) => response.json())
-    //             .then((json) => {
-    //                 console.log(json)
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //             })
-    //     }
-    //     fetcher();
-    // }, []);
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchChallenges());
+        dispatch(fetchTrendingChallenges());
     }, []);
 
     const [open, setOpen] = useState(false);
@@ -38,39 +25,43 @@ const Challenges = ({ navigation }) => {
     ]);
 
 
-    const [trendingChallenges, setTrendingChallenges] = useState([
-        {
-            title: 'Dye your hair blue',
-            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
-            date: new Date('August 19, 1975 23:15:30'),
-            points: 120,
-            id: 1,
-        },
-        {
-            title: 'Compliment a stranger',
-            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
-            date: new Date('August 19, 1975 23:15:30'),
-            points: 120,
-            id: 2,
-        },
-    ]);
+    // const [trendingChallenges, setTrendingChallenges] = useState([
+    //     {
+    //         title: 'Dye your hair blue',
+    //         description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+    //         date: new Date('August 19, 1975 23:15:30'),
+    //         points: 120,
+    //         id: 1,
+    //     },
+    //     {
+    //         title: 'Compliment a stranger',
+    //         description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+    //         date: new Date('August 19, 1975 23:15:30'),
+    //         points: 120,
+    //         id: 2,
+    //     },
+    // ]);
 
-    const [allChallenges, setAllChallenges] = useState([
-        {
-            title: 'Dye your hair blue',
-            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
-            date: new Date('August 19, 1975 23:15:30'),
-            points: 120,
-            id: 1,
-        },
-        {
-            title: 'Compliment a stranger',
-            description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
-            date: new Date('August 19, 1975 23:15:30'),
-            points: 120,
-            id: 2,
-        },
-    ]);
+    const allChallenges = useSelector((state) => state.challenges.allChallenges) || [];
+    const trendingChallenges = useSelector((state) => state.challenges.trendingChallenges) || [];
+    console.log(trendingChallenges)
+
+    // const [allChallenges, setAllChallenges] = useState([
+    //     {
+    //         title: 'Dye your hair blue',
+    //         description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+    //         date: new Date('August 19, 1975 23:15:30'),
+    //         points: 120,
+    //         id: 1,
+    //     },
+    //     {
+    //         title: 'Compliment a stranger',
+    //         description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
+    //         date: new Date('August 19, 1975 23:15:30'),
+    //         points: 120,
+    //         id: 2,
+    //     },
+    // ]);
 
     return (
         <ScrollView style={styles.container}>

@@ -5,11 +5,14 @@ import {
 import BackButton from './../../assets/icons/back-button.png'
 import LoginHeader from './../../assets/images/login-header.png'
 import LoginButton from './../../assets/images/log-in-button.png'
+import { signinUser } from '../features/user/userSlice';
+import { useDispatch } from 'react-redux';
 
 
 const Login = ({navigation}) => {
     const [email, onChangeEmail] = useState('');
     const [password, onChangePassword] = useState('');
+    const dispatch = useDispatch();
 
     return (
         <SafeAreaView>
@@ -46,7 +49,11 @@ const Login = ({navigation}) => {
             </View>
 
             <View style={styles.signupButtonContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={
+                    () => {
+                        dispatch(signinUser(email, password));
+                    }}
+                >
                     <Image
                         source={LoginButton}
                         style={styles.loginButton}

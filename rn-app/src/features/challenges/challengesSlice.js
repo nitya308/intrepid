@@ -1,16 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getToken } from '../../app/utils';
 
 const ROOT_URL = 'https://project-api-nerve.onrender.com';
 
 export const challengesSlice = createSlice({
     name: 'challenges',
     initialState: {
-        challenges: [],
+        allChallenges: [],
+        trendingChallenges: [],
         currentChallenge: null,
     },
     reducers: {
-        setChallenges: (state, action) => {
-            state.challenges = action.payload;
+        setAllChallenges: (state, action) => {
+            state.allChallenges = action.payload;
+        },
+        setTrendingChallenges: (state, action) => {
+            state.trendingChallenges = action.payload;
         },
         setCurrentChallenge: (state, action) => {
             state.currentChallenge = action.payload;
@@ -18,17 +23,30 @@ export const challengesSlice = createSlice({
     },
 });
 
-export const { setChallenges, setCurrentChallenge } = challengesSlice.actions;
+export const { setAllChallenges, setTrendingChallenges, setCurrentChallenge } = challengesSlice.actions;
 
 export function fetchChallenges() {
     return async (dispatch) => {
         fetch(`${ROOT_URL}/api/challenges`)
             .then((response) => response.json())
             .then((data) => {
-                dispatch(setChallenges(data));
+                dispatch(setAllChallenges(data));
             })
             .catch((er) => {
-                console.log(er);
+                throw er;
+            });
+    };
+}
+
+export function fetchTrendingChallenges() {
+    return async (dispatch) => {
+        fetch(`${ROOT_URL}/api/challenges/trending`, {method: 'GET', ...getRequestHeaders()})
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(setTrendingChallenges(data));
+            })
+            .catch((er) => {
+                throw er;
             });
     };
 }
@@ -41,7 +59,7 @@ export function fetchChallenge(id) {
                 dispatch(setCurrentChallenge(data));
             })
             .catch((er) => {
-                console.log(er);
+                throw er;
             });
     };
 }
@@ -60,7 +78,7 @@ export function createChallenge(challenge) {
                 dispatch(fetchChallenges());
             })
             .catch((er) => {
-                console.log(er);
+                throw er;
             });
     }
 }
@@ -79,7 +97,7 @@ export function submitChallenge(userId, videoUrl) {
                 dispatch(fetchChallenges());
             })
             .catch((er) => {
-                console.log(er);
+                throw er;
             });
     }
 }

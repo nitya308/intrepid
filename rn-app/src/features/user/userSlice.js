@@ -1,34 +1,91 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { getToken, setToken } from '../../app/utils';
 
 const ROOT_URL = 'https://project-api-nerve.onrender.com';
 
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        userId: 0,
         username: '',
         email: '',
         points: 0,
+        authenticated: false,
+        token: '',
+        loading: true,
     },
     reducers: {
         setUser: (state, action) => {
-            state.userId = action.payload.userId;
             state.username = action.payload.username;
             state.email = action.payload.email;
             state.points = action.payload.points;
         },
+        emptyUser: (state) => {
+            state.username = '';
+            state.email = '';
+            state.points = 0;
+        },
+        authUser: (state, action) => {
+            console.log(`authUser: ${JSON.stringify(action.payload)}`);
+            loading = false;
+            state.authenticated = true;
+            state.token = action.payload;
+        },
+        deauthUser: (state) => {
+            state.authenticated = false;
+            state.token = '';
+        },
     },
 });
 
-const api = axios.create({
-    baseURL: "http://localhost:9090/",
-    withCredentials: false,
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-    },
-});
+export const { setUser, emptyUser, authUser, deauthUser } = userSlice.actions;
+
+export function signinUser( email, password ) {
+    return async (dispatch) => {
+        fetch(`${ROOT_URL}/api/signin`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(setUser(data));
+                setToken(data.token, authUser, dispatch);
+            })
+            .catch((er) => {
+                throw er;
+            });
+    };
+}
+
+export function signupUser( username, email, password ) {
+    return async (dispatch) => {
+        fetch(`${ROOT_URL}/api/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password }),
+        })
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                console.log(`signupUser: ${JSON.stringify(data.token)}`);
+                dispatch(setUser(data));
+                setToken(data.token);
+            })
+            .catch((er) => {
+                throw er;
+            });
+    };
+}
+
+export function signoutUser() {
+    dispatch(emptyUser());
+    setToken('');
+}
 
 export function fetchUsers() {
     return async (dispatch) => {
@@ -55,7 +112,5 @@ export function fetchUser(id) {
             });
     };
 }
-
-export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

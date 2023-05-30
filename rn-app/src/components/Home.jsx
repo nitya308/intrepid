@@ -1,0 +1,29 @@
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import MainTabBar from '../navigation/mainTabBar';
+import EntryNavigator from '../entry/entryNavigator';
+import { getToken } from '../app/utils.js';
+import { authUser } from '../features/user/userSlice';
+import SplashScreen from '../entry/splashscreen';
+
+const Home = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        getToken(authUser, dispatch);
+    }, []);
+
+    const token = useSelector(state => state.user.token);
+    const loading = useSelector(state => state.user.loading);
+    console.log('loading', loading);
+    
+    if ( loading ) {
+        return <SplashScreen />
+    }
+    if ( token ) {
+        return <MainTabBar />
+    }
+    return <EntryNavigator />
+}
+
+export default Home;
