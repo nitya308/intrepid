@@ -35,6 +35,8 @@ const Login = ({navigation}) => {
                         style={styles.inputField}
                         onChangeText={onChangeEmail}
                         value={email}
+                        keyboardAppearance={'dark'}
+                        selectionColor={'#fff'}
                     />
                 </View>
 
@@ -44,6 +46,8 @@ const Login = ({navigation}) => {
                         style={styles.inputField}
                         onChangeText={onChangePassword}
                         value={password}
+                        keyboardAppearance={'dark'}
+                        selectionColor={'#fff'}
                     />
                 </View>
             </View>
@@ -91,16 +95,31 @@ const styles = StyleSheet.create({
     inputLabel: {
         color: '#ffffff',
         fontSize: 17,
+        fontFamily: 'Exo-Regular',
+        shadowColor: "#ffffff",
+        shadowOpacity: 1,
+        shadowRadius: 3,
+        shadowOffset: {
+            height: 0,
+            width: 0,
+        },
     },
 
     inputField: {
         borderWidth: 1,
-        borderColor: '#ffffff',
+        borderColor: '#FAE3BD',
         borderRadius: 2,
         height: 40,
         color: '#ffffff',
         paddingHorizontal: 10,
         fontSize: 17,
+        shadowColor: "#FFF741",
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        shadowOffset: {
+            height: 0,
+            width: 0,
+        },
     },
 
     signupButtonContainer: {

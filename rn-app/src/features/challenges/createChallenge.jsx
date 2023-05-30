@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {
-    StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity
+    StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity, SafeAreaView
 } from 'react-native';
 import WhiteExclamation from '../../../assets/icons/exclamation_white.png';
 import RedExclamation from '../../../assets/icons/exclamation_red.png';
+import BackButton from '../../../assets/icons/back-button.png';
+import ExitButton from './../../../assets/icons/exit-button.png'
+import PointsBox from '../pointsBox';
 
 const CreateChallenge = ({navigation}) => {
     const [title, setTitle] = useState('');
@@ -17,22 +20,19 @@ const CreateChallenge = ({navigation}) => {
     }
 
     return (
-        <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', margin:10}}>
-            <Text
-                onPress={() => {navigation.navigate('Challenge Info')}}
-            >Create Challenge</Text>
-            <View style={styles.topRow}>
-                {/* <TouchableOpacity onPress={() => { navigation.navigate('Challenges')}}>
+        <SafeAreaView style={{ flexGrow: 1, alignItems: 'center', margin:10}}>
+            <View style={styles.backAndPoints}>
+                <TouchableOpacity onPress={() => {navigation.navigate('Challenges Main')}}>
                     <Image
-                        style={styles.backButton}
-                        source={BackButton}
+                        source={ExitButton}
+                        style={styles.exitButton}
                     />
-                </TouchableOpacity> */}
-
-                <TouchableOpacity style={styles.pointsContainer} >
-                    <Text style={styles.points}>50 pts</Text>
                 </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
             </View>
+
             <View styles={styles.createChallengeContainer}> 
                 <Text style = {styles.h1}> CREATE A CHALLENGE </Text>
                 <View style={styles.illegalWarning}>
@@ -90,15 +90,28 @@ const CreateChallenge = ({navigation}) => {
 
                 
             </View>
-        </ScrollView>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
+
+    backAndPoints: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: 340,
     },
+
+    exitButton: {
+        width: 30,
+        height: 30,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
+    },
+
     points: {
         color: '#99F9FF',
         borderWidth: 1,
@@ -113,11 +126,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         
     },
-    backButton: {
-        width: 20,
-        height: 40,
-        marginHorizontal:140,
-    },
+
     createChallengeContainer: {
         display: 'flex',
         flexDirection:'column',

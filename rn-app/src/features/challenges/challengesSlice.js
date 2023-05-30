@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getToken } from '../../app/utils';
+
+const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
 
 export const challengesSlice = createSlice({
     name: 'challenges',

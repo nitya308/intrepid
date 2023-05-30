@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
 
     entryText: {
         color: '#ffffff',
-        fontSize: 25,
+        fontFamily: 'Exo-Regular',
+        fontSize: 20,
         textAlign: 'center',
     },
 

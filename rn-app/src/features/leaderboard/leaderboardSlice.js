@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
 
 export const leaderboardSlice = createSlice({
     name: 'leaderboard',
@@ -34,7 +34,7 @@ export function fetchTopUsers() {
                 dispatch(setTopUsers(response.data));
             })
             .catch((er) => {
-                throw er;
+                dispatch(setError());
             });
     };
 }

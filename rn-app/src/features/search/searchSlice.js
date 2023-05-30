@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
 
 export const searchSlice = createSlice({
     name: 'search',
