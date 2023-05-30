@@ -2,7 +2,6 @@ import { setAllChallenges, setTrendingChallenges, setCurrentChallenge } from './
 import { getHeaders } from '../../app/store';
 
 const ROOT_URL = 'https://project-api-nerve.onrender.com';
-// const ROOT_URL = 'http://129.170.212.19:9090';
 
 export function fetchChallenges() {
     return async (dispatch) => {
