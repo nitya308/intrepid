@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
     StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView,
 } from 'react-native';
@@ -53,7 +53,7 @@ const Challenges = ({ navigation }) => {
 
                     {trendingChallenges.map((challenge, index) => {
                         return (
-                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: challenge.id}) }}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id}) }} key={challenge.id}>
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} key={challenge.id} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
                                     <Text style={styles.cExpiry} >Expires in 3 days </Text>
@@ -106,7 +106,7 @@ const Challenges = ({ navigation }) => {
 
                     {allChallenges.map((challenge, index) => {
                         return (
-                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id }) }} key={challenge.id}>
                                 <View style={styles.allChallengeBox} key={challenge.id} >
                                     <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
                                     <View style={styles.allRight} >

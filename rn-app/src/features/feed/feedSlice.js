@@ -24,7 +24,7 @@ export function fetchFeed(userId) {
                 dispatch(setSubmissions(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }
@@ -40,7 +40,7 @@ export function submitVote(challengeId, userId, voteScore) {
                 dispatch(fetchFeed());
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }

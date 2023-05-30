@@ -34,7 +34,7 @@ export function fetchTopUsers() {
                 dispatch(setTopUsers(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }

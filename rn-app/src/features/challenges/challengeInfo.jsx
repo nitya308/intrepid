@@ -13,9 +13,8 @@ import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-
         console.log("Challenge id "+ route.params.challengeId)
-        // dispatch(fetchChallenge(route.params.challengeId))
+        dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
     const currentChallenge = useSelector((state) => state.challenges.currentChallenge);

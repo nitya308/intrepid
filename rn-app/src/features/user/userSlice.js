@@ -98,7 +98,7 @@ export function fetchUsers() {
                 dispatch(setItems(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }
@@ -111,7 +111,7 @@ export function fetchUser(id) {
                 dispatch(setUser(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }
