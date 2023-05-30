@@ -6,8 +6,11 @@ import Modal from "react-native-modal";
 import StayButton from './../../../assets/icons/stay-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import SwapButton from './../../../assets/icons/swap-button.png';
+import SelectVideoButton from './../../../assets/icons/select-video-button.png';
 import SubmitButton from './../../../assets/icons/submit-button.png'
 import * as ImagePicker from 'expo-image-picker';
+import uploadImage from '../../frontendS3';
+// import fs from 'react-native-fs';
 
 import { ResizeMode, Video } from 'expo-av';
 
@@ -22,17 +25,37 @@ const SubmitChallenge = ({ navigation }) => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Videos,
             allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
+            quality: 0,
         });
 
         console.log(result);
 
-        if (!result.canceled) {
-            setVideo(result.assets[0]);
-        }
+        if (result.canceled) return;
+
+        setVideo(result.assets[0]);
     };
 
+    const uploadVideo = async () => {
+        console.log("uploading video: " + video.uri);
+        const response = await fetch(video.uri);
+        const blob = await response.blob();
+        const fileName = video.uri.split('/').pop();
+        blob.name = fileName;
+
+        // uriToFile(video.uri, video.fileName).then((file) => {
+        console.log("FILE BEFORE UPLOADING: " + JSON.stringify(blob));
+        uploadImage(blob).then((url) => {
+            console.log('url at uploadImage', url);
+
+        }).catch((error) => {
+            console.log('error uploading image: ', error);
+        });
+        // }).catch((error) => {
+        //     console.log('error', error);
+        // });
+
+
+    };
 
     useEffect(() => {
         pickVideo();
@@ -82,25 +105,22 @@ const SubmitChallenge = ({ navigation }) => {
                 Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
-            {
-                video &&
-                <Video
-                    style={styles.video}
-                    source={{ uri: video.uri }}
-                    useNativeControls
-                    resizeMode={ResizeMode.CONTAIN}
-                    isLooping
-                    onPlaybackStatusUpdate={status => setStatus(() => status)}
+            <Video
+                style={styles.video}
+                source={{ uri: video?.uri }}
+                useNativeControls
+                resizeMode={ResizeMode.CONTAIN}
+                isLooping
+                onPlaybackStatusUpdate={status => setStatus(() => status)}
 
-                />
-            }
+            />
 
 
             <View style={styles.swapButtonContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={pickVideo}>
                     <Image
-                        style={styles.swapButton}
-                        source={SwapButton}
+                        style={video ? styles.swapButton : styles.selectVideoButton}
+                        source={video ? SwapButton : SelectVideoButton}
                     />
                 </TouchableOpacity>
             </View>
@@ -125,7 +145,7 @@ const styles = StyleSheet.create({
     },
 
     exitModal: {
-        backgroundColor: '#303030',
+        backgroundColor: '#121212s',
         borderRadius: 15,
         marginVertical: 320,
         marginHorizontal: 50,
@@ -197,10 +217,16 @@ const styles = StyleSheet.create({
     swapButtonContainer: {
         alignItems: 'center',
         marginTop: 20,
+        width: '100%',
     },
 
     swapButton: {
         width: 100,
+        height: 38,
+    },
+
+    selectVideoButton: {
+        width: 120,
         height: 38,
     },
 
@@ -221,7 +247,7 @@ const styles = StyleSheet.create({
     video: {
         width: '100%',
         height: '30%',
-        backgroundColor: 'black',
+        backgroundColor: '#121212',
     }
 
 })
