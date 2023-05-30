@@ -232,6 +232,7 @@ const styles = StyleSheet.create({
 
     title: {
         color: '#ffffff',
+        fontFamily: 'Glitch-Goblin',
         fontSize: 40,
         fontWeight: 700,
         marginTop: 30,
@@ -246,16 +247,21 @@ const styles = StyleSheet.create({
 
     expiration: {
         color: '#ffffff',
-        fontSize: 20,
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 22,
     },
 
     pointValue: {
         color: '#ffffff',
-        fontSize: 30,
+        fontFamily: 'Glitch-Goblin',
+        fontSize: 35,
     },
 
     description: {
         color: '#ffffff',
+        fontFamily: 'Exo-Regular',
         fontSize: 20,
         marginTop: 20,
         marginBottom: 20,

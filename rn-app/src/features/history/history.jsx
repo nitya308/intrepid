@@ -20,31 +20,53 @@ const History = ({navigation}) => {
 
     const historyData = [
         {
-            id: '1',
+            challengeId: '1',
             title: 'DYE YOUR HAIR PINK',
-            expiresAt: Date.now + (7 * 24 * 60 * 60 * 1000),
             points: 75,
+            success: 1,
+            isVotingEnded: false,
         },
 
         {
-            id: '2',
+            challengeId: '2',
             title: 'GET A DRAGON TATTOO',
-            expiresAt: Date.now + (7 * 24 * 60 * 60 * 1000),
             points: 200,
+            success: 1,
+            isVotingEnded: true,
+        },
+
+        {
+            challengeId: '3',
+            title: 'FLEE THE COUNTRY',
+            points: 180,
+            success: -1,
+            isVotingEnded: true,
         },
 
     ];
 
-    const SavedItem = ({ id, title, expiresAt, points }) => {
+    const SubmissionStatus = ({ success, isVotingEnded }) => {
+        if (!isVotingEnded) {
+            return <Text style={styles.votingStatus}>VOTING</Text>
+        }
+        if (isVotingEnded && success > 0) {
+            return <Text style={styles.successStatus}>SUCCESS</Text>
+        }
+        if (isVotingEnded && success < 0) {
+            return <Text style={styles.failStatus}>FAIL</Text>
+        }
+    }
+
+    const HistoryItem = ({ challengeId, title, points, success, isVotingEnded }) => {
         const [challengedSaved, setChallengeSaved] = useState(true);
 
         return (
-            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {paramKey: id,})}}>
-                <View style={styles.savedItem}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {paramKey: challengeId,})}}>
+                <View style={styles.historyItem}>
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.expirationAndPoints}>
-                        <Text style={styles.expiresAt}>Expires in 3 hours</Text>
-                        <Text style={styles.points}>{points} PTS</Text>
+                        <SubmissionStatus success={success} isVotingEnded={isVotingEnded}/>
+                        <Text style={[styles.points, isVotingEnded && success < 0 ? styles.pointsStrikethrough : null]}>{points} PTS</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -65,11 +87,12 @@ const History = ({navigation}) => {
                     style={styles.savedList}
                     data={historyData}
                     renderItem={({item}) => 
-                        <SavedItem
-                            id={item.id}
+                        <HistoryItem
+                            challengeId={item.challengeId}
                             title={item.title}
-                            expiresAt={item.expiresAt}
                             points={item.points}
+                            success={item.success}
+                            isVotingEnded={item.isVotingEnded}
                         />
                     }
                     keyExtractor={item => item.id}
@@ -89,7 +112,7 @@ const History = ({navigation}) => {
 
 const styles = StyleSheet.create({
     screen: {
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         paddingTop: 55,
     },
 
@@ -106,22 +129,22 @@ const styles = StyleSheet.create({
     savedList: {
     },
 
-    savedItem: {
+    historyItem: {
         backgroundColor: '#262626',
         borderRadius: 15,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
         paddingVertical: 20,
-        paddingHorizontal: 10,
         marginBottom: 20,
     },
 
     title: {
         color: '#ffffff',
-        fontSize: 22,
-        fontWeight: 700,
-        width: 170,
+        fontFamily: 'Groupe',
+        fontSize: 24,
+        letterSpacing: -2.5,
+        width: 160,
         textAlign: 'center',
     },
 
@@ -130,15 +153,39 @@ const styles = StyleSheet.create({
         rowGap: 5,
     },
 
-    expiresAt: {
-        color: '#ffffff',
+    votingStatus: {
+        color: '#FFF7DA',
+        textShadowColor: '#FFE27B',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 17,
+    },
+
+    successStatus: {
+        color: '#02EDFE',
+        textShadowColor: '#02EDFE',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 17,
+    },
+
+    failStatus: {
+        color: '#FF6867',
+        textShadowColor: '#FF6867',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
         fontSize: 17,
     },
 
     points: {
         color: '#ffffff',
-        fontSize: 25,
-        fontWeight: 700,
+        fontFamily: 'Glitch-Goblin',
+        fontSize: 30,
     },
+
+    pointsStrikethrough: {
+        textDecorationLine: 'line-through',
+        textDecorationColor: '#FF0201',
+    }
 })
 export default History;
