@@ -3,13 +3,17 @@ import {
     StyleSheet, View, Text, Image, TouchableOpacity, Button
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge } from '../challenges/challengesSlice';
+import { fetchChallenge, submitChallenge } from '../challenges/challengesSlice';
 import Modal from "react-native-modal";
 import StayButton from './../../../assets/icons/stay-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import SwapButton from './../../../assets/icons/swap-button.png';
+import SelectVideoButton from './../../../assets/icons/select-video-button.png';
 import SubmitButton from './../../../assets/icons/submit-button.png'
 import * as ImagePicker from 'expo-image-picker';
+import uploadImage from '../../frontendS3';
+import { Alert } from 'react-native';
+// import fs from 'react-native-fs';
 
 import { ResizeMode, Video } from 'expo-av';
 
@@ -17,7 +21,7 @@ const SubmitChallenge = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenge(route.params.paramKey))
+        dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
     const currentChallenge = useSelector((state) => state.currentChallenge);
@@ -31,20 +35,76 @@ const SubmitChallenge = ({ navigation, route }) => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Videos,
             allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
+            quality: 0,
         });
 
         console.log(result);
 
-        if (!result.canceled) {
-            setVideo(result.assets[0]);
-        }
+        if (result.canceled) return;
+
+        setVideo(result.assets[0]);
     };
 
+    const uploadVideo = async () => {
+        console.log("uploading video: " + video.uri);
+        const response = await fetch(video.uri);
+        const blob = await response.blob();
+        const fileName = video.uri.split('/').pop();
+        blob.name = fileName;
+
+        // uriToFile(video.uri, video.fileName).then((file) => {
+        console.log("FILE BEFORE UPLOADING: " + JSON.stringify(blob));
+        uploadImage(blob).then((url) => {
+            console.log('url at uploadImage', url);
+
+        }).catch((error) => {
+            console.log('error uploading image: ', error);
+        });
+        // }).catch((error) => {
+        //     console.log('error', error);
+        // });
+
+
+    };
+
+    const handleSubmit = async () => {
+        if (!video) {
+            Alert.alert(
+                'No Video Selected',
+                'Please select a video.',
+                [
+                    { text: 'OK', onPress: () => pickVideo() }
+                ]
+            );
+            return;
+        }
+
+        try {
+
+            const response = await fetch(video.uri);
+            const blob = await response.blob();
+            const fileName = video.uri.split('/').pop();
+            blob.name = fileName;
+            const url = await uploadImage(blob);
+            console.log('url at handleSubmit', url);
+            // create a new submission object with the url
+            // dispatch(submitChallenge(route.params.challengeId, url));
+        } catch (error) {
+            Alert.alert(
+                'Error',
+                'There was an error submitting your video. Try again later.',
+                [
+                    { text: 'OK', onPress: () => navigation.navigate('Challenge Info', { challengeId: route.params.challengeId }) }
+                ]
+            );
+        }
+
+
+    }
 
     useEffect(() => {
-        pickVideo();
+        // pickVideo();
+        // setTestURL();
     }, []);
     return (
         <View style={styles.screen}>
@@ -63,7 +123,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}))}
+                        onPress={() => (navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }))}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -91,31 +151,29 @@ const SubmitChallenge = ({ navigation, route }) => {
                 Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
-            {
-                video &&
-                <Video
-                    style={styles.video}
-                    source={{ uri: video.uri }}
-                    useNativeControls
-                    resizeMode={ResizeMode.CONTAIN}
-                    isLooping
-                    onPlaybackStatusUpdate={status => setStatus(() => status)}
+            <Video
+                style={styles.video}
+                source={{ uri: video?.uri }}
+                // source={{ uri: 'https://swerve-bucket.s3.amazonaws.com/2F4688A4-F1CE-4518-826C-DFCCE16CFCCA.mov' }}
+                useNativeControls
+                resizeMode={ResizeMode.CONTAIN}
+                isLooping
+                onPlaybackStatusUpdate={status => setStatus(() => status)}
 
-                />
-            }
+            />
 
 
             <View style={styles.swapButtonContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={pickVideo}>
                     <Image
-                        style={styles.swapButton}
-                        source={SwapButton}
+                        style={video ? styles.swapButton : styles.selectVideoButton}
+                        source={video ? SwapButton : SelectVideoButton}
                     />
                 </TouchableOpacity>
             </View>
 
             <View style={styles.submitButtonContainer}>
-                <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: route.params.paramKey}) }}>
+                <TouchableOpacity onPress={handleSubmit}>
                     <Image
                         style={styles.submitButton}
                         source={SubmitButton}
@@ -134,7 +192,7 @@ const styles = StyleSheet.create({
     },
 
     exitModal: {
-        backgroundColor: '#303030',
+        backgroundColor: '#121212s',
         borderRadius: 15,
         marginVertical: 320,
         marginHorizontal: 50,
@@ -174,6 +232,7 @@ const styles = StyleSheet.create({
 
     title: {
         color: '#ffffff',
+        fontFamily: 'Glitch-Goblin',
         fontSize: 40,
         fontWeight: 700,
         marginTop: 30,
@@ -188,16 +247,21 @@ const styles = StyleSheet.create({
 
     expiration: {
         color: '#ffffff',
-        fontSize: 20,
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 22,
     },
 
     pointValue: {
         color: '#ffffff',
-        fontSize: 30,
+        fontFamily: 'Glitch-Goblin',
+        fontSize: 35,
     },
 
     description: {
         color: '#ffffff',
+        fontFamily: 'Exo-Regular',
         fontSize: 20,
         marginTop: 20,
         marginBottom: 20,
@@ -206,10 +270,16 @@ const styles = StyleSheet.create({
     swapButtonContainer: {
         alignItems: 'center',
         marginTop: 20,
+        width: '100%',
     },
 
     swapButton: {
         width: 100,
+        height: 38,
+    },
+
+    selectVideoButton: {
+        width: 120,
         height: 38,
     },
 
@@ -230,7 +300,7 @@ const styles = StyleSheet.create({
     video: {
         width: '100%',
         height: '30%',
-        backgroundColor: 'black',
+        backgroundColor: '#121212',
     }
 
 })
