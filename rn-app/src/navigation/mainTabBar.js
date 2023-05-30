@@ -4,11 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 import Leaderboard from '../features/leaderboard/leaderboard';
-import FeedNavigator from '../features/feed/feedNavigator';
 import ChallengesNavigator from '../features/challenges/challengesNavigator';
 import History from '../features/history/history';
 import SavedNavigator from '../features/saved/savedNavigator';
 import HistoryNavigator from '../features/history/historyNavigator';
+import Feed from '../features/feed/feed';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +33,7 @@ const MainTabBar = () => {
                 })}
             >
                 <Tab.Screen name="Leaderboard" component={Leaderboard} />
-                <Tab.Screen name="Feed" component={FeedNavigator} />
+                <Tab.Screen name="Feed" options={{unmountOnBlur: true}} component={Feed} />
                 <Tab.Screen name="Challenges" component={ChallengesNavigator} />
                 <Tab.Screen name="Saved" component={SavedNavigator} />
                 <Tab.Screen name="History" component={HistoryNavigator} />

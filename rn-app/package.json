@@ -27,6 +27,7 @@
     "react-date-object": "^2.1.7",
     "react-native": "0.71.8",
     "react-native-asset": "^2.1.1",
+    "react-native-dimensions": "^0.0.1",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "~2.9.0",

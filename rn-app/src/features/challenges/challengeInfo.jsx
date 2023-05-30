@@ -14,7 +14,9 @@ const ChallengeInfo = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenge(route.params.paramKey))
+
+        console.log("Challenge id "+ route.params.challengeId)
+        // dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
     const currentChallenge = useSelector((state) => state.currentChallenge);
