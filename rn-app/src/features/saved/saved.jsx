@@ -6,8 +6,9 @@ import SavedHeader from './../../../assets/images/saved-header.png';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import PointsBox from '../pointsBox';
+import { CommonActions } from '@react-navigation/native';
 
-const Saved = ({navigation}) => {
+const Saved = ({ navigation }) => {
 
     const [refreshing, setRefreshing] = useState(false);
 
@@ -39,14 +40,26 @@ const Saved = ({navigation}) => {
         const [challengedSaved, setChallengeSaved] = useState(true);
 
         return (
-            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {paramKey: id,})}}>
+            <TouchableOpacity onPress={() => {
+                navigation.dispatch(
+                    CommonActions.navigate({
+                        name: 'Challenges',
+                        params: {
+                            screen: 'Challenge Info',
+                            params: {
+                                challengeId: id,
+                            },
+                        },
+                    })
+                );
+            }}>
                 <View style={styles.savedItem}>
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.expirationAndPointsAndBookmark}>
                         <Text style={styles.expiresAt}>Expires in 3 hours</Text>
                         <View style={styles.pointsAndBookmark}>
                             <Text style={styles.points}>{points} PTS</Text>
-                            <Pressable onPress={() => {setChallengeSaved(!challengedSaved)}}>
+                            <Pressable onPress={() => { setChallengeSaved(!challengedSaved) }}>
                                 <Image
                                     style={styles.bookmark}
                                     source={challengedSaved ? BookmarkFilled : Bookmark}
@@ -58,11 +71,11 @@ const Saved = ({navigation}) => {
             </TouchableOpacity>
         )
     };
-    
+
     return (
         <View style={styles.screen}>
             <PointsBox />
-            <Image 
+            <Image
                 source={SavedHeader}
                 style={styles.savedHeader}
             />
@@ -71,7 +84,7 @@ const Saved = ({navigation}) => {
                 <FlatList
                     style={styles.savedList}
                     data={savedData}
-                    renderItem={({item}) => 
+                    renderItem={({ item }) =>
                         <SavedItem
                             id={item.id}
                             title={item.title}

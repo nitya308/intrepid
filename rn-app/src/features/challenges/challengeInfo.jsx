@@ -13,7 +13,8 @@ import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenge(route.params.paramKey))
+        console.log('route.params.challengeId', route.params.challengeId);
+        // dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
     const currentChallenge = useSelector((state) => state.currentChallenge);
@@ -40,7 +41,7 @@ const ChallengeInfo = ({ navigation, route }) => {
             content = (
                 <View style={styles.submitChallengeButtonContainer}>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate('Submit Challenge', {paramKey: route.params.paramKey}) }}
+                        onPress={() => { navigation.navigate('Submit Challenge', { challengeId: route.params.challengeId }) }}
                     >
                         <Image
                             style={styles.submitChallengeButton}
