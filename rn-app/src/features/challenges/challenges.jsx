@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import {
     StyleSheet, View, Text, Image, ScrollView, TouchableOpacity
 } from 'react-native';
-import { fetchChallenges, fetchTrendingChallenges } from './challengesSlice';
+import { fetchChallenges, fetchTrendingChallenges } from './challengesRequests';
 import { useSelector, useDispatch } from 'react-redux';
 import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
@@ -44,7 +44,7 @@ const Challenges = ({ navigation }) => {
 
     const allChallenges = useSelector((state) => state.challenges.allChallenges) || [];
     const trendingChallenges = useSelector((state) => state.challenges.trendingChallenges) || [];
-    console.log(trendingChallenges)
+    console.log(`trendingChallenges: ${JSON.stringify(trendingChallenges)}`)
 
     // const [allChallenges, setAllChallenges] = useState([
     //     {

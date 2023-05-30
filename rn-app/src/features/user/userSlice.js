@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getToken, setToken } from '../../app/utils';
+import { setToken } from '../../app/utils';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+// const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'http://129.170.212.19:9090';
 
 export const userSlice = createSlice({
     name: 'user',
@@ -33,10 +34,15 @@ export const userSlice = createSlice({
             state.authenticated = false;
             state.token = '';
         },
+        authFailed: (state) => {
+            state.authenticated = false;
+            state.token = '';
+            state.loading = false;
+        }
     },
 });
 
-export const { setUser, emptyUser, authUser, deauthUser } = userSlice.actions;
+export const { setUser, emptyUser, authUser, deauthUser, authFailed } = userSlice.actions;
 
 export function signinUser( email, password ) {
     return async (dispatch) => {
@@ -71,7 +77,6 @@ export function signupUser( username, email, password ) {
                 return response.json()
             })
             .then((data) => {
-                console.log(`signupUser: ${JSON.stringify(data.token)}`);
                 dispatch(setUser(data));
                 setToken(data.token);
             })
