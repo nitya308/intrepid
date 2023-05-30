@@ -41,17 +41,18 @@ const Saved = ({ navigation }) => {
 
         return (
             <TouchableOpacity onPress={() => {
-                navigation.dispatch(
-                    CommonActions.navigate({
-                        name: 'Challenges',
-                        params: {
-                            screen: 'Challenge Info',
-                            params: {
-                                challengeId: id,
-                            },
-                        },
-                    })
-                );
+                navigation.navigate('Challenge Info', {challengeId: id})
+                // navigation.dispatch(
+                //     CommonActions.navigate({
+                //         name: 'Challenges',
+                //         params: {
+                //             screen: 'Challenge Info',
+                //             params: {
+                //                 challengeId: id,
+                //             },
+                //         },
+                //     })
+                // );
             }}>
                 <View style={styles.savedItem}>
                     <Text style={styles.title}>{title}</Text>
