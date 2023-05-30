@@ -47,7 +47,7 @@ const Challenges = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <View style={styles.addAndPoints}>
+            {/* <View style={styles.addAndPoints}>
                 <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
                     <Image
                         source={AddButton}
@@ -55,7 +55,19 @@ const Challenges = ({ navigation }) => {
                     />
                 </TouchableOpacity>
                 <PointsBox />
+            </View> */}
+            <View style={styles.addAndPoints}>
+                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
+                    <Image
+                        source={AddButton}
+                        style={styles.addButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
             </View>
+
             <Text style = {styles.h1}> CHALLENGES </Text>
             <View style={styles.trendingContainer}>
             <View style={{flexDirection: 'row', marginBottom:10,}}>
@@ -160,19 +172,22 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'black',
     },
     
     addAndPoints: {
         flexDirection: 'row',
         marginTop: 40,
-        paddingHorizontal: 15,
+        paddingHorizontal: 20,
         justifyContent: 'space-between',
     },
 
     addButton: {
         width: 40,
         height: 40,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
     },
 
     backButton: {
