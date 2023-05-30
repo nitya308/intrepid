@@ -2,8 +2,10 @@ import React, { Component, useState } from 'react';
 import {
     StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView,
 } from 'react-native';
-import AddButton from './../../../assets/icons/add-button.png'
-import PointsBox from '../pointsBox';
+import DropDownPicker from 'react-native-dropdown-picker';
+import TrendingItem from './trendingItem';
+import ChallengeItem from './challengeItem';
+import BackButton from '../../../assets/icons/back-button.png';
 
 const Challenges = ({ navigation }) => {
 
@@ -47,18 +49,15 @@ const Challenges = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <View style={styles.addAndPoints}>
-                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
-                    <Image
-                        source={AddButton}
-                        style={styles.addButton}
-                    />
-                </TouchableOpacity>
-                <View style={styles.pointsBoxContainer}>
-                    <PointsBox />
-                </View>
-            </View>
-
+            <Text 
+                onPress={() => {navigation.navigate('Challenge Info')}}
+                style={{ marginTop: '10%', color:'white' }}
+            >
+                            Click challenge to see challenge info
+                        </Text>
+            <Text onPress={() => {navigation.navigate('Create Challenge')}} style={{color:'white'}}>
+                Create Challenge Button </Text>
+                
             <Text style = {styles.h1}> CHALLENGES </Text>
             <View style={styles.trendingContainer}>
             <View style={{flexDirection: 'row', marginBottom:10,}}>
@@ -72,7 +71,7 @@ const Challenges = ({ navigation }) => {
                     snapToAlignment={"center"}
                     style={styles.trendingScroll} >
 
-                    <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: 'placeholder ID'}) }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
                         <View style={[styles.trendingBox, styles.neonRed]} >
                             <Text style={styles.cTitle} >DYE YOUR HAIR PINK</Text>
                             <Text style={styles.cExpiry} >Expires in 3 days </Text>
@@ -83,7 +82,7 @@ const Challenges = ({ navigation }) => {
 
                     {trendingChallenges.map((challenge, index) => {
                         return (
-                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: 'placeholder ID'}) }}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} key={challenge.id} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
                                     <Text style={styles.cExpiry} >Expires in 3 days </Text>
@@ -136,7 +135,7 @@ const Challenges = ({ navigation }) => {
 
                     {allChallenges.map((challenge, index) => {
                         return (
-                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: 'placeholder ID'}) }}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {paramKey: 'placeholderID'}) }}>
                                 <View style={styles.allChallengeBox} key={challenge.id} >
                                     <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
                                     <View style={styles.allRight} >

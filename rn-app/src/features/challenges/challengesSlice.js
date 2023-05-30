@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const ROOT_URL = 'http://localhost/9090';//'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
 
 export const challengesSlice = createSlice({
     name: 'challenges',
@@ -22,26 +22,23 @@ export const challengesSlice = createSlice({
 export const { setChallenges, setCurrentChallenge } = challengesSlice.actions;
 
 const api = axios.create({
-    baseURL: ROOT_URL,
+    baseURL: "http://localhost:9090/",
     withCredentials: false,
     headers: {
-        Accept: "application/vnd.GitHub.v3+json",
-        "Content-Type": "application/vnd.GitHub.v3+json",
+        Accept: "application/json",
+        "Content-Type": "application/json",
     },
 });
 
 export function fetchChallenges() {
     return async (dispatch) => {
-        console.log(`fetchChallenges`);
         api
-
-            .get("/challenges?sortBy=points")
+            .get("/challenges")
             .then((response) => {
-                console.log(`response.data: ${JSON.stringify(response.data)}`);
-                dispatch(setChallenges(response.data));
+                dispatch(setItems(response.data));
             })
             .catch((er) => {
-                throw er;
+                dispatch(setError());
             });
     };
 }
@@ -54,7 +51,7 @@ export function fetchChallenge(id) {
                 dispatch(setCurrentChallenge(response.data));
             })
             .catch((er) => {
-                throw er;
+                dispatch(setError());
             });
     };
 }
@@ -67,7 +64,7 @@ export function createChallenge(challenge) {
                 dispatch(fetchChallenges());
             })
             .catch((er) => {
-                throw er;
+                dispatch(setError());
             });
     };
 }
@@ -80,7 +77,7 @@ export function submitChallenge(userId, videoUrl) {
                 dispatch(fetchChallenges());
             })
             .catch((er) => {
-                throw er;
+                dispatch(setError());
             });
     };
 }
