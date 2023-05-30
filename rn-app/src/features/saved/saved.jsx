@@ -95,7 +95,7 @@ const Saved = ({navigation}) => {
 
 const styles = StyleSheet.create({
     screen: {
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         paddingTop: 55,
     },
 
@@ -125,19 +125,25 @@ const styles = StyleSheet.create({
 
     title: {
         color: '#ffffff',
-        fontSize: 22,
-        fontWeight: 700,
-        width: 170,
+        fontFamily: 'Groupe',
+        fontSize: 24,
+        letterSpacing: -2.5,
+        width: 160,
         textAlign: 'center',
+        // borderWidth: 1,
+        // borderColor: '#ffffff',
     },
 
     expirationAndPointsAndBookmark: {
         alignItems: 'flex-end',
         rowGap: 5,
+        // borderWidth: 1,
+        // borderColor: '#ffffff',
     },
 
     expiresAt: {
         color: '#ffffff',
+        fontFamily: 'Exo-Medium',
         fontSize: 17,
     },
 
@@ -149,8 +155,8 @@ const styles = StyleSheet.create({
 
     points: {
         color: '#ffffff',
-        fontSize: 25,
-        fontWeight: 700,
+        fontFamily: 'Glitch-Goblin',
+        fontSize: 30,
     },
 
     bookmark: {

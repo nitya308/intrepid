@@ -20,30 +20,52 @@ const History = ({navigation}) => {
 
     const historyData = [
         {
-            id: '1',
+            challengeId: '1',
             title: 'DYE YOUR HAIR PINK',
-            expiresAt: Date.now + (7 * 24 * 60 * 60 * 1000),
             points: 75,
+            success: 1,
+            isVotingEnded: false,
         },
 
         {
-            id: '2',
+            challengeId: '2',
             title: 'GET A DRAGON TATTOO',
-            expiresAt: Date.now + (7 * 24 * 60 * 60 * 1000),
             points: 200,
+            success: 1,
+            isVotingEnded: true,
+        },
+
+        {
+            challengeId: '3',
+            title: 'FLEE THE COUNTRY',
+            points: 180,
+            success: -1,
+            isVotingEnded: true,
         },
 
     ];
 
-    const SavedItem = ({ id, title, expiresAt, points }) => {
+    const SubmissionStatus = ({ success, isVotingEnded }) => {
+        if (!isVotingEnded) {
+            return <Text style={styles.expiresAt}>VOTING</Text>
+        }
+        if (isVotingEnded && success > 0) {
+            return <Text style={styles.expiresAt}>SUCCESS</Text>
+        }
+        if (isVotingEnded && success < 0) {
+            return <Text style={styles.expiresAt}>FAIL</Text>
+        }
+    }
+
+    const HistoryItem = ({ challengeId, title, points, success, isVotingEnded }) => {
         const [challengedSaved, setChallengeSaved] = useState(true);
 
         return (
-            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {paramKey: id,})}}>
-                <View style={styles.savedItem}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {paramKey: challengeId,})}}>
+                <View style={styles.historyItem}>
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.expirationAndPoints}>
-                        <Text style={styles.expiresAt}>Expires in 3 hours</Text>
+                        <SubmissionStatus success={success} isVotingEnded={isVotingEnded}/>
                         <Text style={styles.points}>{points} PTS</Text>
                     </View>
                 </View>
@@ -65,11 +87,12 @@ const History = ({navigation}) => {
                     style={styles.savedList}
                     data={historyData}
                     renderItem={({item}) => 
-                        <SavedItem
-                            id={item.id}
+                        <HistoryItem
+                            challengeId={item.challengeId}
                             title={item.title}
-                            expiresAt={item.expiresAt}
                             points={item.points}
+                            success={item.success}
+                            isVotingEnded={item.isVotingEnded}
                         />
                     }
                     keyExtractor={item => item.id}
@@ -89,7 +112,7 @@ const History = ({navigation}) => {
 
 const styles = StyleSheet.create({
     screen: {
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         paddingTop: 55,
     },
 
@@ -106,7 +129,7 @@ const styles = StyleSheet.create({
     savedList: {
     },
 
-    savedItem: {
+    historyItem: {
         backgroundColor: '#262626',
         borderRadius: 15,
         flexDirection: 'row',
@@ -119,9 +142,10 @@ const styles = StyleSheet.create({
 
     title: {
         color: '#ffffff',
-        fontSize: 22,
-        fontWeight: 700,
-        width: 170,
+        fontFamily: 'Groupe',
+        fontSize: 24,
+        letterSpacing: -2.5,
+        width: 160,
         textAlign: 'center',
     },
 
@@ -132,13 +156,14 @@ const styles = StyleSheet.create({
 
     expiresAt: {
         color: '#ffffff',
+        fontFamily: 'Exo-Medium',
         fontSize: 17,
     },
 
     points: {
         color: '#ffffff',
-        fontSize: 25,
-        fontWeight: 700,
+        fontFamily: 'Glitch-Goblin',
+        fontSize: 30,
     },
 })
 export default History;
