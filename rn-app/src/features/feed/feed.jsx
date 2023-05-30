@@ -36,7 +36,7 @@ const Feed=({navigation, route}) => {
     })
 
     const navigateToChallengeInfo = (id) => {
-        navigation.navigate('Challenge Info',{challengeId: id})
+        navigation.navigate('Feed Challenge Info', {challengeId: id})
     }
 
 
@@ -79,10 +79,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         textAlign: 'center',
-        top:79,
+        top:65,
         color: 'white',
         fontSize: 24,
         zIndex: 1000,
+        fontFamily: 'Glitch-Goblin'
     },
 })
 

@@ -8,7 +8,7 @@ import ChallengesNavigator from '../features/challenges/challengesNavigator';
 import History from '../features/history/history';
 import SavedNavigator from '../features/saved/savedNavigator';
 import HistoryNavigator from '../features/history/historyNavigator';
-import Feed from '../features/feed/feed';
+import FeedNavigator from '../features/feed/feedNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -69,7 +69,7 @@ const MainTabBar = () => {
                 })}
             >
                 <Tab.Screen name="Leaderboard" component={Leaderboard} />
-                <Tab.Screen name="Feed" options={{unmountOnBlur: true}} component={Feed} />
+                <Tab.Screen name="Feed" options={{unmountOnBlur: true}} component={FeedNavigator} />
                 <Tab.Screen name="Challenges" component={ChallengesNavigator} />
                 <Tab.Screen name="Saved" component={SavedNavigator} />
                 <Tab.Screen name="History" component={HistoryNavigator} />
