@@ -7,9 +7,7 @@ import {
 const UserRank = (props) => {
 
     const userObj = props.userObj;
-    console.log("username", userObj);
     const rank = props.rank;
-    console.log(rank);
 
     return (
         <View style={[styles.userContainer, rank % 2 ? styles.neonGreen : styles.neonWhite]}>
@@ -94,6 +92,6 @@ const styles = StyleSheet.create({
 
     }
 
-  })
+})
 
 export default UserRank;

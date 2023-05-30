@@ -22,4 +22,14 @@ const store = configureStore({
     },
 });
 
+export const getHeaders = () => {
+    const state = store.getState();
+    const token = state.user.token;
+    return {
+        headers: {
+            Authorization: token,
+        },
+    };
+};
+
 export default store;
