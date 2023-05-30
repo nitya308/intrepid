@@ -47,13 +47,13 @@ const History = ({navigation}) => {
 
     const SubmissionStatus = ({ success, isVotingEnded }) => {
         if (!isVotingEnded) {
-            return <Text style={styles.expiresAt}>VOTING</Text>
+            return <Text style={styles.votingStatus}>VOTING</Text>
         }
         if (isVotingEnded && success > 0) {
-            return <Text style={styles.expiresAt}>SUCCESS</Text>
+            return <Text style={styles.successStatus}>SUCCESS</Text>
         }
         if (isVotingEnded && success < 0) {
-            return <Text style={styles.expiresAt}>FAIL</Text>
+            return <Text style={styles.failStatus}>FAIL</Text>
         }
     }
 
@@ -66,7 +66,7 @@ const History = ({navigation}) => {
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.expirationAndPoints}>
                         <SubmissionStatus success={success} isVotingEnded={isVotingEnded}/>
-                        <Text style={styles.points}>{points} PTS</Text>
+                        <Text style={[styles.points, isVotingEnded && success < 0 ? styles.pointsStrikethrough : null]}>{points} PTS</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-evenly',
         paddingVertical: 20,
-        paddingHorizontal: 10,
         marginBottom: 20,
     },
 
@@ -154,8 +153,26 @@ const styles = StyleSheet.create({
         rowGap: 5,
     },
 
-    expiresAt: {
-        color: '#ffffff',
+    votingStatus: {
+        color: '#FFF7DA',
+        textShadowColor: '#FFE27B',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 17,
+    },
+
+    successStatus: {
+        color: '#02EDFE',
+        textShadowColor: '#02EDFE',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 17,
+    },
+
+    failStatus: {
+        color: '#FF6867',
+        textShadowColor: '#FF6867',
+        textShadowRadius: 4,
         fontFamily: 'Exo-Medium',
         fontSize: 17,
     },
@@ -165,5 +182,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Glitch-Goblin',
         fontSize: 30,
     },
+
+    pointsStrikethrough: {
+        textDecorationLine: 'line-through',
+        textDecorationColor: '#FF6867',
+    }
 })
 export default History;
