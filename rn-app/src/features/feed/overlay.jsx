@@ -28,7 +28,7 @@ const Overlay = ({post, toChallenge}) => {
                 <VotingSlider />
             </View>
             <LinearGradient
-                colors={['transparent',  'rgba(0,0,0, 0.8)']}
+                colors={['transparent',  'rgba(0,0,0, 0.6)']}
                 style={styles.nonSliderBackground}>
                 <View style={styles.nonSlider}>
                     
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 30,
         justifyContent: 'space-between',
-        paddingBottom: 22,
+        paddingBottom: 26,
     },
 
     nonSliderBackground: {
