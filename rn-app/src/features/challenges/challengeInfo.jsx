@@ -14,27 +14,11 @@ import { fetchSaved } from '../saved/savedSlice';
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log("Challenge id "+ route.params.challengeId)
         dispatch(fetchChallenge(route.params.challengeId))
         dispatch(fetchSaved)
     }, [])
 
     const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
-
-    const mockCurrentChallenge = {
-        title: 'Dye your hair pink',
-        description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
-        points: 125,
-        expiresAt: {},
-        isExpired: false,
-    }
-
-    // let [fontsLoaded] = useFonts({
-    //     'Glitch-Goblin': require('./../../../assets/fonts/glitchGoblin/GlitchGoblin.ttf'),
-    // })
-
-    const [challengeSaved, setChallengeSaved] = useState(false);
-    const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
     const ChallengeInfoCTA = ({ submitted }) => {
         let content;
@@ -84,15 +68,18 @@ const ChallengeInfo = ({ navigation, route }) => {
                 {currentChallenge.title}
             </Text>
 
-            <Pressable onPress={() => { dispatch(saveChallenge()) }}>
+            <Pressable onPress={() => { 
+                console.log("currentChallenge.id: " + currentChallenge.id)
+                dispatch(saveChallenge(currentChallenge.id))
+            }}>
                 <Image
                     style={styles.bookmark}
-                    source={challengeSaved ? BookmarkFilled : Bookmark}
+                    source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
                 />
             </Pressable>
 
             <View style={styles.expirationAndPointValue}>
-                <Text style={styles.expiration}>Expires in 3 days</Text>
+                <Text style={styles.expiration}>{currentChallenge.expiresIn}</Text>
                 <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
             </View>
 
@@ -100,7 +87,7 @@ const ChallengeInfo = ({ navigation, route }) => {
                 {currentChallenge.description}
             </Text>
 
-            <ChallengeInfoCTA submitted={challengeSubmitted} />
+            <ChallengeInfoCTA submitted={currentChallenge.submitted} />
         </View>
     )} else {
         // TODO: MAKE THIS LOOK NICER
