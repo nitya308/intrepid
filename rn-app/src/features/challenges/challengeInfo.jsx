@@ -26,6 +26,15 @@ const ChallengeInfo = ({ navigation, route }) => {
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
+    const videosList = [
+        'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov',
+        'https://swerve-bucket.s3.amazonaws.com/07841723-081B-4896-B1CE-547D99961AF7.mov',
+        'https://swerve-bucket.s3.amazonaws.com/2F4688A4-F1CE-4518-826C-DFCCE16CFCCA.mov',
+        'https://swerve-bucket.s3.amazonaws.com/7FDB7F7C-5192-46CE-A018-15819F71F2E9.mov',
+        'https://swerve-bucket.s3.amazonaws.com/E2785B21-B749-4EE0-9BC9-4C491467DE16.mov',
+        'https://swerve-bucket.s3.amazonaws.com/ED6C3E8A-B28D-4F57-93B1-EC6B9F29913B.mov',
+    ]
+
     const ChallengeInfoCTA = ({ submitted }) => {
         let content;
 
@@ -76,14 +85,18 @@ const ChallengeInfo = ({ navigation, route }) => {
 
             <AutoScroll>
                 <View style={styles.videos}>
-                    <Video
-                        style={styles.video}
-                        // source={{ uri: 'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov', }}
-                        resizeMode={ResizeMode.CONTAIN}
-                        isLooping={true}
-                        isMuted={true}
-                        // onPlaybackStatusUpdate={status => setStatus(() => status)}
-                    />
+                    {videosList.map((url) => {
+                        return (
+                            <Video
+                                style={styles.video}
+                                source={{ uri: url }}
+                                resizeMode={ResizeMode.COVER}
+                                isLooping={true}
+                                isMuted={true}
+                                shouldPlay
+                            />
+                        )
+                    })}
                 </View>
             </AutoScroll>
 
@@ -130,7 +143,6 @@ const styles = StyleSheet.create({
     },
 
     screen: {
-        paddingHorizontal: 35,
         paddingTop: 55,
     },
 
@@ -138,6 +150,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingHorizontal: 30,
+        marginBottom: 20,
     },
 
     backButton: {
@@ -155,8 +169,8 @@ const styles = StyleSheet.create({
     },
 
     video: {
-        width: '100%',
-        height: '30%',
+        width: 80,
+        height: 140,
     },
 
     challengeTitle: {
