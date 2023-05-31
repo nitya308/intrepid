@@ -247,9 +247,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#223e40',
     },
     neonLine: {
-        backgroundColor:'#7BF7FF',
+        backgroundColor: '#c8a9e8',
         shadowRadius: 15,
-        shadowColor: '#27F2FF',
+        shadowColor: '#AD5AFF',
         shadowOpacity: 1,
         shadowRadius: 3,
         shadowOffset: {

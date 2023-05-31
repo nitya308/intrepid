@@ -34,7 +34,7 @@ const CreateChallenge = ({navigation}) => {
             }
             console.log(challenge);
             dispatch(createChallenge(challenge, navigation));
-            
+            navigation.navigate('Challenges Main');
             
         }
     }
@@ -122,7 +122,7 @@ const CreateChallenge = ({navigation}) => {
                   />
                 </View>
            
-                {points>=userPoints ? (
+                {points>userPoints ? (
                         <View style={styles.pointsWarning}>
                             <Image
                             style={styles.red_exclamation}
