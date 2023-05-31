@@ -123,9 +123,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
 
-    savedList: {
-    },
-
     savedItem: {
         backgroundColor: '#262626',
         borderRadius: 15,
