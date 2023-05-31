@@ -8,6 +8,9 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
 import ChallengeItem from './challengeItem';
 import BackButton from '../../../assets/icons/back-button.png';
+import ExitButton from './../../../assets/icons/exit-button.png';
+import PointsBox from '../pointsBox';
+import AddButton from './../../../assets/icons/add-button.png';
 
 const Challenges = ({ navigation }) => {
 
@@ -29,14 +32,18 @@ const Challenges = ({ navigation }) => {
     
     return (
         <ScrollView style={styles.container}>
-            <Text 
-                onPress={() => {navigation.navigate('Challenge Info')}}
-                style={{ marginTop: '10%', color:'white' }}
-            >
-                            Click challenge to see challenge info
-                        </Text>
-            <Text onPress={() => {navigation.navigate('Create Challenge')}} style={{color:'white'}}>
-                Create Challenge Button </Text>
+            <View style={styles.backAndPoints}>
+                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
+                    <Image
+                        source={AddButton}
+                        style={styles.addButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
+            </View>
+           
                 
             <Text style = {styles.h1}> CHALLENGES </Text>
             <View style={styles.trendingContainer}>
@@ -134,7 +141,21 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
     },
-    
+    backAndPoints: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: 340,
+    },
+
+    exitButton: {
+        width: 30,
+        height: 30,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
+    },
     addAndPoints: {
         flexDirection: 'row',
         marginTop: 45,
