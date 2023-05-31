@@ -42,12 +42,10 @@ const App = (props) => {
     if (!fontsLoaded) {
         return null;
     } 
-
-    console.log(isSignedIn);
-
+    
     return (
         <Provider store={store} onLayout={onLayoutRootView}>
-            {isSignedIn ? <MainTabBar /> : <EntryNavigator />}
+            <Home/>
         </Provider>
     )
 };
