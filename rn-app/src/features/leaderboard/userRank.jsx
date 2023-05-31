@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         color: 'rgb(201, 170, 232)',
         paddingTop: '3.25%',
         paddingLeft: '3%',
-        textShadowColor: '#C9AAE8',
-        textShadowRadius: 10,
+        // textShadowColor: '#C9AAE8',
+        // textShadowRadius: 10,
         fontFamily: 'Glitch-Goblin',
     },
 
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
         textAlign: 'flex-start',
         paddingTop: '4%',
         paddingLeft: '10%',
-        textShadowColor: 'rgba(100, 100, 100, 0.75)',
-        textShadowRadius: 5,
+        // textShadowColor: 'rgba(100, 100, 100, 0.75)',
+        // textShadowRadius: 5,
     },
 
     challengesAndPoints: {
@@ -72,28 +72,28 @@ const styles = StyleSheet.create({
 
     neonGreen: {
         shadowOpacity: 1,
-        borderColor: '#BFFFA8',
-        borderWidth: 1.5,
-        borderRadius: 2,
         shadowRadius: 15,
         shadowColor: '#3BFF1C',
+        borderColor: '#BFFFA8',
+        borderWidth: 1.5,
+        borderRadius: 4,
         backgroundColor: 'rgba(25, 102, 28, 0.10)'
     },
 
     neonWhite: {
         shadowOpacity: 1,
-        borderColor: '#ffffff',
-        borderWidth: 1.5,
-        borderRadius: 2,
         shadowRadius: 15,
         shadowColor: '#ffffff',
+        borderColor: '#ffffff',
+        borderWidth: 1.5,
+        borderRadius: 4,
         backgroundColor: 'rgba(225, 225, 225, 0.09)'
     },
 
     numChallenges: {
         color: '#fff',
-        textShadowColor: '#CCFF00',
-        textShadowRadius: 4,
+        // textShadowColor: '#CCFF00',
+        // textShadowRadius: 4,
         fontFamily: 'Exo-Medium',
         fontSize: 20,
     }
