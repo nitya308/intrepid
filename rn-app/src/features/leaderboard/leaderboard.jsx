@@ -59,13 +59,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingHorizontal: 10,
         flexDirection: 'column',
-        // alignItems: 'center',
         rowGap: 20,
-        // justifyContent: 'center',
-        // borderRadius: 15,
-        // paddingVertical: 20,
-        // paddingHorizontal: 10,
-        // marginBottom: 20,
     },
 })
 
