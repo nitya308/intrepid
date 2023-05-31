@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {
-    StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity, SafeAreaView
+    StyleSheet, View, Text, Image, ScrollView, TextInput, TouchableOpacity, SafeAreaView, 
 } from 'react-native';
 import WhiteExclamation from '../../../assets/icons/exclamation_white.png';
 import RedExclamation from '../../../assets/icons/exclamation_red.png';
 import BackButton from '../../../assets/icons/back-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png'
 import PointsBox from '../pointsBox';
+import Modal from "react-native-modal";
+import StayButton from './../../../assets/icons/stay-button.png';
 
 const CreateChallenge = ({navigation}) => {
     const [title, setTitle] = useState('');
@@ -14,15 +16,44 @@ const CreateChallenge = ({navigation}) => {
     const [points, setPoints] = useState('0');
     const [enoughPoints, setEnoughPoints] = useState('false');
 
-    
+    const [exitModalVisible, setExitModalVisible] = useState(false);
+
     const submitChallenge = () => {
-        // submit challenge with title, description, points, and 
+        // submit challenge with title, description, points
+        
     }
 
     return (
-        <SafeAreaView style={{ flexGrow: 1, alignItems: 'center', margin:10}}>
+        <ScrollView style={[{ flexGrow: 1, margin:10}]} contentContainerStyle = {styles.container}>
+            <Modal
+                isVisible={exitModalVisible}
+                style={styles.exitModal}
+                backdropOpacity={0.70}
+                animationIn={'fadeIn'}
+                animationInTiming={100}
+                animationOut={'fadeOut'}
+                animationOutTiming={100}
+            >
+                <Text
+                    style={styles.editModalTextHeader}>Are you sure you want to leave this page?</Text>
+                    <Text
+                    style={styles.editModalTextCaption}>You will lose your progress on creating a challenge.</Text>
+                <View style={styles.exitModalActions}>
+                    <Text
+                        style={styles.exitModalExitText}
+                        onPress={() => {navigation.navigate('Challenges Main')}}
+                    >Exit</Text>
+                    <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
+                        <Image
+                            style={styles.stayButton}
+                            source={StayButton}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </Modal>
+
             <View style={styles.backAndPoints}>
-                <TouchableOpacity onPress={() => {navigation.navigate('Challenges Main')}}>
+                <TouchableOpacity onPress={() => {setExitModalVisible(true)}}>
                     <Image
                         source={ExitButton}
                         style={styles.exitButton}
@@ -37,10 +68,10 @@ const CreateChallenge = ({navigation}) => {
                 <Text style = {styles.h1}> CREATE A CHALLENGE </Text>
                 <View style={styles.illegalWarning}>
                 <Image
-                            style={styles.red_exclamation}
-                            source={RedExclamation}
+                            style={styles.white_exclamation}
+                            source={WhiteExclamation}
                         />
-                    <Text style={styles.text}> Challenges involving illegal activities or encouraging users to harm themselves or others will be removed. </Text>
+                    <Text style={styles.text}> Challenges involving illegal activities or encouraging users to harm themselves or others <Text style={styles.redText}>will be removed.</Text> </Text>
                 </View>
 
                 <View style={styles.inputContainer}> 
@@ -50,6 +81,7 @@ const CreateChallenge = ({navigation}) => {
                       value={title}
                       onChangeText={setTitle}
                       placeholder="Input a title"
+                      maxLength={32}
                   />
                 </View>
 
@@ -61,6 +93,7 @@ const CreateChallenge = ({navigation}) => {
                       onChangeText={setDescription}
                       placeholder="Input a description"
                       multiline={true}
+                      maxLength={200}
                   />
                 </View>
 
@@ -70,15 +103,14 @@ const CreateChallenge = ({navigation}) => {
                       style={[styles.inputPoints]}
                       value={points}
                       onChangeText={setPoints}
-                      
                   />
                 </View>
            
                 {points>20 ? (
                         <View style={styles.pointsWarning}>
                             <Image
-                            style={styles.white_exclamation}
-                            source={WhiteExclamation}
+                            style={styles.red_exclamation}
+                            source={RedExclamation}
                         />
                         <Text  style={styles.text}>You don't have enough points to create this challenge.</Text>
                     </View>
@@ -87,15 +119,16 @@ const CreateChallenge = ({navigation}) => {
                         <Text style={styles.buttonTextCreate}>Create</Text>
                 </TouchableOpacity>
                 
-
-                
             </View>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+alignItems:'center',
+justifyContent:'center',
+    },
     backAndPoints: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -142,6 +175,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight:'bold',
         fontStyle:'italic',
+        fontFamily: 'Glitch-Goblin',
     },
     illegalWarning: {
         borderStyle:'solid',
@@ -154,11 +188,16 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
+        
     },
     text: {
         fontSize:13,
         color:'white',
         flex:.7,
+        fontFamily:'Exo-Medium',
+    },
+    redText: {
+        color:'red',
     },
     inputContainer: {
         marginTop:20,
@@ -167,6 +206,7 @@ const styles = StyleSheet.create({
     inputLabel: {
         fontSize: 14,
         color:'white',
+        fontFamily: 'Exo-Medium'
     },
     input: {
         
@@ -179,6 +219,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       width: 335,
       height:28,
+      fontFamily: 'Exo-Medium'
     },
     inputDescription: {
         height: 143,
@@ -206,6 +247,8 @@ paddingBottom: 0,
       color: 'white',
       borderRadius: 10,
       width: 60,
+      fontFamily:'Exo-SemiBold'
+      
     },
     pointsWarning: {
         borderStyle:'solid',
@@ -242,12 +285,71 @@ paddingBottom: 0,
         display:'flex',
         justifyContent:'center',
         alignContent:'center',
+        borderWidth: 1,
+        borderColor: '#7BF7FF',
+        borderRadius: 2,
+        shadowColor: "#27F2FF",
+        shadowOpacity: 1,
+        shadowRadius: 3,
+        shadowOffset: {
+            height: 0,
+            width: 0,
+        }
     },
     buttonTextCreate: {
         fontSize: 18,
         textAlign: 'center',
-        color:'white',
+        color: '#99F9FF',
+        fontFamily: 'Exo-Medium',
+    },
+    exitModal: {
+        backgroundColor: '#303030',
+        width:280,
+        borderRadius: 15,
+        marginVertical: 200,
+        // marginHorizontal: 50,
+        paddingHorizontal: 20,
+        // rowGap: 40,
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
+    },
 
+    editModalTextHeader: {
+        color: '#ffffff',
+        fontSize: 20,
+        fontWeight: 500,
+        textAlign: 'center',
+        lineHeight: 30,
+        fontFamily:'Exo-SemiBold',
+    },
+    editModalTextCaption: {
+        color: '#ffffff',
+        fontSize: 15,
+        fontWeight: 500,
+        textAlign: 'center',
+        lineHeight: 30,
+        fontFamily:'Exo-Regular',
+    },
+
+
+    exitModalActions: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+
+    exitModalExitText: {
+        color: '#99F9FF',
+        fontSize: 23,
+        fontWeight: 500,
+    },
+
+    stayButton: {
+        width: 115,
+        height: 45,
+        marginLeft:20,
     },
     
 });
