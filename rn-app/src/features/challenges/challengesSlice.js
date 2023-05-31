@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
-
 export const challengesSlice = createSlice({
     name: 'challenges',
     initialState: {

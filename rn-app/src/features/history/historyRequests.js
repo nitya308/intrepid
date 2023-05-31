@@ -1,7 +1,9 @@
 import { getHeaders } from "../../app/store";
 import { setSubmissions } from "./historySlice";
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://nerveapi.onrender.com';
+// const ROOT_URL = 'http://127.0.0.1:9090';
+
 
 export function fetchHistory() {
     return async (dispatch) => {

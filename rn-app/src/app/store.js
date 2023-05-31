@@ -25,6 +25,7 @@ const store = configureStore({
 export const getHeaders = () => {
     const state = store.getState();
     const token = state.user.token;
+    console.log("token inside getHeaders:", token);
     return {
         headers: {
             Authorization: token,

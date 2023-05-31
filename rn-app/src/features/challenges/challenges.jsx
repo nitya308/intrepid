@@ -11,6 +11,7 @@ import BackButton from '../../../assets/icons/back-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import PointsBox from '../pointsBox';
 import AddButton from './../../../assets/icons/add-button.png';
+import { signoutUser } from '../user/userRequests';
 
 const Challenges = ({ navigation }) => {
 
@@ -43,10 +44,12 @@ const Challenges = ({ navigation }) => {
     const allChallenges = useSelector((state) => state.challenges.allChallenges) || [];
     const trendingChallenges = useSelector((state) => state.challenges.trendingChallenges) || [];
 
+
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.backAndPoints}>
-                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
+                <TouchableOpacity onPress={() => { dispatch(signoutUser()); navigation.navigate('Create Challenge')}}>
                     <Image
                         source={AddButton}
                         style={styles.addButton}
@@ -78,7 +81,7 @@ const Challenges = ({ navigation }) => {
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id}) }} key={challenge.id}>
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonBlue]} key={challenge.id} >
-                                    <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
+                                    {/* <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text> */}
                                     <Text style={styles.cExpiry} >Expires in {challenge.expiresIn} </Text>
                                     <Text style={styles.cDescription} >{challenge.description} </Text>
                                     <Text style={styles.cPoints} >{challenge.points} PTS </Text>
@@ -127,7 +130,7 @@ const Challenges = ({ navigation }) => {
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id }) }} key={challenge.id}>
                                 <View style={styles.allChallengeBox} key={challenge.id} >
-                                    <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
+                                    {/* <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text> */}
                                     <View style={styles.allRight} >
                                         <Text style={styles.cExpiry}>Expires in {challenge.expiresIn}</Text>
                                         <Text style={styles.aPoints}>{challenge.points} PTS</Text>

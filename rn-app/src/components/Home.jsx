@@ -19,7 +19,8 @@ const Home = () => {
     if ( loading && !token ) {
         return <SplashScreen />
     }
-    if ( token ) {
+    if (token) {
+        console.log("token: ", token);
         return <MainTabBar />
     }
     return <EntryNavigator />

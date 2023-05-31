@@ -16,6 +16,10 @@ import { Alert } from 'react-native';
 // import fs from 'react-native-fs';
 
 import { ResizeMode, Video } from 'expo-av';
+import { getHeaders } from '../../app/store';
+
+const ROOT_URL = 'https://nerveapi.onrender.com';
+
 
 const SubmitChallenge = ({ navigation, route }) => {
 
@@ -88,8 +92,11 @@ const SubmitChallenge = ({ navigation, route }) => {
             const url = await uploadImage(blob);
             console.log('url at handleSubmit', url);
             // create a new submission object with the url
-            dispatch(submitChallenge(route.params.challengeId, url));
+            dispatch(submitChallenge(url, route.params.challengeId));
+            
+
         } catch (error) {
+            console.log('error submitting video: ', error);
             const onPress = () => {
                 navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })
             }

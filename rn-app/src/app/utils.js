@@ -20,6 +20,7 @@ export const getToken = async (authUser, authFailed, dispatch) => {
                 return;
             }
             dispatch(authUser(token));
+            // dispatch(authFailed());
         })
         .catch((er) => {
             dispatch(authFailed());

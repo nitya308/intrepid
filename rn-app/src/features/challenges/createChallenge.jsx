@@ -28,9 +28,9 @@ const CreateChallenge = ({navigation}) => {
         {
             // do something
             challenge = {
-                cTitle:title,
-                cDes:description,
-                cPoints:points,
+                title,
+                description,
+                points,
             }
             dispatch(createChallenge(challenge));
             
