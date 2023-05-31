@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { LogBox, View } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import Home from './components/Home';
@@ -30,11 +30,22 @@ const App = (props) => {
         'Exo-BoldItalic': require('./../assets/fonts/exo/Exo-BoldItalic.ttf'),
         'Exo-ExtraBoldItalic': require('./../assets/fonts/exo/Exo-ExtraBoldItalic.ttf'),
         'Exo-BlackItalic': require('./../assets/fonts/exo/Exo-BlackItalic.ttf'),
-    })
+    });
 
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+        await SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
+
+
+    if (!fontsLoaded) {
+        return null;
+    } 
+    
     return (
-        <Provider store={store}>
-            <Home />
+        <Provider store={store} onLayout={onLayoutRootView}>
+            <Home/>
         </Provider>
     )
 };

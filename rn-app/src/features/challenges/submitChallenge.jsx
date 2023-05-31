@@ -21,7 +21,7 @@ const SubmitChallenge = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenge(route.params.challengeId))
+        // dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
     const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
@@ -45,27 +45,27 @@ const SubmitChallenge = ({ navigation, route }) => {
         setVideo(result.assets[0]);
     };
 
-    const uploadVideo = async () => {
-        console.log("uploading video: " + video.uri);
-        const response = await fetch(video.uri);
-        const blob = await response.blob();
-        const fileName = video.uri.split('/').pop();
-        blob.name = fileName;
+    // const uploadVideo = async () => {
+    //     console.log("uploading video: " + video.uri);
+    //     const response = await fetch(video.uri);
+    //     const blob = await response.blob();
+    //     const fileName = video.uri.split('/').pop();
+    //     blob.name = fileName;
 
-        // uriToFile(video.uri, video.fileName).then((file) => {
-        console.log("FILE BEFORE UPLOADING: " + JSON.stringify(blob));
-        uploadImage(blob).then((url) => {
-            console.log('url at uploadImage', url);
+    //     // uriToFile(video.uri, video.fileName).then((file) => {
+    //     console.log("FILE BEFORE UPLOADING: " + JSON.stringify(blob));
+    //     uploadImage(blob).then((url) => {
+    //         console.log('url at uploadImage', url);
 
-        }).catch((error) => {
-            console.log('error uploading image: ', error);
-        });
-        // }).catch((error) => {
-        //     console.log('error', error);
-        // });
+    //     }).catch((error) => {
+    //         console.log('error uploading image: ', error);
+    //     });
+    //     // }).catch((error) => {
+    //     //     console.log('error', error);
+    //     // });
 
 
-    };
+    // };
 
     const handleSubmit = async () => {
         if (!video) {
@@ -88,7 +88,7 @@ const SubmitChallenge = ({ navigation, route }) => {
             const url = await uploadImage(blob);
             console.log('url at handleSubmit', url);
             // create a new submission object with the url
-            // dispatch(submitChallenge(route.params.challengeId, url));
+            dispatch(submitChallenge(route.params.challengeId, url));
         } catch (error) {
             const onPress = () => {
                 navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })
@@ -126,7 +126,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }))}
+                        onPress={() => (navigation.navigate('Challenge Info', { challengeId: route.params.challengeId }))}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
