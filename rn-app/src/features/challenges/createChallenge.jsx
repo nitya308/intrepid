@@ -147,16 +147,21 @@ justifyContent:'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: 340,
+       
+        width: 370,
+        marginTop: 20,
+        paddingTop:40,
     },
 
     exitButton: {
         width: 30,
         height: 30,
+        marginLeft:20
     },
 
     pointsBoxContainer: {
         width: 71,
+        marginRight:20,
     },
 
     points: {
