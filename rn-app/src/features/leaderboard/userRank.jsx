@@ -25,24 +25,15 @@ const UserRank = (props) => {
 const styles = StyleSheet.create({
     userContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        paddingVertical: 20,
-        paddingHorizontal: 10,
-        marginBottom: 20,
+        justifyContent: 'space-around',
+        paddingVertical: 12,
     },
 
     rank: {
-        width: '12%',
-        justifyContent: "flex-start",
-        alignItems: "center",
-        fontSize: 35,
-        fontWeight: 500,
-        color: 'rgb(201, 170, 232)',
-        paddingTop: '3.25%',
-        paddingLeft: '3%',
-        textShadowColor: '#C9AAE8',
-        textShadowRadius: 10,
         fontFamily: 'Glitch-Goblin',
+        fontSize: 35,
+        color: 'rgb(201, 170, 232)',
+        alignSelf: 'center',
     },
 
     username: {
@@ -50,18 +41,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Groupe',
         fontSize: 24,
         letterSpacing: -2.5,
-        width: 170,
-        textAlign: 'flex-start',
-        paddingTop: '4%',
-        paddingLeft: '10%',
-        textShadowColor: 'rgba(100, 100, 100, 0.75)',
-        textShadowRadius: 5,
+        alignSelf: 'center',
     },
 
     challengesAndPoints: {
         alignItems: 'flex-end',
         rowGap: 5,
-        paddingLeft: 10,
     },
 
     points: {
@@ -72,28 +57,34 @@ const styles = StyleSheet.create({
 
     neonGreen: {
         shadowOpacity: 1,
+        shadowRadius: 7,
+        shadowColor: '#3BFF1C',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
         borderColor: '#BFFFA8',
         borderWidth: 1.5,
-        borderRadius: 2,
-        shadowRadius: 15,
-        shadowColor: '#3BFF1C',
-        backgroundColor: 'rgba(25, 102, 28, 0.10)'
+        borderRadius: 4,
+        backgroundColor: '#142D15',
     },
 
     neonWhite: {
         shadowOpacity: 1,
+        shadowRadius: 7,
+        shadowColor: '#ffffff',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
         borderColor: '#ffffff',
         borderWidth: 1.5,
-        borderRadius: 2,
-        shadowRadius: 15,
-        shadowColor: '#ffffff',
-        backgroundColor: 'rgba(225, 225, 225, 0.09)'
+        borderRadius: 4,
+        backgroundColor: '#252528',
     },
 
     numChallenges: {
         color: '#fff',
-        textShadowColor: '#CCFF00',
-        textShadowRadius: 4,
         fontFamily: 'Exo-Medium',
         fontSize: 20,
     }
