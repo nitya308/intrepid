@@ -16,15 +16,15 @@ const CreateChallenge = ({navigation}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [points, setPoints] = useState('0');
-    const [enoughPoints, setEnoughPoints] = useState('false');
 
     const [exitModalVisible, setExitModalVisible] = useState(false);
+    const userPoints = useSelector((state) => state.user.points);
 
     const dispatch = useDispatch();
     
     const submitChallenge = () => {
         // submit challenge with title, description, points
-        if (points < 20)
+        if (points <= userPoints)
         {
             // do something
             challenge = {
@@ -120,7 +120,7 @@ const CreateChallenge = ({navigation}) => {
                   />
                 </View>
            
-                {points>20 ? (
+                {points>=userPoints ? (
                         <View style={styles.pointsWarning}>
                             <Image
                             style={styles.red_exclamation}

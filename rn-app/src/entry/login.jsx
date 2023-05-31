@@ -5,7 +5,7 @@ import {
 import BackButton from './../../assets/icons/back-button.png'
 import LoginHeader from './../../assets/images/login-header.png'
 import LoginButton from './../../assets/images/log-in-button.png'
-import { signinUser } from '../features/user/userSlice';
+import { signinUser } from '../features/user/userRequests';
 import { useDispatch } from 'react-redux';
 
 

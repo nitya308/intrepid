@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -21,6 +21,7 @@ const NavigationContainerTheme = {
 };
 
 const MainTabBar = () => {
+
     return (
         <NavigationContainer theme={NavigationContainerTheme}>
             <Tab.Navigator
