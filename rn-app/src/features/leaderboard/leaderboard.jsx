@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     StyleSheet, View, Text, Image,
 } from 'react-native';
@@ -6,6 +6,8 @@ import UserRank from './userRank';
 import LeaderboardHeader from './../../../assets/images/leaderboard.png'
 import { ScrollView } from 'react-native-gesture-handler';
 import PointsBox from '../pointsBox';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTopUsers } from './leaderboardRequests';
 
 const Leaderboard = (props) => {
 
@@ -24,9 +26,8 @@ const Leaderboard = (props) => {
             />
 
             <View style={styles.leaderboardContainer}>
-                {leaderboardArray.map((leaderboardObject, idx) => (
-                    console.log("lb", leaderboardObject),
-                    <UserRank key={idx} rank={leaderboardObject.rank} userObj={leaderboardObject.userObj} />
+                {topUsers.map((user, idx) => (
+                    <UserRank key={idx} rank={idx} userObj={user} />
                 ))}
             </View>
         </ScrollView>
