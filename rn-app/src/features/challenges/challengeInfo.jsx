@@ -87,7 +87,7 @@ const ChallengeInfo = ({ navigation, route }) => {
                 <View style={styles.videos}>
                     <Video
                         style={styles.video}
-                        source={{ uri: 'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov', }}
+                        // source={{ uri: 'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov', }}
                         resizeMode={ResizeMode.CONTAIN}
                         isLooping={true}
                         isMuted={true}
