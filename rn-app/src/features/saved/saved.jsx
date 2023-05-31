@@ -50,7 +50,7 @@ const Saved = ({ navigation }) => {
                 <View style={styles.savedItem}>
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.expirationAndPointsAndBookmark}>
-                        <Text style={styles.expiresAt}>{expiresIn}</Text>
+                        <Text style={styles.expiresAt}>Expires in {expiresIn}</Text>
                         <View style={styles.pointsAndBookmark}>
                             <Text style={styles.points}>{points} PTS</Text>
                             <Pressable onPress={() => { setChallengeSaved(!challengedSaved) }}>
