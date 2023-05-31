@@ -294,19 +294,6 @@ const styles = StyleSheet.create({
         // color: '#FAE3BD',
     },
 
-    aExpiry: {
-        color: '#ffffff',
-        textShadowColor: '#CCFF00',
-        textShadowRadius: 4,
-        fontFamily: 'Exo-Medium',
-        
-        // color: 'white',
-        marginHorizontal: 20,
-        marginTop: 15,
-        fontSize: 14.67,
-        // color: '#FAE3BD',
-    },
-
     cDescription: {
         fontSize: 14,
         color: 'white',
@@ -345,36 +332,45 @@ const styles = StyleSheet.create({
     allChallengeBox: {
         width: 329,
         height: 85,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        marginBottom: 10,
-        backgroundColor: '#262626',
         borderRadius: 11,
-        display: 'flex',
+        marginBottom: 15,
+        backgroundColor: '#262626',
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
-        paddingHorizontal:5,
-
-    },
-
-    allRight: {
-        marginRight: 20,
-        marginBottom: 10,
-        paddingVertical:4,
-        justifyContent: 'center',
-        alignItems: 'flex-end',
     },
 
     allTitle: {
         color: 'white',
         fontWeight: 'bold',
         fontSize: 17,
-        flex: 1,
         textAlign: 'center',
-        marginRight: 20,
-        marginLeft:10,
+        width: 160,
+        // marginRight: 20,
+        // marginLeft:10,
         lineHeight:25,
-        marginVertical:2
+    },
+
+    allRight: {
+        // marginRight: 20,
+        // marginBottom: 10,
+        // paddingVertical:4,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        rowGap: 5,
+    },
+
+    aExpiry: {
+        color: '#ffffff',
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        
+        // color: 'white',
+        // marginHorizontal: 20,
+        // marginTop: 15,
+        fontSize: 14.67,
+        // color: '#FAE3BD',
     },
 
     aPoints: {
