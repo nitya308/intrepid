@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { getHeaders } from '../../app/store'
 
 const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
 
@@ -17,26 +17,21 @@ export const savedSlice = createSlice({
 
 export const { setChallenges } = savedSlice.actions;
 
-const api = axios.create({
-    baseURL: "http://localhost:9090/",
-    withCredentials: false,
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-    },
-});
-
-export function fetchSaved(userId) {
+export function fetchSaved(){
     return async (dispatch) => {
-        api
-            .get(`/users/${userId}/saved`)
-            .then((response) => {
-                dispatch(setChallenges(response.data));
+        const headers = await getHeaders();
+        fetch(`${ROOT_URL}/api/saved`, {
+            method: 'GET',
+            headers,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(setChallenges(data));
             })
             .catch((er) => {
                 throw er;
             });
-    };
+    }
 }
 
 export default savedSlice.reducer;

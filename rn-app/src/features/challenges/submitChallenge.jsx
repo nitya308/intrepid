@@ -3,7 +3,7 @@ import {
     StyleSheet, View, Text, Image, TouchableOpacity, Button
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge, submitChallenge } from '../challenges/challengesSlice';
+import { fetchChallenge, submitChallenge } from '../challenges/challengesRequests';
 import Modal from "react-native-modal";
 import StayButton from './../../../assets/icons/stay-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
@@ -24,7 +24,7 @@ const SubmitChallenge = ({ navigation, route }) => {
         // dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
-    const currentChallenge = useSelector((state) => state.currentChallenge);
+    const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
 
     const [exitModalVisible, setExitModalVisible] = useState(false);
     const [video, setVideo] = useState(null);
@@ -45,27 +45,27 @@ const SubmitChallenge = ({ navigation, route }) => {
         setVideo(result.assets[0]);
     };
 
-    const uploadVideo = async () => {
-        console.log("uploading video: " + video.uri);
-        const response = await fetch(video.uri);
-        const blob = await response.blob();
-        const fileName = video.uri.split('/').pop();
-        blob.name = fileName;
+    // const uploadVideo = async () => {
+    //     console.log("uploading video: " + video.uri);
+    //     const response = await fetch(video.uri);
+    //     const blob = await response.blob();
+    //     const fileName = video.uri.split('/').pop();
+    //     blob.name = fileName;
 
-        // uriToFile(video.uri, video.fileName).then((file) => {
-        console.log("FILE BEFORE UPLOADING: " + JSON.stringify(blob));
-        uploadImage(blob).then((url) => {
-            console.log('url at uploadImage', url);
+    //     // uriToFile(video.uri, video.fileName).then((file) => {
+    //     console.log("FILE BEFORE UPLOADING: " + JSON.stringify(blob));
+    //     uploadImage(blob).then((url) => {
+    //         console.log('url at uploadImage', url);
 
-        }).catch((error) => {
-            console.log('error uploading image: ', error);
-        });
-        // }).catch((error) => {
-        //     console.log('error', error);
-        // });
+    //     }).catch((error) => {
+    //         console.log('error uploading image: ', error);
+    //     });
+    //     // }).catch((error) => {
+    //     //     console.log('error', error);
+    //     // });
 
 
-    };
+    // };
 
     const handleSubmit = async () => {
         if (!video) {
@@ -88,13 +88,16 @@ const SubmitChallenge = ({ navigation, route }) => {
             const url = await uploadImage(blob);
             console.log('url at handleSubmit', url);
             // create a new submission object with the url
-            // dispatch(submitChallenge(route.params.challengeId, url));
+            dispatch(submitChallenge(route.params.challengeId, url));
         } catch (error) {
+            const onPress = () => {
+                navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })
+            }
             Alert.alert(
                 'Error',
                 'There was an error submitting your video. Try again later.',
                 [
-                    { text: 'OK', onPress: () => navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }) }
+                    { text: 'OK', onPress }
                 ]
             );
         }
@@ -123,7 +126,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }))}
+                        onPress={() => (navigation.navigate('Challenge Info', { challengeId: route.params.challengeId }))}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -141,14 +144,14 @@ const SubmitChallenge = ({ navigation, route }) => {
                 />
             </TouchableOpacity>
 
-            <Text style={styles.title}>DYE YOUR HAIR PINK</Text>
+            <Text style={styles.title}>{currentChallenge.title}</Text>
             <View style={styles.expirationAndPointValue}>
                 <Text style={styles.expiration}>Expires in 3 days</Text>
-                <Text style={styles.pointValue}>125 PTS</Text>
+                <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
             </View>
 
             <Text style={styles.description}>
-                Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
+                {currentChallenge.description}
             </Text>
 
             <Video
