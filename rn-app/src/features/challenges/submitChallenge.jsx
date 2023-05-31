@@ -68,6 +68,7 @@ const SubmitChallenge = ({ navigation, route }) => {
     // };
 
     const handleSubmit = async () => {
+        console.log('video at handleSubmit', video);
         if (!video) {
             Alert.alert(
                 'No Video Selected',
@@ -88,7 +89,8 @@ const SubmitChallenge = ({ navigation, route }) => {
             const url = await uploadImage(blob);
             console.log('url at handleSubmit', url);
             // create a new submission object with the url
-            dispatch(submitChallenge(route.params.challengeId, url));
+            // console.log('currentChallenge.id', currentChallenge.id)
+            dispatch(submitChallenge(url, currentChallenge.id));
         } catch (error) {
             const onPress = () => {
                 navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })

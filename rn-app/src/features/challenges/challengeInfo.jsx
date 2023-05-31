@@ -3,23 +3,21 @@ import {
     StyleSheet, View, Text, Image, TouchableOpacity, Pressable
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge, saveChallenge } from '../challenges/challengesRequests';
+import { fetchChallenge } from '../challenges/challengesSlice';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
-import { fetchSaved } from '../saved/savedSlice';
 
 const ChallengeInfo = ({ navigation, route }) => {
+
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log("Challenge id "+ route.params.challengeId)
-        dispatch(fetchChallenge(route.params.challengeId))
-        dispatch(fetchSaved)
+        // dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
-    const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
+    const currentChallenge = useSelector((state) => state.currentChallenge);
 
     const mockCurrentChallenge = {
         title: 'Dye your hair pink',
@@ -28,10 +26,6 @@ const ChallengeInfo = ({ navigation, route }) => {
         expiresAt: {},
         isExpired: false,
     }
-
-    // let [fontsLoaded] = useFonts({
-    //     'Glitch-Goblin': require('./../../../assets/fonts/glitchGoblin/GlitchGoblin.ttf'),
-    // })
 
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
@@ -69,8 +63,6 @@ const ChallengeInfo = ({ navigation, route }) => {
         return content;
     }
 
-    // TODO: EXPIRATION STRING
-    if (currentChallenge) {
     return (
         <View style={styles.screen}>
             <TouchableOpacity onPress={() => { navigation.goBack() }}>
@@ -81,10 +73,10 @@ const ChallengeInfo = ({ navigation, route }) => {
             </TouchableOpacity>
 
             <Text style={styles.challengeTitle}>
-                {currentChallenge.title}
+                DYE YOUR HAIR PINK
             </Text>
 
-            <Pressable onPress={() => { dispatch(saveChallenge()) }}>
+            <Pressable onPress={() => { setChallengeSaved(challengeSaved ? false : true) }}>
                 <Image
                     style={styles.bookmark}
                     source={challengeSaved ? BookmarkFilled : Bookmark}
@@ -93,23 +85,16 @@ const ChallengeInfo = ({ navigation, route }) => {
 
             <View style={styles.expirationAndPointValue}>
                 <Text style={styles.expiration}>Expires in 3 days</Text>
-                <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
+                <Text style={styles.pointValue}>125 PTS</Text>
             </View>
 
             <Text style={styles.description}>
-                {currentChallenge.description}
+                Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
             <ChallengeInfoCTA submitted={challengeSubmitted} />
         </View>
-    )} else {
-        // TODO: MAKE THIS LOOK NICER
-        return (
-            <View style={styles.screen}>
-                <Text style={styles.description}>Loading...</Text>
-            </View>
-        )
-    }
+    )
 }
 
 const styles = StyleSheet.create({
@@ -125,7 +110,6 @@ const styles = StyleSheet.create({
 
     challengeTitle: {
         color: '#ffffff',
-        fontFamily: 'Glitch-Goblin',
         fontSize: 40,
         fontWeight: 700,
         marginTop: 30,
@@ -146,21 +130,16 @@ const styles = StyleSheet.create({
 
     expiration: {
         color: '#ffffff',
-        textShadowColor: '#CCFF00',
-        textShadowRadius: 4,
-        fontFamily: 'Exo-Medium',
-        fontSize: 22,
+        fontSize: 20,
     },
 
     pointValue: {
         color: '#ffffff',
-        fontFamily: 'Glitch-Goblin',
-        fontSize: 35,
+        fontSize: 30,
     },
 
     description: {
         color: '#ffffff',
-        fontFamily: 'Exo-Regular',
         fontSize: 20,
         marginTop: 20,
     },
