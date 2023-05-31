@@ -32,24 +32,28 @@ const styles = StyleSheet.create({
     },
 
     rank: {
-      flex: 1,
-      justifyContent: "flex-start",
-      alignItems: "center",
-      fontSize: 30,
-      fontWeight: 500,
-      color: 'rgb(201, 170, 232)',
-      paddingTop: 11,
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        fontSize: 35,
+        fontWeight: 500,
+        color: 'rgb(201, 170, 232)',
+        paddingTop: '3.25%',
+        paddingLeft: '3%',
+        textShadowColor: '#C9AAE8',
+        textShadowRadius: 10,
+        fontFamily: 'Glitch-Goblin',
     },
 
     username: {
         color: '#ffffff',
-        fontSize: 28,
-        fontWeight: 700,
+        fontFamily: 'Groupe',
+        fontSize: 30,
+        letterSpacing: -2.5,
         width: 170,
-        textAlign: 'center',
-        paddingTop: 11,
+        textAlign: 'flex-start',
+        paddingTop: '4%',
         textShadowColor: 'rgba(100, 100, 100, 0.75)',
-        textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 5
     },
 
@@ -61,9 +65,8 @@ const styles = StyleSheet.create({
 
     points: {
         color: '#ffffff',
-        fontSize: 28,
-        fontWeight: 700,
-        fontStyle: 'italic',
+        fontFamily: 'Glitch-Goblin',
+        fontSize: 32,
     },
 
     neonGreen: {
@@ -87,9 +90,11 @@ const styles = StyleSheet.create({
     },
 
     numChallenges: {
-        color: '#FFE27B',
-        fontSize: 22
-
+        color: '#fff',
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        fontSize: 20,
     }
 
 })
