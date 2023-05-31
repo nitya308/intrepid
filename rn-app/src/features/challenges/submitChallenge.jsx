@@ -120,13 +120,16 @@ const SubmitChallenge = ({ navigation, route }) => {
                 animationInTiming={100}
                 animationOut={'fadeOut'}
                 animationOutTiming={100}
+                backdropTransitionOutTiming={0}
             >
                 <Text
                     style={styles.editModalText}>Are you sure you want to stop uploading?</Text>
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info', { challengeId: route.params.challengeId }))}
+                        onPress={() => {
+                            setExitModalVisible(false)
+                            navigation.navigate('Challenge Info', { challengeId: route.params.challengeId })}}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -204,6 +207,7 @@ const styles = StyleSheet.create({
 
     editModalText: {
         color: '#ffffff',
+        fontFamily: 'Exo-Medium',
         fontSize: 23,
         fontWeight: 500,
         textAlign: 'center',
@@ -218,6 +222,7 @@ const styles = StyleSheet.create({
 
     exitModalExitText: {
         color: '#99F9FF',
+        fontFamily: 'Exo-Medium',
         fontSize: 23,
         fontWeight: 500,
     },

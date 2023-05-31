@@ -6,14 +6,14 @@ import SavedHeader from './../../../assets/images/saved-header.png';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import PointsBox from '../pointsBox';
-import { CommonActions } from '@react-navigation/native';
-import { fetchSaved } from './savedSlice';
+import { fetchSaved } from './savedRequests';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Saved = ({ navigation }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
+        console.log('fetching saved');
         dispatch(fetchSaved());
     }, []);
 
@@ -23,12 +23,13 @@ const Saved = ({ navigation }) => {
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
+        dispatch(fetchSaved());
         setTimeout(() => {
             setRefreshing(false);
         }, 2000);
     }, []);
 
-    const SavedItem = ({ id, title, expiresAt, points }) => {
+    const SavedItem = ({ id, title, expiresIn, points }) => {
         const [challengedSaved, setChallengeSaved] = useState(true);
 
         return (
@@ -49,7 +50,7 @@ const Saved = ({ navigation }) => {
                 <View style={styles.savedItem}>
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.expirationAndPointsAndBookmark}>
-                        <Text style={styles.expiresAt}>Expires in 3 hours</Text>
+                        <Text style={styles.expiresAt}>Expires in {expiresIn}</Text>
                         <View style={styles.pointsAndBookmark}>
                             <Text style={styles.points}>{points} PTS</Text>
                             <Pressable onPress={() => { setChallengeSaved(!challengedSaved) }}>
@@ -81,7 +82,7 @@ const Saved = ({ navigation }) => {
                         <SavedItem
                             id={item.id}
                             title={item.title}
-                            expiresAt={item.expiresAt}
+                            expiresIn={item.expiresIn}
                             points={item.points}
                         />
                     }

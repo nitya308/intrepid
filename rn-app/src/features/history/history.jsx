@@ -1,18 +1,27 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
     StyleSheet, View, Text, Image, FlatList, SafeAreaView, Pressable, RefreshControl, TouchableOpacity
 } from 'react-native';
 import PointsBox from '../pointsBox';
 import HistoryHeader from './../../../assets/images/history-header.png'
-import Bookmark from '../../../assets/icons/bookmark.png';
-import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
+import SignOutButton from './../../../assets/images/sign-out-button.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHistory } from './historyRequests';
 
 const History = ({navigation}) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchHistory());
+    }, []);
+
+    const history = useSelector((state) => state.history.submissions) || [];
 
     const [refreshing, setRefreshing] = useState(false);
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
+        dispatch(fetchHistory());
         setTimeout(() => {
             setRefreshing(false);
         }, 2000);
@@ -74,7 +83,17 @@ const History = ({navigation}) => {
 
     return (
         <View style={styles.screen}>
-            <PointsBox />
+            <View style={styles.signOutAndPoints}>
+                <TouchableOpacity>
+                    <Image
+                        source={SignOutButton}
+                        style={styles.signOutButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
+            </View>
             
             <Image 
                 source={HistoryHeader}
@@ -84,7 +103,7 @@ const History = ({navigation}) => {
             <SafeAreaView style={styles.savedContainer}>
                 <FlatList
                     style={styles.savedList}
-                    data={historyData}
+                    data={history}
                     renderItem={({item}) => 
                         <HistoryItem
                             challengeId={item.challengeId}
@@ -113,6 +132,22 @@ const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 20,
         paddingTop: 55,
+    },
+
+    signOutAndPoints: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+
+    signOutButton: {
+        width: 105,
+        height: 33.5,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
     },
 
     historyHeader: {
