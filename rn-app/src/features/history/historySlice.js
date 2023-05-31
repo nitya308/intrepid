@@ -7,6 +7,7 @@ export const historySlice = createSlice({
     },
     reducers: {
         setSubmissions: (state, action) => {
+            console.log("setting history submissions", action.payload);
             state.submissions = action.payload;
         }
     },

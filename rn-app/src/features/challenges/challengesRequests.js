@@ -89,6 +89,23 @@ export function submitChallenge(challengeId, videoUrl) {
     }
 }
 
+export function deleteChallenge(challengeId) {
+    return async (dispatch) => {
+        const headers = getHeaders();
+        fetch(`${ROOT_URL}/api/challenges/${challengeId}`, {
+            method: 'DELETE',
+            ...headers
+        })
+            .then((data) => {
+                dispatch(fetchChallenges());
+                dispatch(fetchTrendingChallenges());
+            })
+            .catch((er) => {
+                throw er;
+            });
+    }
+}
+
 export function saveChallenge(challengeId, savedScreen) {
     return async (dispatch) => {
         const headers = getHeaders();
