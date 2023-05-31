@@ -13,7 +13,6 @@ const Saved = ({ navigation }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log('fetching saved');
         dispatch(fetchSaved());
     }, []);
 

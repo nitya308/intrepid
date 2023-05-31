@@ -9,7 +9,6 @@ export function fetchHistory() {
         fetch(`${ROOT_URL}/api/submissions`, headers )
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 dispatch(setSubmissions(data));
             })
             .catch((er) => {

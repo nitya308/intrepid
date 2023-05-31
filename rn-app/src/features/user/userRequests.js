@@ -60,7 +60,6 @@ export function fetchUser() {
         fetch(`${ROOT_URL}/api/profile`, headers )
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 dispatch(setUser(data));
             })
             .catch((er) => {
