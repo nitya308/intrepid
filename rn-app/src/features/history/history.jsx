@@ -7,6 +7,7 @@ import HistoryHeader from './../../../assets/images/history-header.png'
 import SignOutButton from './../../../assets/images/sign-out-button.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHistory } from './historyRequests';
+import { signoutUser } from '../user/userRequests';
 
 const History = ({navigation}) => {
 
@@ -84,7 +85,9 @@ const History = ({navigation}) => {
     return (
         <View style={styles.screen}>
             <View style={styles.signOutAndPoints}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() =>  dispatch(signoutUser()) }
+                >
                     <Image
                         source={SignOutButton}
                         style={styles.signOutButton}
