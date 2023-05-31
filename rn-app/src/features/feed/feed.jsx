@@ -60,13 +60,13 @@ const Feed=({navigation, route}) => {
     }
     return (
         <View style={styles.container}>
-            {/* <Text style={styles.title}>FEED</Text> */}
-            <SafeAreaView>
+            <Text style={styles.title}>FEED</Text>
+            {/* <SafeAreaView>
                 <Button
                     title="Go to Challenge Info"
                     onPress={() => console.log("arr", arr)}
                 />
-            </SafeAreaView>
+            </SafeAreaView> */}
             <FlatList
                 data = {arr}
                 windowSize={4}
