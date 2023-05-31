@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import VerticalSlider from 'rn-vertical-slider';
+import { useDispatch } from 'react-redux';
 
 function debounce(func, timeout = 300) {
     let timer;
@@ -12,6 +13,9 @@ function debounce(func, timeout = 300) {
 }
 
 const VotingSlider = () => {
+
+    const dispatch = useDispatch();
+
     const [value, setValue] = useState(0);
     const [voted, setVoted] = useState(false);
 
@@ -19,7 +23,10 @@ const VotingSlider = () => {
 
     const vote = debounce(() => {
         setVoted(true);
+        dispatch(voteForChallenge(value));
+        console.log("voted for challenge");
     });
+
     return (
         <View style={styles.container}>
             <Text style={{ ...styles.sliderText, color: `rgb(0, 238, 255)`, textShadowColor: `rgb(0, 238, 255)`, opacity: `${opacity()}` }}>SUCCESS</Text>
