@@ -9,7 +9,6 @@ export function fetchSaved() {
         fetch(`${ROOT_URL}/api/saved`, headers )
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 dispatch(setChallenges(data));
             })
             .catch((er) => {

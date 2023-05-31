@@ -35,7 +35,7 @@ export function fetchTrendingChallenges() {
 export function fetchChallenge(id) {
     return async (dispatch) => {
         const headers = getHeaders();
-        fetch(`${ROOT_URL}/api/challenges/${id}`, headers )
+        fetch(`${ROOT_URL}/api/challenges/${id}`, headers)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -47,16 +47,13 @@ export function fetchChallenge(id) {
     };
 }
 
-export function createChallenge(challenge) {
+export function createChallenge(challenge_obj) {
     return async (dispatch) => {
         const headers = getHeaders();
         fetch(`${ROOT_URL}/api/challenges`, {
             method: 'POST',
-            body: JSON.stringify(challenge),
-            headers: {
-                'Content-Type': 'application/json',
-                ...headers,
-            },
+            body: JSON.stringify(challenge_obj),
+            ...headers,
         })
             .then((response) => response.json())
             .then((data) => {
