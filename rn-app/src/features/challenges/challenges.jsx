@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
-    StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView,
+    StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView, Alert
 } from 'react-native';
 import { fetchChallenges, fetchTrendingChallenges } from './challengesRequests';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,19 +16,33 @@ const Challenges = ({ navigation }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenges());
-        dispatch(fetchTrendingChallenges());
+            dispatch(fetchChallenges(value==='Points'));
+            // Alert.alert("reg use effect");
+            dispatch(fetchTrendingChallenges());
+        
+        
     }, []);
+
+    useEffect(() => {
+        // This runs after every render
+        dispatch(fetchChallenges(value==='Points'));
+       });
+    useEffect(()=>{
+        //call your increment function here
+        dispatch(fetchChallenges(value==='Points'));
+        Alert.alert("hello");
+    },[value])
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'New', value: 'new' },
+        { label: 'New', value: 'New' },
+        { label: 'Points', value: 'Points' },
     ]);
     //const [colorBlue, setBlue] = useState(false);
     const allChallenges = useSelector((state) => state.challenges.allChallenges) || [];
     const trendingChallenges = useSelector((state) => state.challenges.trendingChallenges) || [];
-    
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.backAndPoints}>
@@ -84,7 +98,7 @@ const Challenges = ({ navigation }) => {
                     <View style={[{backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center'}, styles.neonLine]} />
                 </View>
 
-                {/* <DropDownPicker
+                <DropDownPicker
                     open={open}
                     value={value}
                     items={items}
@@ -102,7 +116,7 @@ const Challenges = ({ navigation }) => {
                         margin: 10,
                     }}
 
-                /> */}
+                />
 
                 <View nativeId='allChallengeList' style={styles.allChallengeList} >
 
