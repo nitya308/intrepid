@@ -62,13 +62,35 @@ export function createChallenge(challenge) {
     }
 }
 
-export function submitChallenge(userId, videoUrl) {
+export function submitChallenge(videoUrl) {
     return async (dispatch) => {
+        const headers = getHeaders();
         fetch(`${ROOT_URL}/api/users/${userId}/submissions`, {
             method: 'POST',
-            body: JSON.stringify({ userId, videoUrl }),
+            body: JSON.stringify({ videoUrl }),
             headers: {
                 'Content-Type': 'application/json',
+                ...headers,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(fetchChallenges());
+            })
+            .catch((er) => {
+                throw er;
+            });
+    }
+}
+
+export function saveChallenge(challenge) {
+    return async (dispatch) => {
+        const headers = getHeaders();
+        fetch(`${ROOT_URL}/api/challenges/${challenge.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...headers,
             },
         })
             .then((response) => response.json())
