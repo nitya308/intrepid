@@ -58,16 +58,19 @@ const Challenges = ({ navigation }) => {
                     style={styles.trendingScroll} >
 
                     {trendingChallenges.map((challenge, index) => {
+                        if (challenge.expiresIn !== 'Expired')
+                        {
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id}) }} key={challenge.id}>
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonBlue]} key={challenge.id} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
-                                    <Text style={styles.cExpiry} >{challenge.expiresIn} </Text>
+                                    <Text style={styles.cExpiry} >Expires in {challenge.expiresIn} </Text>
                                     <Text style={styles.cDescription} >{challenge.description} </Text>
                                     <Text style={styles.cPoints} >{challenge.points} PTS </Text>
                                 </View>
                             </TouchableOpacity>
                         )
+                        }
                     })}
                 </ScrollView>
             </View>
@@ -104,6 +107,8 @@ const Challenges = ({ navigation }) => {
 
 
                     {allChallenges.map((challenge, index) => {
+                        if (challenge.expiresIn !== 'Expired')
+                        {
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id }) }} key={challenge.id}>
                                 <View style={styles.allChallengeBox} key={challenge.id} >
@@ -115,6 +120,7 @@ const Challenges = ({ navigation }) => {
                                 </View>
                             </TouchableOpacity>
                         )
+                        }
                     })}
 
                 </View>
@@ -213,7 +219,7 @@ const styles = StyleSheet.create({
     neonPurple: {
         shadowOpacity: 1,
         borderColor: '#c8a9e8',
-        shadowRadius: 15,
+        shadowRadius: 8,
         shadowColor: '#AD5AFF',
         backgroundColor: '#39233c',
     },
