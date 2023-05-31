@@ -10,6 +10,7 @@ import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 import { fetchSaved } from '../saved/savedSlice';
+import PointsBox from '../pointsBox';
 
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -68,12 +69,17 @@ const ChallengeInfo = ({ navigation, route }) => {
     if (currentChallenge) {
     return (
         <View style={styles.screen}>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-                <Image
-                    style={styles.backButton}
-                    source={BackButton}
-                />
-            </TouchableOpacity>
+            <View style={styles.backAndPoints}>
+                <TouchableOpacity onPress={() => {navigation.goBack()}}>
+                    <Image
+                        source={BackButton}
+                        style={styles.backButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
+            </View>
 
             <Text style={styles.challengeTitle}>
                 {currentChallenge.title}
@@ -115,9 +121,19 @@ const styles = StyleSheet.create({
         paddingTop: 55,
     },
 
+    backAndPoints: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+
     backButton: {
         width: 20,
         height: 40,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
     },
 
     challengeTitle: {
