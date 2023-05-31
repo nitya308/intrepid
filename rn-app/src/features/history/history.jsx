@@ -124,7 +124,7 @@ const History = ({navigation}) => {
             <SafeAreaView style={styles.savedContainer}>
                 <FlatList
                     style={styles.savedList}
-                    data={[history]}
+                    data={history}
                     renderItem={({item}) => 
                         <HistoryItem
                             challengeId={item.challengeId.id}
