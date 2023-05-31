@@ -23,8 +23,8 @@ const ChallengeInfo = ({ navigation, route }) => {
 
     const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
 
-    const [challengeSaved, setChallengeSaved] = useState(false);
-    const [challengeSubmitted, setChallengeSubmitted] = useState(false);
+    // const [challengeSaved, setChallengeSaved] = useState(false);
+    // const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
     const videosList = [
         'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov',
@@ -100,32 +100,34 @@ const ChallengeInfo = ({ navigation, route }) => {
                 </View>
             </AutoScroll>
 
-            <Text style={styles.challengeTitle}>
-                {currentChallenge.title}
-            </Text>
-
-            <Pressable onPress={() => { 
-                console.log("currentChallenge.id: " + currentChallenge.id)
-                dispatch(saveChallenge(currentChallenge.id))
-            }}>
-                <Image
-                    style={styles.bookmark}
-                    source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
-                />
-            </Pressable>
-
-            <View style={styles.expirationAndPointValue}>
-                <Text style={styles.expiration}>
-                    {currentChallenge.expiresIn == 'Expired' ? ('Expired') : `Expires in ${currentChallenge.expiresIn}`}
+            <View style={styles.challengesInfoContainer}>
+                <Text style={styles.challengeTitle}>
+                    {currentChallenge.title}
                 </Text>
-                <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
+
+                <Pressable onPress={() => { 
+                    console.log("currentChallenge.id: " + currentChallenge.id)
+                    dispatch(saveChallenge(currentChallenge.id))
+                }}>
+                    <Image
+                        style={styles.bookmark}
+                        source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
+                    />
+                </Pressable>
+
+                <View style={styles.expirationAndPointValue}>
+                    <Text style={styles.expiration}>
+                        {currentChallenge.expiresIn == 'Expired' ? ('Expired') : `Expires in ${currentChallenge.expiresIn}`}
+                    </Text>
+                    <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
+                </View>
+
+                <Text style={styles.description}>
+                    {currentChallenge.description}
+                </Text>
+
+                <ChallengeInfoCTA submitted={currentChallenge.submitted} />
             </View>
-
-            <Text style={styles.description}>
-                {currentChallenge.description}
-            </Text>
-
-            <ChallengeInfoCTA submitted={currentChallenge.submitted} />
         </View>
     )} else {
         return (
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 30,
+        paddingHorizontal: 25,
         marginBottom: 20,
     },
 
@@ -171,6 +173,10 @@ const styles = StyleSheet.create({
     video: {
         width: 80,
         height: 140,
+    },
+
+    challengesInfoContainer: {
+        paddingHorizontal: 40,
     },
 
     challengeTitle: {
