@@ -5,7 +5,7 @@ import {
 import AutoScroll from "@homielab/react-native-auto-scroll";
 import { Video, ResizeMode } from 'expo-av';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge, saveChallenge } from '../challenges/challengesRequests';
+import { fetchChallenge, saveChallenge, deleteChallenge } from '../challenges/challengesRequests';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import TrashCan from '../../../assets/icons/trash-can.png';
@@ -17,7 +17,7 @@ import { setCurrentChallenge } from './challengesSlice';
 
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
-    const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
+    const currentChallenge = useSelector((state) => state.challenges.currentChallenge) || {};
     useEffect(() => {
         if (route.params.challengeId !== currentChallenge?.id) {
             dispatch(setCurrentChallenge(null))
@@ -25,8 +25,8 @@ const ChallengeInfo = ({ navigation, route }) => {
         dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
-    // const [challengeSaved, setChallengeSaved] = useState(false);
-    // const [challengeSubmitted, setChallengeSubmitted] = useState(false);
+    const userId = useSelector((state) => state.user.userId);
+    const createdChallenge = userId === currentChallenge.creator;
 
     const videosList = [
         'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov',
@@ -118,12 +118,19 @@ const ChallengeInfo = ({ navigation, route }) => {
                         />
                     </Pressable>
                     
-                    <TouchableOpacity>
+                    { createdChallenge &&
+                    <TouchableOpacity
+                        onPress={() => { 
+                            navigation.goBack()
+                            dispatch(deleteChallenge(currentChallenge.id))
+                        }}
+                    >
                         <Image
                             style={styles.trashCan}
                             source={TrashCan}
                         />
                     </TouchableOpacity>
+                    }
                 </View>
 
                 <View style={styles.expirationAndPointValue}>
