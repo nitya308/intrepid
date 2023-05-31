@@ -16,7 +16,7 @@ const Leaderboard = (props) => {
         dispatch(fetchTopUsers());
     }, []);
 
-    const leaderBoardArray = useSelector((state) => state.leaderboard.topUsers);
+    const leaderboardArray = useSelector((state) => state.leaderboard.topUsers);
 
     // const leaderboardArray = [
     //     {
