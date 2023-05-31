@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchChallenge, saveChallenge } from '../challenges/challengesRequests';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
+import TrashCan from '../../../assets/icons/trash-can.png';
 import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
@@ -106,14 +107,23 @@ const ChallengeInfo = ({ navigation, route }) => {
                     {currentChallenge.title}
                 </Text>
 
-                <Pressable onPress={() => { 
-                    dispatch(saveChallenge(currentChallenge.id, false))
-                }}>
-                    <Image
-                        style={styles.bookmark}
-                        source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
-                    />
-                </Pressable>
+                <View style={styles.actions}>
+                    <Pressable onPress={() => { 
+                        dispatch(saveChallenge(currentChallenge.id, false))
+                    }}>
+                        <Image
+                            style={styles.bookmark}
+                            source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
+                        />
+                    </Pressable>
+                    
+                    <TouchableOpacity>
+                        <Image
+                            style={styles.trashCan}
+                            source={TrashCan}
+                        />
+                    </TouchableOpacity>
+                </View>
 
                 <View style={styles.expirationAndPointValue}>
                     <Text style={styles.expiration}>
@@ -140,10 +150,6 @@ const ChallengeInfo = ({ navigation, route }) => {
 }
 
 const styles = StyleSheet.create({
-    hey: {
-        color: '#fff'
-    },
-
     screen: {
         paddingTop: 55,
     },
@@ -187,10 +193,21 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
 
+    actions: {
+        marginTop: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 5,
+    },
+
     bookmark: {
         width: 40,
         height: 40,
-        marginTop: 10,
+    },
+
+    trashCan: {
+        width: 47,
+        height: 50,
     },
 
     expirationAndPointValue: {
