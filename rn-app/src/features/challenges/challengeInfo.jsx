@@ -3,18 +3,20 @@ import {
     StyleSheet, View, Text, Image, TouchableOpacity, Pressable
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge } from '../challenges/challengesRequests';
+import { fetchChallenge, saveChallenge } from '../challenges/challengesRequests';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
+import { fetchSaved } from '../saved/savedSlice';
 
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         console.log("Challenge id "+ route.params.challengeId)
         dispatch(fetchChallenge(route.params.challengeId))
+        dispatch(fetchSaved)
     }, [])
 
     const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
@@ -82,7 +84,7 @@ const ChallengeInfo = ({ navigation, route }) => {
                 {currentChallenge.title}
             </Text>
 
-            <Pressable onPress={() => { setChallengeSaved(challengeSaved ? false : true) }}>
+            <Pressable onPress={() => { dispatch(saveChallenge()) }}>
                 <Image
                     style={styles.bookmark}
                     source={challengeSaved ? BookmarkFilled : Bookmark}
