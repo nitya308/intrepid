@@ -1,5 +1,5 @@
 import { setAllChallenges, setTrendingChallenges, setCurrentChallenge } from './challengesSlice';
-import { setChallenges } from '../saved/savedSlice';
+import { fetchSaved } from '../saved/savedRequests';
 import { getHeaders } from '../../app/store';
 import store from '../../app/store';
 
@@ -86,7 +86,7 @@ export function submitChallenge(videoUrl, challengeId) {
     }
 }
 
-export function saveChallenge(challengeId) {
+export function saveChallenge(challengeId, savedScreen) {
     return async (dispatch) => {
         const headers = getHeaders();
         fetch(`${ROOT_URL}/api/saved/${challengeId}`, {
@@ -94,9 +94,21 @@ export function saveChallenge(challengeId) {
             ...headers
         })
             .then((data) => {
-                const currentChallenge = store.getState().challenges.currentChallenge;
-                dispatch(setCurrentChallenge({ ...currentChallenge, isSaved: !currentChallenge.isSaved }))
+                if (!savedScreen) {
+                    const currentChallenge = store.getState().challenges.currentChallenge;
+                    console.log(`currentChallenge: ${currentChallenge}`)
+                    dispatch(setCurrentChallenge({ ...currentChallenge, isSaved: !currentChallenge.isSaved }));
+                }
+                // } else {
+                //     console.log('here')
+                //     const allChallenges = store.getState().challenges.allChallenges;
+                //     console.log(`allChallenges: ${allChallenges}`)
+                //     const challenge = allChallenges.find((challenge) => challenge.id === challengeId);
+                //     dispatch(setAllChallenges( ...allChallenges, { ...challenge, isSaved: !challenge.isSaved } ));
+                //     dispatch(fetchSaved());
+                // }
                 dispatch(fetchChallenge(challengeId));
+                dispatch(fetchSaved());
             })
             .catch((er) => {
                 throw er;

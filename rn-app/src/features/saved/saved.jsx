@@ -8,6 +8,7 @@ import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import PointsBox from '../pointsBox';
 import { fetchSaved } from './savedRequests';
 import { useDispatch, useSelector } from 'react-redux';
+import { saveChallenge } from '../challenges/challengesRequests';
 
 const Saved = ({ navigation }) => {
 
@@ -52,7 +53,7 @@ const Saved = ({ navigation }) => {
                         <Text style={styles.expiresAt}>Expires in {expiresIn}</Text>
                         <View style={styles.pointsAndBookmark}>
                             <Text style={styles.points}>{points} PTS</Text>
-                            <Pressable onPress={() => { setChallengeSaved(!challengedSaved) }}>
+                            <Pressable onPress={() => { dispatch(saveChallenge(id, true)); setChallengeSaved(false) }}>
                                 <Image
                                     style={styles.bookmark}
                                     source={challengedSaved ? BookmarkFilled : Bookmark}
