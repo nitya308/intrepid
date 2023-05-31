@@ -61,9 +61,9 @@ const Challenges = ({ navigation }) => {
                     {trendingChallenges.map((challenge, index) => {
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id}) }} key={challenge.id}>
-                                <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} key={challenge.id} >
+                                <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonBlue]} key={challenge.id} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
-                                    <Text style={styles.cExpiry} >Expires in 3 days </Text>
+                                    <Text style={styles.cExpiry} >{challenge.expiresIn} </Text>
                                     {/* <Text style={styles.cExpiry} >Expires in {challenge.date.toString()}</Text> */}
                                     <Text style={styles.cDescription} >{challenge.description} </Text>
                                     <Text style={styles.cPoints} >{challenge.points} PTS </Text>
@@ -103,13 +103,7 @@ const Challenges = ({ navigation }) => {
                 /> */}
 
                 <View nativeId='allChallengeList' style={styles.allChallengeList} >
-                    {/* <View style={styles.allChallengeBox } > 
-                        <Text style = {styles.allTitle}>COMPLIMENT A STRANGER </Text>
-                        <View style={styles.allRight } >
-                            <Text style={styles.cExpiry}> Expires in 3 hours</Text>
-                            <Text style={styles.aPoints}>10 PTS</Text>
-                        </View>
-                    </View> */}
+
 
                     {allChallenges.map((challenge, index) => {
                         return (
@@ -117,7 +111,7 @@ const Challenges = ({ navigation }) => {
                                 <View style={styles.allChallengeBox} key={challenge.id} >
                                     <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
                                     <View style={styles.allRight} >
-                                        <Text style={styles.cExpiry}> Expires in 3 hours</Text>
+                                        <Text style={styles.cExpiry}>{challenge.expiresIn}</Text>
                                         <Text style={styles.aPoints}>{challenge.points} PTS</Text>
                                     </View>
                                 </View>
@@ -224,6 +218,13 @@ const styles = StyleSheet.create({
         shadowRadius: 15,
         shadowColor: '#AD5AFF',
         backgroundColor: '#39233c',
+    },
+    neonBlue: {
+        shadowOpacity: 1,
+        borderColor: '#7BF7FF',
+        shadowRadius: 15,
+        shadowColor: '#27F2FF',
+        backgroundColor: '#223e40',
     },
     cTitle: {
         color: 'white',
