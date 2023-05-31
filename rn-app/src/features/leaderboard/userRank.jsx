@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
 
     rank: {
-        flex: 1,
+        width: '12%',
         justifyContent: "flex-start",
         alignItems: "center",
         fontSize: 35,
@@ -48,13 +48,14 @@ const styles = StyleSheet.create({
     username: {
         color: '#ffffff',
         fontFamily: 'Groupe',
-        fontSize: 30,
+        fontSize: 24,
         letterSpacing: -2.5,
         width: 170,
         textAlign: 'flex-start',
         paddingTop: '4%',
+        paddingLeft: '10%',
         textShadowColor: 'rgba(100, 100, 100, 0.75)',
-        textShadowRadius: 5
+        textShadowRadius: 5,
     },
 
     challengesAndPoints: {
