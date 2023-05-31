@@ -12,7 +12,7 @@ const UserRank = (props) => {
     return (
         <View style={[styles.userContainer, rank % 2 ? styles.neonGreen : styles.neonWhite]}>
             <Text style={styles.rank}>{rank}</Text>
-            <Text style={styles.username}>{userObj.username}</Text>
+            <Text style={styles.username}>{!userObj.username ? null : userObj.username.toUpperCase()}</Text>
             <View style={styles.challengesAndPoints}>
                 <Text style={styles.points}>{userObj.totalPoints} PTS</Text>
                 <Text style={styles.numChallenges}>{userObj.numChallengesSucceeded} challenges</Text>
@@ -34,14 +34,21 @@ const styles = StyleSheet.create({
         fontSize: 35,
         color: 'rgb(201, 170, 232)',
         alignSelf: 'center',
+        textShadowColor: '#C9AAE8',
+        textShadowRadius: 7,
+        width: '12%',
+        paddingLeft: '2%',
     },
 
     username: {
         color: '#ffffff',
-        fontFamily: 'Groupe',
-        fontSize: 24,
+        fontSize: 25,
         letterSpacing: -2.5,
         alignSelf: 'center',
+        fontFamily: 'Groupe',
+        textShadowColor: '#ffffff',
+        textShadowRadius: 5,
+        width: '30%',
     },
 
     challengesAndPoints: {
@@ -87,6 +94,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'Exo-Medium',
         fontSize: 20,
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
     }
 
 })
