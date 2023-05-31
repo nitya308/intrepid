@@ -47,8 +47,11 @@ export function signupUser( username, email, password ) {
 }
 
 export function signoutUser() {
-    dispatch(emptyUser());
-    setToken('');
+    return async (dispatch) => {
+
+        dispatch(emptyUser());
+        setToken('');
+    }
 }
 
 export function fetchUser() {

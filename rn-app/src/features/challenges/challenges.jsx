@@ -11,6 +11,7 @@ import BackButton from '../../../assets/icons/back-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import PointsBox from '../pointsBox';
 import AddButton from './../../../assets/icons/add-button.png';
+import { signoutUser } from '../user/userRequests';
 
 const Challenges = ({ navigation }) => {
 
@@ -46,7 +47,7 @@ const Challenges = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.backAndPoints}>
-                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
+                <TouchableOpacity onPress={() => {  navigation.navigate('Create Challenge')}}>
                     <Image
                         source={AddButton}
                         style={styles.addButton}

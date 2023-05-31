@@ -53,10 +53,7 @@ export function createChallenge(challenge) {
         fetch(`${ROOT_URL}/api/challenges`, {
             method: 'POST',
             body: JSON.stringify(challenge),
-            headers: {
-                'Content-Type': 'application/json',
-                ...headers,
-            },
+            ...headers
         })
             .then((response) => response.json())
             .then((data) => {
