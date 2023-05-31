@@ -87,7 +87,13 @@ const Challenges = ({ navigation }) => {
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonBlue]} key={challenge.id} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
                                     <Text style={styles.cExpiry} >Expires in {challenge.expiresIn} </Text>
-                                    <Text style={styles.cDescription} >{challenge.description} </Text>
+                                    <Text
+                                        numberOfLines={3}
+                                        ellipsizeMode='tail'
+                                        style={styles.cDescription}
+                                    >
+                                        {challenge.description}
+                                    </Text>
                                     <Text style={styles.cPoints} >{challenge.points} PTS </Text>
                                 </View>
                             </TouchableOpacity>
@@ -136,7 +142,7 @@ const Challenges = ({ navigation }) => {
                                 <View style={styles.allChallengeBox} key={challenge.id} >
                                     <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
                                     <View style={styles.allRight} >
-                                        <Text style={styles.cExpiry}>Expires in {challenge.expiresIn}</Text>
+                                        <Text style={styles.aExpiry}>Expires in {challenge.expiresIn}</Text>
                                         <Text style={styles.aPoints}>{challenge.points} PTS</Text>
                                     </View>
                                 </View>
@@ -223,16 +229,13 @@ const styles = StyleSheet.create({
         height: 270,
 
         margin: 20,
-        display: 'flex',
         flexDirection: 'column',
 
-        //alignItems:'center',
         justifyContent:'center',
         borderRadius: 2,
         borderWidth: 2,
-
-
     },
+
     neonRed: {
         shadowOpacity: 1,
         borderColor: '#FFA8A8',
@@ -240,6 +243,7 @@ const styles = StyleSheet.create({
         shadowColor: '#FF1C1C',
         backgroundColor: '#41151b',
     },
+
     neonPurple: {
         shadowOpacity: 1,
         borderColor: '#c8a9e8',
@@ -247,6 +251,7 @@ const styles = StyleSheet.create({
         shadowColor: '#AD5AFF',
         backgroundColor: '#39233c',
     },
+
     neonBlue: {
         shadowOpacity: 1,
         borderColor: '#7BF7FF',
@@ -254,6 +259,7 @@ const styles = StyleSheet.create({
         shadowColor: '#27F2FF',
         backgroundColor: '#223e40',
     },
+
     neonLine: {
         backgroundColor: '#c8a9e8',
         shadowRadius: 15,
@@ -265,48 +271,49 @@ const styles = StyleSheet.create({
             width: 0,
         },
     },
+
     cTitle: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 35,
         textAlign: 'center',
-        fontWeight: 'bold',
-        fontStyle: 'italic',
-        marginTop: 0,
         fontFamily: 'Groupe',
-        fontWeight:700,
-        letterSpacing:-5,
-        margin:2,
+        letterSpacing: -4.5,
+        marginHorizontal: 15,
     },
-    cExpiry: {
 
+    cExpiry: {
         color: '#ffffff',
         textShadowColor: '#CCFF00',
         textShadowRadius: 4,
         fontFamily: 'Exo-Medium',
         
         // color: 'white',
-        marginLeft: 20,
+        marginHorizontal: 20,
         marginTop: 15,
-        fontSize: 14.67,
+        fontSize: 17,
         // color: '#FAE3BD',
     },
+
     cDescription: {
         fontSize: 14,
         color: 'white',
-        margin: 20,
+        marginHorizontal: 20,
+        marginTop: 10,
         fontFamily: 'Exo-Medium',
     },
+
     cPoints: {
-        fontSize: 30,
+        fontSize: 35,
         color: 'white',
-        marginLeft: 20,
-        fontStyle: 'italic',
-        fontWeight: 'bold',
+        marginHorizontal: 20,
+        marginTop: 10,
         fontFamily: 'Glitch-Goblin',
     },
+
     allContainer: {
         display: 'flex',
     },
+
     filterList: {
         display: 'flex',
         flexDirection: 'row',
@@ -321,38 +328,51 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 15,
     },
+
     allChallengeBox: {
         width: 329,
         height: 85,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        marginBottom: 10,
-        backgroundColor: '#262626',
         borderRadius: 11,
-        display: 'flex',
+        marginBottom: 15,
+        backgroundColor: '#262626',
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
-        paddingHorizontal:5,
+    },
 
-    },
-    allRight: {
-        marginRight: 20,
-        marginBottom: 10,
-        paddingVertical:4,
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-    },
     allTitle: {
         color: 'white',
         fontWeight: 'bold',
         fontSize: 17,
-        flex: 1,
         textAlign: 'center',
-        marginRight: 20,
-        marginLeft:10,
+        width: 160,
+        // marginRight: 20,
+        // marginLeft:10,
         lineHeight:25,
-        marginVertical:2
     },
+
+    allRight: {
+        // marginRight: 20,
+        // marginBottom: 10,
+        // paddingVertical:4,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        rowGap: 5,
+    },
+
+    aExpiry: {
+        color: '#ffffff',
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        
+        // color: 'white',
+        // marginHorizontal: 20,
+        // marginTop: 15,
+        fontSize: 14.67,
+        // color: '#FAE3BD',
+    },
+
     aPoints: {
         fontSize: 25,
         color: 'white',
