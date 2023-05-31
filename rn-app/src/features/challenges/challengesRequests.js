@@ -87,6 +87,7 @@ export function saveChallenge(challengeId) {
     return async (dispatch) => {
         const headers = getHeaders();
         console.log(headers);
+        console.log(`${ROOT_URL}/api/saved/${challengeId}`);
         fetch(`${ROOT_URL}/api/saved/${challengeId}`, {
             method: 'POST',
             headers: {
