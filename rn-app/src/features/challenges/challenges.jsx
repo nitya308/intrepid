@@ -17,22 +17,20 @@ const Challenges = ({ navigation }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-            dispatch(fetchChallenges(value==='Points'));
-            // Alert.alert("reg use effect");
-            dispatch(fetchTrendingChallenges());
-        
-        
+        dispatch(fetchChallenges(value === 'Points'));
+        // Alert.alert("reg use effect");
+        dispatch(fetchTrendingChallenges());
     }, []);
 
+    // useEffect(() => {
+    //     // This runs after every render
+    //     dispatch(fetchChallenges(value==='Points'));
+    //    });
     useEffect(() => {
-        // This runs after every render
-        dispatch(fetchChallenges(value==='Points'));
-       });
-    useEffect(()=>{
         //call your increment function here
-        dispatch(fetchChallenges(value==='Points'));
+        dispatch(fetchChallenges(value === 'Points'));
         Alert.alert("hello");
-    },[value])
+    }, [value])
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);

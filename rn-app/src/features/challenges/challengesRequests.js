@@ -2,10 +2,13 @@ import { setAllChallenges, setTrendingChallenges, setCurrentChallenge } from './
 import { setChallenges } from '../saved/savedSlice';
 import { getHeaders } from '../../app/store';
 import store from '../../app/store';
+import { fetchUser } from '../user/userRequests';
 
 const ROOT_URL = 'https://project-api-nerve.onrender.com';
 
 export function fetchChallenges(sortPoints) {
+
+    console.log('fetching challenges');
     return async (dispatch) => {
         fetch(`${ROOT_URL}/api/challenges${sortPoints ? '?sortBy=points' : ''}`)
             .then((response) => response.json())
@@ -47,7 +50,7 @@ export function fetchChallenge(id) {
     };
 }
 
-export function createChallenge(challenge_obj) {
+export function createChallenge(challenge_obj, navigation) {
     return async (dispatch) => {
         const headers = getHeaders();
         fetch(`${ROOT_URL}/api/challenges`, {
@@ -58,6 +61,8 @@ export function createChallenge(challenge_obj) {
             .then((response) => response.json())
             .then((data) => {
                 dispatch(fetchChallenges());
+                dispatch(fetchUser());
+                navigation.goBack();
             })
             .catch((er) => {
                 throw er;

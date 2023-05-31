@@ -11,6 +11,7 @@ export const challengesSlice = createSlice({
     },
     reducers: {
         setAllChallenges: (state, action) => {
+            console.log('setting all challenges');
             state.allChallenges = action.payload;
         },
         setTrendingChallenges: (state, action) => {
