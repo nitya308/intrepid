@@ -17,7 +17,6 @@ const History = ({navigation}) => {
     }, []);
 
     const history = useSelector((state) => state.history.submissions) || [];
-    console.log("history frontend", history);
 
     const [refreshing, setRefreshing] = useState(false);
 
@@ -84,8 +83,6 @@ const History = ({navigation}) => {
     }
 
     const HistoryItem = ({ challengeId, title, points, success, isVotingEnded }) => {
-
-        console.log("history item", challengeId, title, points, success, isVotingEnded);
 
         return (
             <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {challengeId: challengeId})}}>

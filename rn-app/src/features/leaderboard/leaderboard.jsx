@@ -15,13 +15,11 @@ const Leaderboard = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("fetching top users");
         dispatch(fetchTopUsers());
     }, []);
 
 
     const leaderboardArray = useSelector((state) => state.leaderboard.topUsers);
-    console.log("leaderboardArray", leaderboardArray);
     
     return (
         <ScrollView style={styles.screen}>
@@ -33,7 +31,6 @@ const Leaderboard = (props) => {
 
             <View style={styles.leaderboardContainer}>
                 {leaderboardArray.length>0 && leaderboardArray.map((leaderboardObject, idx) => (
-                    console.log("lb", leaderboardObject),
                     <UserRank key={idx} rank={idx + 1} userObj={leaderboardObject} />
                 ))}
 
