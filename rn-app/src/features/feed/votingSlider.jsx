@@ -23,7 +23,7 @@ const VotingSlider = () => {
 
     const vote = debounce(() => {
         setVoted(true);
-        dispatch(voteForChallenge(value));
+        // dispatch(voteForChallenge(value));
         console.log("voted for challenge");
     });
 

@@ -29,7 +29,7 @@ const Challenges = ({ navigation }) => {
     //    });
     useEffect(()=>{
         //call your increment function here
-        console.log("hello");
+        // console.log("hello");
         dispatch(fetchChallenges(value==='Points'));
     },[value])
 
@@ -49,7 +49,7 @@ const Challenges = ({ navigation }) => {
         setValue(newValue);
 
     }
-    console.log(value);
+    // console.log(value);
     return (
         <ScrollView style={styles.container}>
             <View style={styles.backAndPoints}>
