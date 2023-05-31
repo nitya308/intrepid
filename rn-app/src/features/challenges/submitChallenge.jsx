@@ -89,6 +89,7 @@ const SubmitChallenge = ({ navigation, route }) => {
             console.log('url at handleSubmit', url);
             // create a new submission object with the url
             dispatch(submitChallenge(route.params.challengeId, url));
+            navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })
         } catch (error) {
             const onPress = () => {
                 navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })

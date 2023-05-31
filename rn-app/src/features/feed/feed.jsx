@@ -10,14 +10,6 @@ import { fetchSubmissions } from './feedRequests';
 const Feed=({navigation, route}) => {
     const mediaRefs = useRef([])
     const dispatch = useDispatch();
-    // const arr = [
-    //     { challengeId: "1", videoUrl: 'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov' },
-    //     { challengeId: "2", videoUrl: 'https://swerve-bucket.s3.amazonaws.com/07841723-081B-4896-B1CE-547D99961AF7.mov' },
-    //     { challengeId: "3", videoUrl: 'https://swerve-bucket.s3.amazonaws.com/2F4688A4-F1CE-4518-826C-DFCCE16CFCCA.mov' },
-    //     { challengeId: "4", videoUrl: 'https://swerve-bucket.s3.amazonaws.com/7FDB7F7C-5192-46CE-A018-15819F71F2E9.mov' },
-    //     { challengeId: "5", videoUrl: 'https://swerve-bucket.s3.amazonaws.com/E2785B21-B749-4EE0-9BC9-4C491467DE16.mov' },
-    //     { challengeId: "6", videoUrl: 'https://swerve-bucket.s3.amazonaws.com/ED6C3E8A-B28D-4F57-93B1-EC6B9F29913B.mov' }
-    // ];
 
     useEffect(() => {
         dispatch(fetchSubmissions());
