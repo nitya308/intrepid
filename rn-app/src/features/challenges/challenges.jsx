@@ -196,7 +196,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
 
-        // alignItems:'center',
+        alignItems:'center',
+        justifyContent:'center',
         borderRadius: 2,
         borderWidth: 2,
 
@@ -219,7 +220,7 @@ const styles = StyleSheet.create({
     neonBlue: {
         shadowOpacity: 1,
         borderColor: '#7BF7FF',
-        shadowRadius: 15,
+        shadowRadius: 8,
         shadowColor: '#27F2FF',
         backgroundColor: '#223e40',
     },
