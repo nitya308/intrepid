@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         letterSpacing: -2.5,
         width: 170,
-        textAlign: 'center',
+        textAlign: 'flex-start',
         paddingTop: '4%',
         textShadowColor: 'rgba(100, 100, 100, 0.75)',
         textShadowRadius: 5
