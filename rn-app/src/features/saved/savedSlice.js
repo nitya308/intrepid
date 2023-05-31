@@ -22,10 +22,7 @@ export function fetchSaved(){
         const headers = getHeaders();
         fetch(`${ROOT_URL}/api/saved`, {
             method: 'GET',
-            headers: {
-                ...headers,
-                'Content-Type': 'application/json',
-            },
+            ...headers,
         })
             .then((response) => response.json())
             .then((data) => {
