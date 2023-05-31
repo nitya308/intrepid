@@ -4,8 +4,7 @@ import {
 } from 'react-native';
 import PointsBox from '../pointsBox';
 import HistoryHeader from './../../../assets/images/history-header.png'
-import Bookmark from '../../../assets/icons/bookmark.png';
-import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
+import SignOutButton from './../../../assets/images/sign-out-button.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHistory } from './historyRequests';
 
@@ -84,7 +83,17 @@ const History = ({navigation}) => {
 
     return (
         <View style={styles.screen}>
-            <PointsBox />
+            <View style={styles.signOutAndPoints}>
+                <TouchableOpacity>
+                    <Image
+                        source={SignOutButton}
+                        style={styles.signOutButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
+            </View>
             
             <Image 
                 source={HistoryHeader}
@@ -123,6 +132,22 @@ const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 20,
         paddingTop: 55,
+    },
+
+    signOutAndPoints: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+
+    signOutButton: {
+        width: 105,
+        height: 33.5,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
     },
 
     historyHeader: {
