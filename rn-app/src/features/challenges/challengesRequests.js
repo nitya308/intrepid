@@ -1,4 +1,5 @@
 import { setAllChallenges, setTrendingChallenges, setCurrentChallenge } from './challengesSlice';
+import { setChallenges } from '../saved/savedSlice';
 import { getHeaders } from '../../app/store';
 import store from '../../app/store';
 
