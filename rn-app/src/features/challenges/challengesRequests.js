@@ -47,12 +47,12 @@ export function fetchChallenge(id) {
     };
 }
 
-export function createChallenge(challenge) {
+export function createChallenge(challenge_obj) {
     return async (dispatch) => {
         const headers = getHeaders();
         fetch(`${ROOT_URL}/api/challenges`, {
             method: 'POST',
-            body: JSON.stringify(challenge),
+            body: JSON.stringify(challenge_obj),
             ...headers,
         })
             .then((response) => response.json())
