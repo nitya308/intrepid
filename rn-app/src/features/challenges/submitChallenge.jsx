@@ -21,7 +21,7 @@ const SubmitChallenge = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenge(route.params.challengeId))
+        // dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
     const currentChallenge = useSelector((state) => state.currentChallenge);
