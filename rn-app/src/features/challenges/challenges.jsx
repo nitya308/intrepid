@@ -25,7 +25,7 @@ const Challenges = ({ navigation }) => {
     const [items, setItems] = useState([
         { label: 'New', value: 'new' },
     ]);
-
+    //const [colorBlue, setBlue] = useState(false);
     const allChallenges = useSelector((state) => state.challenges.allChallenges) || [];
     const trendingChallenges = useSelector((state) => state.challenges.trendingChallenges) || [];
     
@@ -60,6 +60,7 @@ const Challenges = ({ navigation }) => {
                     {trendingChallenges.map((challenge, index) => {
                         if (challenge.expiresIn !== 'Expired')
                         {
+                            //setBlue(!colorBlue);
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id}) }} key={challenge.id}>
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonBlue]} key={challenge.id} >
@@ -143,8 +144,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: 340,
+        width: 370,
         marginTop: 20,
+        paddingTop:40,
     },
 
     exitButton: {
@@ -154,6 +156,7 @@ const styles = StyleSheet.create({
 
     pointsBoxContainer: {
         width: 71,
+        marginRight:20,
     },
 
     addButton: {
