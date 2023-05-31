@@ -1,38 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity, Pressable
+    StyleSheet, View, Text, Image, TouchableOpacity, Pressable, SafeAreaView, ActivityIndicator
 } from 'react-native';
+import AutoScroll from "@homielab/react-native-auto-scroll";
+import { Video, ResizeMode } from 'expo-av';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchChallenge } from '../challenges/challengesRequests';
+import { fetchChallenge, saveChallenge } from '../challenges/challengesRequests';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
+import { fetchSaved } from '../saved/savedSlice';
+import PointsBox from '../pointsBox';
 
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log("Challenge id "+ route.params.challengeId)
         dispatch(fetchChallenge(route.params.challengeId))
+        dispatch(fetchSaved)
     }, [])
 
     const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
 
-    const mockCurrentChallenge = {
-        title: 'Dye your hair pink',
-        description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
-        points: 125,
-        expiresAt: {},
-        isExpired: false,
-    }
+    // const [challengeSaved, setChallengeSaved] = useState(false);
+    // const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
-    // let [fontsLoaded] = useFonts({
-    //     'Glitch-Goblin': require('./../../../assets/fonts/glitchGoblin/GlitchGoblin.ttf'),
-    // })
-
-    const [challengeSaved, setChallengeSaved] = useState(false);
-    const [challengeSubmitted, setChallengeSubmitted] = useState(false);
+    const videosList = [
+        'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov',
+        'https://swerve-bucket.s3.amazonaws.com/07841723-081B-4896-B1CE-547D99961AF7.mov',
+        'https://swerve-bucket.s3.amazonaws.com/2F4688A4-F1CE-4518-826C-DFCCE16CFCCA.mov',
+        'https://swerve-bucket.s3.amazonaws.com/7FDB7F7C-5192-46CE-A018-15819F71F2E9.mov',
+        'https://swerve-bucket.s3.amazonaws.com/E2785B21-B749-4EE0-9BC9-4C491467DE16.mov',
+        'https://swerve-bucket.s3.amazonaws.com/ED6C3E8A-B28D-4F57-93B1-EC6B9F29913B.mov',
+    ]
 
     const ChallengeInfoCTA = ({ submitted }) => {
         let content;
@@ -67,58 +68,115 @@ const ChallengeInfo = ({ navigation, route }) => {
         return content;
     }
 
-    // TODO: EXPIRATION STRING
     if (currentChallenge) {
     return (
         <View style={styles.screen}>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-                <Image
-                    style={styles.backButton}
-                    source={BackButton}
-                />
-            </TouchableOpacity>
-
-            <Text style={styles.challengeTitle}>
-                {currentChallenge.title}
-            </Text>
-
-            <Pressable onPress={() => { setChallengeSaved(challengeSaved ? false : true) }}>
-                <Image
-                    style={styles.bookmark}
-                    source={challengeSaved ? BookmarkFilled : Bookmark}
-                />
-            </Pressable>
-
-            <View style={styles.expirationAndPointValue}>
-                <Text style={styles.expiration}>Expires in 3 days</Text>
-                <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
+            <View style={styles.backAndPoints}>
+                <TouchableOpacity onPress={() => {navigation.goBack()}}>
+                    <Image
+                        source={BackButton}
+                        style={styles.backButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
             </View>
 
-            <Text style={styles.description}>
-                {currentChallenge.description}
-            </Text>
+            <AutoScroll>
+                <View style={styles.videos}>
+                    {videosList.map((url) => {
+                        return (
+                            <Video
+                                style={styles.video}
+                                source={{ uri: url }}
+                                resizeMode={ResizeMode.COVER}
+                                isLooping={true}
+                                isMuted={true}
+                                shouldPlay
+                            />
+                        )
+                    })}
+                </View>
+            </AutoScroll>
 
-            <ChallengeInfoCTA submitted={challengeSubmitted} />
+            <View style={styles.challengesInfoContainer}>
+                <Text style={styles.challengeTitle}>
+                    {currentChallenge.title}
+                </Text>
+
+                <Pressable onPress={() => { 
+                    console.log("currentChallenge.id: " + currentChallenge.id)
+                    dispatch(saveChallenge(currentChallenge.id))
+                }}>
+                    <Image
+                        style={styles.bookmark}
+                        source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
+                    />
+                </Pressable>
+
+                <View style={styles.expirationAndPointValue}>
+                    <Text style={styles.expiration}>
+                        {currentChallenge.expiresIn == 'Expired' ? ('Expired') : `Expires in ${currentChallenge.expiresIn}`}
+                    </Text>
+                    <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
+                </View>
+
+                <Text style={styles.description}>
+                    {currentChallenge.description}
+                </Text>
+
+                <ChallengeInfoCTA submitted={currentChallenge.submitted} />
+            </View>
         </View>
     )} else {
-        // TODO: MAKE THIS LOOK NICER
         return (
-            <View style={styles.screen}>
-                <Text style={styles.description}>Loading...</Text>
-            </View>
+            <SafeAreaView style={styles.loadingScreen}>
+                <Text style={styles.loadingText}>Loading this challenge...</Text>
+                <ActivityIndicator size='large' />
+            </SafeAreaView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    hey: {
+        color: '#fff'
+    },
+
     screen: {
-        paddingHorizontal: 35,
         paddingTop: 55,
+    },
+
+    backAndPoints: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 25,
+        marginBottom: 20,
     },
 
     backButton: {
         width: 20,
         height: 40,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
+    },
+
+    videos: {
+        flexDirection: 'row',
+        columnGap: 10,
+    },
+
+    video: {
+        width: 80,
+        height: 140,
+    },
+
+    challengesInfoContainer: {
+        paddingHorizontal: 40,
     },
 
     challengeTitle: {
@@ -205,6 +263,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
     },
+
+    loadingScreen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        rowGap: 20,
+    },
+
+    loadingText: {
+        color: '#ffffff',
+        fontFamily: 'Exo-Regular',
+        fontSize: 20,
+    }
 })
 
 export default ChallengeInfo;
