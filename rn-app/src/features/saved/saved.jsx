@@ -6,7 +6,6 @@ import SavedHeader from './../../../assets/images/saved-header.png';
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import PointsBox from '../pointsBox';
-import { CommonActions } from '@react-navigation/native';
 import { fetchSaved } from './savedRequests';
 import { useDispatch, useSelector } from 'react-redux';
 

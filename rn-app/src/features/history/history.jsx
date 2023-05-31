@@ -22,6 +22,7 @@ const History = ({navigation}) => {
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
+        dispatch(fetchHistory());
         setTimeout(() => {
             setRefreshing(false);
         }, 2000);

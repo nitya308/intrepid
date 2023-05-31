@@ -5,9 +5,9 @@ import store from '../../app/store';
 
 const ROOT_URL = 'https://project-api-nerve.onrender.com';
 
-export function fetchChallenges() {
+export function fetchChallenges(sortPoints) {
     return async (dispatch) => {
-        fetch(`${ROOT_URL}/api/challenges`)
+        fetch(`${ROOT_URL}/api/challenges${sortPoints ? '?sortBy=points' : ''}`)
             .then((response) => response.json())
             .then((data) => {
                 dispatch(setAllChallenges(data));
