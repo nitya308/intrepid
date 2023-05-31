@@ -162,7 +162,6 @@ const SubmitChallenge = ({ navigation, route }) => {
                 resizeMode={ResizeMode.CONTAIN}
                 isLooping
                 onPlaybackStatusUpdate={status => setStatus(() => status)}
-
             />
 
 
