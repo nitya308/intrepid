@@ -32,7 +32,7 @@ export function fetchSubmissions(userId) {
                 dispatch(setSubmissions(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }

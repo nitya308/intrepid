@@ -1,9 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { LogBox } from 'react-native';
+import { LogBox, View } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
-import MainTabBar from './navigation/mainTabBar';
-import EntryNavigator from './entry/entryNavigator';
-import { Provider } from 'react-redux';
+import Home from './components/Home';
+import { Provider, useSelector } from 'react-redux';
 import store from './app/store';
 import { useFonts } from 'expo-font';
 
@@ -11,8 +10,6 @@ import { useFonts } from 'expo-font';
 LogBox.ignoreAllLogs();
 
 const App = (props) => {
-    const [isSignedIn, setIsSignedIn] = useState(true);
-
     let [fontsLoaded] = useFonts({
         'Glitch-Goblin': require('./../assets/fonts/glitchGoblin/GlitchGoblin.ttf'),
         'Groupe': require('./../assets/fonts/groupe/Groupe-Medium.otf'),

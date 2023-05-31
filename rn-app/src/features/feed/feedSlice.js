@@ -17,24 +17,14 @@ export const feedSlice = createSlice({
 
 export const { setSubmissions } = feedSlice.actions;
 
-const api = axios.create({
-    baseURL: "http://localhost:9090/",
-    withCredentials: false,
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-    },
-});
-
 export function fetchFeed(userId) {
     return async (dispatch) => {
-        api
-            .get(`/submissions`)
+        fetch(`${ROOT_URL}api/users/${userId}/feed`)
             .then((response) => {
                 dispatch(setSubmissions(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }
@@ -50,7 +40,7 @@ export function submitVote(challengeId, userId, voteScore) {
                 dispatch(fetchFeed());
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }

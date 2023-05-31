@@ -16,7 +16,8 @@ const PointsBox = () => {
 
 const styles = StyleSheet.create({
     pointsContainer: {
-        alignItems: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     },
 
     pointsBox: {

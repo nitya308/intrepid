@@ -58,10 +58,9 @@ const History = ({navigation}) => {
     }
 
     const HistoryItem = ({ challengeId, title, points, success, isVotingEnded }) => {
-        const [challengedSaved, setChallengeSaved] = useState(true);
 
         return (
-            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {paramKey: challengeId,})}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {challengeId: challengeId})}}>
                 <View style={styles.historyItem}>
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.expirationAndPoints}>

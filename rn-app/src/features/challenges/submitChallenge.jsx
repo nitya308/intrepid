@@ -94,7 +94,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 'Error',
                 'There was an error submitting your video. Try again later.',
                 [
-                    { text: 'OK', onPress: () => navigation.navigate('Challenge Info', { challengeId: route.params.challengeId }) }
+                    { text: 'OK', onPress: () => navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }) }
                 ]
             );
         }
