@@ -13,7 +13,7 @@ export const userSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             state.username = action.payload.username;
-            state.points = action.payload.totalPoints;
+            state.points = action.payload.currentPoints;
         },
         emptyUser: (state) => {
             state.username = '';
