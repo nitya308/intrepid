@@ -78,7 +78,7 @@ const Challenges = ({ navigation }) => {
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id}) }} key={challenge.id}>
                                 <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonBlue]} key={challenge.id} >
-                                    {/* <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text> */}
+                                    <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
                                     <Text style={styles.cExpiry} >Expires in {challenge.expiresIn} </Text>
                                     <Text style={styles.cDescription} >{challenge.description} </Text>
                                     <Text style={styles.cPoints} >{challenge.points} PTS </Text>
