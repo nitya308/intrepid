@@ -37,7 +37,9 @@ export function signupUser( username, email, password ) {
                 return response.json()
             })
             .then((data) => {
+                console.log('signupUser DATA', data);
                 dispatch(setUser(data));
+                console.log('signupUser', data.token);
                 setToken(data.token);
             })
             .catch((er) => {

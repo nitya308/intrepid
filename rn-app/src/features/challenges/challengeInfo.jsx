@@ -12,14 +12,17 @@ import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
 import PointsBox from '../pointsBox';
+import { setCurrentChallenge } from './challengesSlice';
 
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
+    const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
     useEffect(() => {
+        if (route.params.challengeId !== currentChallenge.id) {
+            dispatch(setCurrentChallenge(null))
+        }
         dispatch(fetchChallenge(route.params.challengeId))
     }, [])
-
-    const currentChallenge = useSelector((state) => state.challenges.currentChallenge);
 
     // const [challengeSaved, setChallengeSaved] = useState(false);
     // const [challengeSubmitted, setChallengeSubmitted] = useState(false);
@@ -104,8 +107,7 @@ const ChallengeInfo = ({ navigation, route }) => {
                 </Text>
 
                 <Pressable onPress={() => { 
-                    console.log("currentChallenge.id: " + currentChallenge.id)
-                    dispatch(saveChallenge(currentChallenge.id))
+                    dispatch(saveChallenge(currentChallenge.id, false))
                 }}>
                     <Image
                         style={styles.bookmark}
