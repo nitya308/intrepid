@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     StyleSheet, View, Text,
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUser } from '../features/user/userRequests';
 
 const PointsBox = () => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchUser());
+    }, []);
+
+    const points = useSelector((state) => state.user.points) || 0;
+
     return (
         <View style={styles.pointsContainer}>
             <View style={styles.pointsBox}>
-                <Text style={styles.currentPoints}>130</Text>
+                <Text style={styles.currentPoints}>{points}</Text>
                 <Text style={styles.pts}>pts</Text>
             </View>
         </View>

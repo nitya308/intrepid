@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setToken } from '../../app/utils';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
-
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
         username: '',
-        email: '',
         points: 0,
         authenticated: false,
         token: '',
@@ -16,12 +13,10 @@ export const userSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             state.username = action.payload.username;
-            state.email = action.payload.email;
-            state.points = action.payload.points;
+            state.points = action.payload.totalPoints;
         },
         emptyUser: (state) => {
             state.username = '';
-            state.email = '';
             state.points = 0;
         },
         authUser: (state, action) => {
@@ -42,78 +37,5 @@ export const userSlice = createSlice({
 });
 
 export const { setUser, emptyUser, authUser, deauthUser, authFailed } = userSlice.actions;
-
-export function signinUser( email, password ) {
-    return async (dispatch) => {
-        fetch(`${ROOT_URL}/api/signin`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                dispatch(setUser(data));
-                setToken(data.token, authUser, dispatch);
-            })
-            .catch((er) => {
-                throw er;
-            });
-    };
-}
-
-export function signupUser( username, email, password ) {
-    return async (dispatch) => {
-        fetch(`${ROOT_URL}/api/signup`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, email, password }),
-        })
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                dispatch(setUser(data));
-                setToken(data.token);
-            })
-            .catch((er) => {
-                throw er;
-            });
-    };
-}
-
-export function signoutUser() {
-    dispatch(emptyUser());
-    setToken('');
-}
-
-export function fetchUsers() {
-    return async (dispatch) => {
-        api
-            .get("/users")
-            .then((response) => {
-                dispatch(setItems(response.data));
-            })
-            .catch((er) => {
-                throw er;
-            });
-    };
-}
-
-export function fetchUser(id) {
-    return async (dispatch) => {
-        api
-            .get(`/users/${id}`)
-            .then((response) => {
-                dispatch(setUser(response.data));
-            })
-            .catch((er) => {
-                throw er;
-            });
-    };
-}
 
 export default userSlice.reducer;
