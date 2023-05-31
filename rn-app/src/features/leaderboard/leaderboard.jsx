@@ -127,71 +127,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 15,
-        // justifyContent: 'space-evenly',
         paddingVertical: 20,
         paddingHorizontal: 10,
         marginBottom: 20,
     },
-
-    // leaderboardArray: {
-    //     marginTop: 30,
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     backgroundColor: '#262626',
-    //     borderRadius: 15,
-    //     // justifyContent: 'space-evenly',
-    //     paddingVertical: 20,
-    //     paddingHorizontal: 10,
-    //     marginBottom: 20,
-    // }
 })
 
 export default Leaderboard;
-
-// import React from 'react';
-// import {
-//     StyleSheet, View, Text, Image,
-// } from 'react-native';
-// import UserRank from './userRank';
-// import { FlatList } from 'react-native-gesture-handler';
-// import { fetchTopUsers } from './leaderboardSlice';
-// import { useSelector, useDispatch } from "react-redux";
-// import { useEffect } from 'react';
-
-// const Leaderboard = (props) => {
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     dispatch(fetchTopUsers());
-//   }, []);
-
-//   c
-
-// //   const ranking = props.topUsers.map((rank) => (
-// //     <UserRank rank={rank} />
-// //   ))
-
-//   const ranking = useSelector((state) => state.leaderboard.topUsers);
-  
-//   return (
-
-//     <FlatList style={styles.screen}>
-//       <Text style={styles.title}>Leaderboard</Text>
-//       <View nativeId='ranking' style={styles.ranking} >
-//         {ranking.map(rank, userObj => (
-//           <UserRank key={rank + 1} rank={rank + 1} userObj={userObj} />
-//         ))}
-//       </View>
-//     </FlatList>
-//     )
-// }
-
-// // function mapStateToProps(reduxState) {
-// //   return {
-// //     leaderboard: reduxState.leaderboard.topUsers,
-// //   };
-// // }
-
-
-
-// export default Leaderboard;
