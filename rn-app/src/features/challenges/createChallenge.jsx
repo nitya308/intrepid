@@ -9,6 +9,8 @@ import ExitButton from './../../../assets/icons/exit-button.png'
 import PointsBox from '../pointsBox';
 import Modal from "react-native-modal";
 import StayButton from './../../../assets/icons/stay-button.png';
+import { createChallenge } from '../challenges/challengesRequests';
+import { useSelector, useDispatch } from 'react-redux';
 
 const CreateChallenge = ({navigation}) => {
     const [title, setTitle] = useState('');
@@ -18,9 +20,21 @@ const CreateChallenge = ({navigation}) => {
 
     const [exitModalVisible, setExitModalVisible] = useState(false);
 
+    const dispatch = useDispatch();
+    
     const submitChallenge = () => {
         // submit challenge with title, description, points
-        
+        if (points < 20)
+        {
+            // do something
+            challenge = {
+                cTitle:title,
+                cDes:description,
+                cPoints:points,
+            }
+            dispatch(createChallenge(challenge));
+            
+        }
     }
 
     return (
