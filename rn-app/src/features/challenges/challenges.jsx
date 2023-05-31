@@ -48,9 +48,9 @@ const Challenges = ({ navigation }) => {
             <Text style = {styles.h1}> CHALLENGES </Text>
             <View style={styles.trendingContainer}>
             <View style={{flexDirection: 'row', marginBottom:10,}}>
-                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
+                    <View style={[{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}, styles.neonLine]} />
                     <Text style={styles.h2}> TRENDING </Text>
-                    <View style={{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }} />
+                    <View style={[{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }, styles.neonLine]} />
                 </View>
                 <ScrollView horizontal={true}
                     decelerationRate={0}
@@ -77,9 +77,9 @@ const Challenges = ({ navigation }) => {
             <View style={styles.allContainer}>
             
                 <View style={{flexDirection: 'row', marginBottom:10,}}>
-                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
+                    <View style={[{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}, styles.neonLine]} />
                     <Text style={styles.h2}> ALL </Text>
-                    <View style={{backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center'}} />
+                    <View style={[{backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center'}, styles.neonLine]} />
                 </View>
 
                 {/* <DropDownPicker
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: 340,
+        marginTop: 20,
     },
 
     exitButton: {
@@ -150,17 +151,11 @@ const styles = StyleSheet.create({
     pointsBoxContainer: {
         width: 71,
     },
-    addAndPoints: {
-        flexDirection: 'row',
-        marginTop: 45,
-        paddingHorizontal: 20,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
 
     addButton: {
         width: 40,
         height: 40,
+        marginLeft:20
     },
 
     pointsBoxContainer: {
@@ -172,8 +167,9 @@ const styles = StyleSheet.create({
         marginTop: 25,
         marginBottom: 25,
         color: 'white',
-        fontWeight: 'bold',
+        fontWeight: 700,
         fontStyle: 'italic',
+        fontFamily: 'Glitch-Goblin',
     },
     
     trendingScroll: {
@@ -188,7 +184,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         paddingHorizontal: 5,
         fontWeight: 'bold',
+        fontWeight: 700,
         fontStyle: 'italic',
+        fontFamily: 'Glitch-Goblin',
+
     },
 
     trendingBox: {
@@ -226,6 +225,17 @@ const styles = StyleSheet.create({
         shadowColor: '#27F2FF',
         backgroundColor: '#223e40',
     },
+    neonLine: {
+        backgroundColor:'#7BF7FF',
+        shadowRadius: 15,
+        shadowColor: '#27F2FF',
+        shadowOpacity: 1,
+        shadowRadius: 3,
+        shadowOffset: {
+            height: 0,
+            width: 0,
+        },
+    },
     cTitle: {
         color: 'white',
         fontSize: 30,
@@ -233,19 +243,27 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontStyle: 'italic',
         marginTop: 15,
+        // fontFamily: 'Groupe',
+        // fontWeight:700,
     },
     cExpiry: {
-        color: 'white',
+
+        color: '#ffffff',
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        
+        // color: 'white',
         marginLeft: 20,
         marginTop: 15,
         fontSize: 14.67,
-        color: '#FAE3BD',
+        // color: '#FAE3BD',
     },
     cDescription: {
         fontSize: 14,
         color: 'white',
         margin: 20,
-
+        fontFamily: 'Exo-Medium',
     },
     cPoints: {
         fontSize: 30,
@@ -253,6 +271,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         fontStyle: 'italic',
         fontWeight: 'bold',
+        fontFamily: 'Glitch-Goblin',
     },
     allContainer: {
         display: 'flex',
