@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        backgroundColor: 'black'
+        // backgroundColor: 'black'
     },
     gradient: {
         borderRadius: 500,
@@ -89,6 +89,8 @@ const styles = StyleSheet.create({
         textShadowRadius: 6,
         marginTop: 10,
         marginBottom: 10,
+        width: 70,
+        textAlign: 'center',
 
     }
 });

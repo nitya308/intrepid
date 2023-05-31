@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {SafeAreaView, Button, View, Text, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 import tryButton from '../../../assets/images/try.png';
 import challengesSlice from '../challenges/challengesSlice';
+import VotingSlider from './votingSlider';
+import {LinearGradient} from 'expo-linear-gradient'
 
 
 
@@ -22,21 +24,31 @@ const Overlay = ({post, toChallenge}) => {
 }, []);
     return (
         <View style={styles.container}>
-            <View style={styles.description}>
-                <Text style={styles.challengeTitle}>{challenge.title}</Text>
-                <Text style={styles.expiration}>{challenge.expiration}</Text>
+            <View style={styles.sliderContainer}>
+                <VotingSlider />
             </View>
-            <View style={styles.tryContainer}>
-                <TouchableOpacity onPress={() => {
-                    toChallenge(post.challengeId)
-                    console.log('TRY button pressed')
-                    }}>
-                    <Image
-                        source={tryButton}
-                        style={styles.tryButton}
-                    />
-                </TouchableOpacity>
-            </View>
+            <LinearGradient
+                colors={['transparent',  'rgba(0,0,0, 0.8)']}
+                style={styles.nonSliderBackground}>
+                <View style={styles.nonSlider}>
+                    
+                    <View style={styles.description}>
+                        <Text style={styles.challengeTitle}>{challenge.title}</Text>
+                        <Text style={styles.expiration}>{challenge.expiration}</Text>
+                    </View>
+                    <View style={styles.tryContainer}>
+                        <TouchableOpacity onPress={() => {
+                            toChallenge(post.challengeId)
+                            console.log('TRY button pressed')
+                            }}>
+                            <Image
+                                source={tryButton}
+                                style={styles.tryButton}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </View> 
+            </LinearGradient>  
         </View>
     )
 }
@@ -47,21 +59,37 @@ const styles = StyleSheet.create({
         position: 'absolute',
         zIndex: 999,
         width: '100%',
+        flexDirection: 'column',
+    },
+
+    sliderContainer: {
+        height: Dimensions.get(`window`).height - 180,
+        width: Dimensions.get(`window`).width - 5,
+        alignItems: 'flex-end',
+    },
+
+    nonSlider: {
         flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 30,
+        justifyContent: 'space-between',
+        paddingBottom: 22,
+    },
+
+    nonSliderBackground: {
+        width: Dimensions.get(`window`).width,
     },
 
     description: {
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'flex-start',
-        
     },
 
     tryContainer: {
-        justifyContent: 'flex-end',
         alignItems: 'flex-end',
-        width: Dimensions.get(`window`).width - 270,
-        height:  Dimensions.get(`window`).height - 120,
+        paddingLeft: 22,
+        paddingRight: 5,
     },
 
     tryButton: {
