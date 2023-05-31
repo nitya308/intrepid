@@ -30,11 +30,10 @@ const Challenges = ({ navigation }) => {
     useEffect(()=>{
         //call your increment function here
         dispatch(fetchChallenges(value==='Points'));
-        Alert.alert("hello");
     },[value])
 
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('Points');
     const [items, setItems] = useState([
         { label: 'New', value: 'New' },
         { label: 'Points', value: 'Points' },
@@ -264,7 +263,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         fontStyle: 'italic',
-        marginTop: 15,
+        marginTop: 0,
         // fontFamily: 'Groupe',
         // fontWeight:700,
     },
