@@ -48,9 +48,14 @@ export function fetchChallenge(id) {
 
 export function createChallenge(challenge) {
     return async (dispatch) => {
+        const headers = getHeaders();
         fetch(`${ROOT_URL}/api/challenges`, {
             method: 'POST',
             body: JSON.stringify(challenge),
+            headers: {
+                'Content-Type': 'application/json',
+                ...headers,
+            },
         })
             .then((response) => response.json())
             .then((data) => {
@@ -86,13 +91,9 @@ export function submitChallenge(videoUrl, challengeId) {
 export function saveChallenge(challengeId) {
     return async (dispatch) => {
         const headers = getHeaders();
-        console.log(headers);
         fetch(`${ROOT_URL}/api/saved/${challengeId}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                ...headers,
-            },
+            ...headers
         })
             .then((data) => {
                 const currentChallenge = store.getState().challenges.currentChallenge;

@@ -7,8 +7,17 @@ import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import PointsBox from '../pointsBox';
 import { CommonActions } from '@react-navigation/native';
+import { fetchSaved } from './savedSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Saved = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchSaved());
+    }, []);
+
+    const savedChallenges = useSelector((state) => state.saved.challenges) || [];
 
     const [refreshing, setRefreshing] = useState(false);
 
@@ -18,23 +27,6 @@ const Saved = ({ navigation }) => {
             setRefreshing(false);
         }, 2000);
     }, []);
-
-    const savedData = [
-        {
-            id: '1',
-            title: 'DYE YOUR HAIR PINK',
-            expiresAt: Date.now + (7 * 24 * 60 * 60 * 1000),
-            points: 75,
-        },
-
-        {
-            id: '2',
-            title: 'GET A DRAGON TATTOO',
-            expiresAt: Date.now + (7 * 24 * 60 * 60 * 1000),
-            points: 200,
-        },
-
-    ];
 
     const SavedItem = ({ id, title, expiresAt, points }) => {
         const [challengedSaved, setChallengeSaved] = useState(true);
@@ -84,7 +76,7 @@ const Saved = ({ navigation }) => {
             <SafeAreaView style={styles.savedContainer}>
                 <FlatList
                     style={styles.savedList}
-                    data={savedData}
+                    data={savedChallenges}
                     renderItem={({ item }) =>
                         <SavedItem
                             id={item.id}
