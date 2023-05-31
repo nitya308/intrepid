@@ -8,6 +8,9 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import TrendingItem from './trendingItem';
 import ChallengeItem from './challengeItem';
 import BackButton from '../../../assets/icons/back-button.png';
+import ExitButton from './../../../assets/icons/exit-button.png';
+import PointsBox from '../pointsBox';
+import AddButton from './../../../assets/icons/add-button.png';
 
 const Challenges = ({ navigation }) => {
 
@@ -29,21 +32,25 @@ const Challenges = ({ navigation }) => {
     
     return (
         <ScrollView style={styles.container}>
-            <Text 
-                onPress={() => {navigation.navigate('Challenge Info')}}
-                style={{ marginTop: '10%', color:'white' }}
-            >
-                            Click challenge to see challenge info
-                        </Text>
-            <Text onPress={() => {navigation.navigate('Create Challenge')}} style={{color:'white'}}>
-                Create Challenge Button </Text>
+            <View style={styles.backAndPoints}>
+                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
+                    <Image
+                        source={AddButton}
+                        style={styles.addButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.pointsBoxContainer}>
+                    <PointsBox />
+                </View>
+            </View>
+           
                 
             <Text style = {styles.h1}> CHALLENGES </Text>
             <View style={styles.trendingContainer}>
             <View style={{flexDirection: 'row', marginBottom:10,}}>
-                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
+                    <View style={[{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}, styles.neonLine]} />
                     <Text style={styles.h2}> TRENDING </Text>
-                    <View style={{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }} />
+                    <View style={[{ backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center' }, styles.neonLine]} />
                 </View>
                 <ScrollView horizontal={true}
                     decelerationRate={0}
@@ -54,9 +61,9 @@ const Challenges = ({ navigation }) => {
                     {trendingChallenges.map((challenge, index) => {
                         return (
                             <TouchableOpacity onPress={() => { navigation.navigate('Challenge Info', {challengeId: challenge.id}) }} key={challenge.id}>
-                                <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonPurple]} key={challenge.id} >
+                                <View style={[styles.trendingBox, index % 2 ? styles.neonRed : styles.neonBlue]} key={challenge.id} >
                                     <Text style={styles.cTitle}> {challenge.title.toUpperCase()} </Text>
-                                    <Text style={styles.cExpiry} >Expires in 3 days </Text>
+                                    <Text style={styles.cExpiry} >{challenge.expiresIn} </Text>
                                     {/* <Text style={styles.cExpiry} >Expires in {challenge.date.toString()}</Text> */}
                                     <Text style={styles.cDescription} >{challenge.description} </Text>
                                     <Text style={styles.cPoints} >{challenge.points} PTS </Text>
@@ -70,9 +77,9 @@ const Challenges = ({ navigation }) => {
             <View style={styles.allContainer}>
             
                 <View style={{flexDirection: 'row', marginBottom:10,}}>
-                    <View style={{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}} />
+                    <View style={[{backgroundColor: 'white', height: 2, flex: .1, alignSelf: 'center'}, styles.neonLine]} />
                     <Text style={styles.h2}> ALL </Text>
-                    <View style={{backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center'}} />
+                    <View style={[{backgroundColor: 'white', height: 2, flex: 1, alignSelf: 'center'}, styles.neonLine]} />
                 </View>
 
                 {/* <DropDownPicker
@@ -96,13 +103,7 @@ const Challenges = ({ navigation }) => {
                 /> */}
 
                 <View nativeId='allChallengeList' style={styles.allChallengeList} >
-                    {/* <View style={styles.allChallengeBox } > 
-                        <Text style = {styles.allTitle}>COMPLIMENT A STRANGER </Text>
-                        <View style={styles.allRight } >
-                            <Text style={styles.cExpiry}> Expires in 3 hours</Text>
-                            <Text style={styles.aPoints}>10 PTS</Text>
-                        </View>
-                    </View> */}
+
 
                     {allChallenges.map((challenge, index) => {
                         return (
@@ -110,7 +111,7 @@ const Challenges = ({ navigation }) => {
                                 <View style={styles.allChallengeBox} key={challenge.id} >
                                     <Text style={styles.allTitle}>{challenge.title.toUpperCase()} </Text>
                                     <View style={styles.allRight} >
-                                        <Text style={styles.cExpiry}> Expires in 3 hours</Text>
+                                        <Text style={styles.cExpiry}>{challenge.expiresIn}</Text>
                                         <Text style={styles.aPoints}>{challenge.points} PTS</Text>
                                     </View>
                                 </View>
@@ -134,18 +135,27 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
     },
-    
-    addAndPoints: {
+    backAndPoints: {
         flexDirection: 'row',
-        marginTop: 45,
-        paddingHorizontal: 20,
         justifyContent: 'space-between',
         alignItems: 'center',
+        width: 340,
+        marginTop: 20,
+    },
+
+    exitButton: {
+        width: 30,
+        height: 30,
+    },
+
+    pointsBoxContainer: {
+        width: 71,
     },
 
     addButton: {
         width: 40,
         height: 40,
+        marginLeft:20
     },
 
     pointsBoxContainer: {
@@ -157,8 +167,9 @@ const styles = StyleSheet.create({
         marginTop: 25,
         marginBottom: 25,
         color: 'white',
-        fontWeight: 'bold',
+        fontWeight: 700,
         fontStyle: 'italic',
+        fontFamily: 'Glitch-Goblin',
     },
     
     trendingScroll: {
@@ -173,7 +184,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         paddingHorizontal: 5,
         fontWeight: 'bold',
+        fontWeight: 700,
         fontStyle: 'italic',
+        fontFamily: 'Glitch-Goblin',
+
     },
 
     trendingBox: {
@@ -204,6 +218,24 @@ const styles = StyleSheet.create({
         shadowColor: '#AD5AFF',
         backgroundColor: '#39233c',
     },
+    neonBlue: {
+        shadowOpacity: 1,
+        borderColor: '#7BF7FF',
+        shadowRadius: 15,
+        shadowColor: '#27F2FF',
+        backgroundColor: '#223e40',
+    },
+    neonLine: {
+        backgroundColor:'#7BF7FF',
+        shadowRadius: 15,
+        shadowColor: '#27F2FF',
+        shadowOpacity: 1,
+        shadowRadius: 3,
+        shadowOffset: {
+            height: 0,
+            width: 0,
+        },
+    },
     cTitle: {
         color: 'white',
         fontSize: 30,
@@ -211,19 +243,27 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontStyle: 'italic',
         marginTop: 15,
+        // fontFamily: 'Groupe',
+        // fontWeight:700,
     },
     cExpiry: {
-        color: 'white',
+
+        color: '#ffffff',
+        textShadowColor: '#CCFF00',
+        textShadowRadius: 4,
+        fontFamily: 'Exo-Medium',
+        
+        // color: 'white',
         marginLeft: 20,
         marginTop: 15,
         fontSize: 14.67,
-        color: '#FAE3BD',
+        // color: '#FAE3BD',
     },
     cDescription: {
         fontSize: 14,
         color: 'white',
         margin: 20,
-
+        fontFamily: 'Exo-Medium',
     },
     cPoints: {
         fontSize: 30,
@@ -231,6 +271,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         fontStyle: 'italic',
         fontWeight: 'bold',
+        fontFamily: 'Glitch-Goblin',
     },
     allContainer: {
         display: 'flex',
