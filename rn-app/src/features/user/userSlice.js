@@ -9,13 +9,16 @@ export const userSlice = createSlice({
         authenticated: false,
         token: '',
         loading: true,
+        userId: '',
     },
     reducers: {
         setUser: (state, action) => {
+            state.userId = action.payload.id;
             state.username = action.payload.username;
             state.points = action.payload.currentPoints;
         },
         emptyUser: (state) => {
+            state.userId = '';
             state.username = '';
             state.points = 0;
         },
