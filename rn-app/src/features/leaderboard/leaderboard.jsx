@@ -27,7 +27,7 @@ const Leaderboard = (props) => {
 
             <View style={styles.leaderboardContainer}>
                 {topUsers.map((user, idx) => (
-                    <UserRank key={idx} rank={idx} userObj={user} />
+                    <UserRank key={idx} rank={idx+1} userObj={user} />
                 ))}
             </View>
         </ScrollView>

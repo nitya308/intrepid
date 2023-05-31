@@ -19,13 +19,14 @@ export const { setChallenges } = savedSlice.actions;
 
 export function fetchSaved(){
     return async (dispatch) => {
-        const headers = await getHeaders();
+        const headers = getHeaders();
         fetch(`${ROOT_URL}/api/saved`, {
             method: 'GET',
-            headers,
+            ...headers,
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 dispatch(setChallenges(data));
             })
             .catch((er) => {
