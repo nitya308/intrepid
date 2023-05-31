@@ -34,7 +34,7 @@ export function fetchSaved(userId) {
                 dispatch(setChallenges(response.data));
             })
             .catch((er) => {
-                dispatch(setError());
+                throw er;
             });
     };
 }
