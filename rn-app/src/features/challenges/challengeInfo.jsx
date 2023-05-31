@@ -14,21 +14,11 @@ const ChallengeInfo = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        // dispatch(fetchChallenge(route.params.challengeId))
+        // dispatch(fetchChallenge(route.params.challengeId));
+        // dispatch(fetchSaved);
     }, [])
 
     const currentChallenge = useSelector((state) => state.currentChallenge);
-
-    const mockCurrentChallenge = {
-        title: 'Dye your hair pink',
-        description: 'Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!',
-        points: 125,
-        expiresAt: {},
-        isExpired: false,
-    }
-
-    const [challengeSaved, setChallengeSaved] = useState(false);
-    const [challengeSubmitted, setChallengeSubmitted] = useState(false);
 
     const ChallengeInfoCTA = ({ submitted }) => {
         let content;
@@ -76,24 +66,27 @@ const ChallengeInfo = ({ navigation, route }) => {
                 DYE YOUR HAIR PINK
             </Text>
 
-            <Pressable onPress={() => { setChallengeSaved(challengeSaved ? false : true) }}>
+            <Pressable onPress={() => {
+                console.log("currentChallenge.id: " + currentChallenge.id)
+                dispatch(saveChallenge(currentChallenge.id))
+            }}>
                 <Image
                     style={styles.bookmark}
-                    source={challengeSaved ? BookmarkFilled : Bookmark}
+                    source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
                 />
             </Pressable>
 
             <View style={styles.expirationAndPointValue}>
-                <Text style={styles.expiration}>Expires in 3 days</Text>
-                <Text style={styles.pointValue}>125 PTS</Text>
-            </View>
+                <Text style={styles.expiration}>{currentChallenge.expiresIn}</Text>
+                <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
+            </View >
 
             <Text style={styles.description}>
                 Dye all of your hair bright, neon pink. No streaks or balayages, only full on pink!
             </Text>
 
-            <ChallengeInfoCTA submitted={challengeSubmitted} />
-        </View>
+            <ChallengeInfoCTA submitted={currentChallenge.submitted} />
+        </View >
     )
 }
 
