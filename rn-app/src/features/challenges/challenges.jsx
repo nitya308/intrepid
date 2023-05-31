@@ -11,29 +11,29 @@ import BackButton from '../../../assets/icons/back-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import PointsBox from '../pointsBox';
 import AddButton from './../../../assets/icons/add-button.png';
-import { signoutUser } from '../user/userRequests';
 
 const Challenges = ({ navigation }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchChallenges(value === 'Points'));
-        // Alert.alert("reg use effect");
-        dispatch(fetchTrendingChallenges());
+            dispatch(fetchChallenges(value==='Points'));
+            // Alert.alert("reg use effect");
+            dispatch(fetchTrendingChallenges());
+        
+        
     }, []);
 
-    // useEffect(() => {
-    //     // This runs after every render
-    //     dispatch(fetchChallenges(value==='Points'));
-    //    });
     useEffect(() => {
+        // This runs after every render
+        dispatch(fetchChallenges(value==='Points'));
+       });
+    useEffect(()=>{
         //call your increment function here
-        dispatch(fetchChallenges(value === 'Points'));
-        Alert.alert("hello");
-    }, [value])
+        dispatch(fetchChallenges(value==='Points'));
+    },[value])
 
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('Points');
     const [items, setItems] = useState([
         { label: 'New', value: 'New' },
         { label: 'Points', value: 'Points' },
@@ -45,7 +45,7 @@ const Challenges = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.backAndPoints}>
-                <TouchableOpacity onPress={() => {  navigation.navigate('Create Challenge')}}>
+                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
                     <Image
                         source={AddButton}
                         style={styles.addButton}
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
 
-        alignItems:'center',
+        //alignItems:'center',
         justifyContent:'center',
         borderRadius: 2,
         borderWidth: 2,
@@ -247,9 +247,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#223e40',
     },
     neonLine: {
-        backgroundColor:'#7BF7FF',
+        backgroundColor: '#c8a9e8',
         shadowRadius: 15,
-        shadowColor: '#27F2FF',
+        shadowColor: '#AD5AFF',
         shadowOpacity: 1,
         shadowRadius: 3,
         shadowOffset: {
@@ -263,9 +263,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         fontStyle: 'italic',
-        marginTop: 15,
-        // fontFamily: 'Groupe',
-        // fontWeight:700,
+        marginTop: 0,
+        fontFamily: 'Groupe',
+        fontWeight:700,
+        letterSpacing:-5,
+        margin:2,
     },
     cExpiry: {
 
