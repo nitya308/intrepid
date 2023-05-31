@@ -15,6 +15,7 @@ const Home = () => {
 
     const token = useSelector(state => state.user.token);
     const loading = useSelector(state => state.user.loading);
+    console.log(`Home.jsx: token: ${token}`);
     
     if ( loading && !token ) {
         return <SplashScreen />

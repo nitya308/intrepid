@@ -57,13 +57,15 @@ const styles = StyleSheet.create({
 
     leaderboardContainer: {
         marginTop: 20,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 15,
-        paddingVertical: 20,
         paddingHorizontal: 10,
-        marginBottom: 20,
+        flexDirection: 'column',
+        // alignItems: 'center',
+        rowGap: 20,
+        // justifyContent: 'center',
+        // borderRadius: 15,
+        // paddingVertical: 20,
+        // paddingHorizontal: 10,
+        // marginBottom: 20,
     },
 })
 

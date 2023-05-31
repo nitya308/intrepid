@@ -33,7 +33,8 @@ const CreateChallenge = ({navigation}) => {
                 points,
             }
             console.log(challenge);
-            dispatch(createChallenge(challenge));
+            dispatch(createChallenge(challenge, navigation));
+            
             
         }
     }
