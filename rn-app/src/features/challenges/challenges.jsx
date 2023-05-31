@@ -23,12 +23,13 @@ const Challenges = ({ navigation }) => {
         
     }, []);
 
-    useEffect(() => {
-        // This runs after every render
-        dispatch(fetchChallenges(value==='Points'));
-       });
+    // useEffect(() => {
+    //     // This runs after every render
+    //     dispatch(fetchChallenges(value==='Points'));
+    //    });
     useEffect(()=>{
         //call your increment function here
+        console.log("hello");
         dispatch(fetchChallenges(value==='Points'));
     },[value])
 
@@ -42,6 +43,13 @@ const Challenges = ({ navigation }) => {
     const allChallenges = useSelector((state) => state.challenges.allChallenges) || [];
     const trendingChallenges = useSelector((state) => state.challenges.trendingChallenges) || [];
 
+    const onDropdownSelect = (dropdownValue) => {
+        const newValue=dropdownValue();
+        dispatch(fetchChallenges(newValue==='Points'));
+        setValue(newValue);
+
+    }
+    console.log(value);
     return (
         <ScrollView style={styles.container}>
             <View style={styles.backAndPoints}>
@@ -102,7 +110,7 @@ const Challenges = ({ navigation }) => {
                     value={value}
                     items={items}
                     setOpen={setOpen}
-                    setValue={setValue}
+                    setValue={onDropdownSelect}
                     setItems={setItems}
                     // theme="dark"
                     theme="DARK"
