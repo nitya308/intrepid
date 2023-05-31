@@ -8,7 +8,6 @@ const ROOT_URL = 'https://project-api-nerve.onrender.com';
 
 export function fetchChallenges(sortPoints) {
 
-    console.log('fetching challenges');
     return async (dispatch) => {
         fetch(`${ROOT_URL}/api/challenges${sortPoints ? '?sortBy=points' : ''}`)
             .then((response) => response.json())
@@ -70,19 +69,18 @@ export function createChallenge(challenge_obj, navigation) {
     }
 }
 
-export function submitChallenge(videoUrl, challengeId) {
+export function submitChallenge(challengeId, videoUrl) {
     return async (dispatch) => {
         const headers = getHeaders();
+        console.log(`videoUrl: ${videoUrl}`);
         fetch(`${ROOT_URL}/api/challenges/${challengeId}/submit`, {
             method: 'POST',
             body: JSON.stringify({ videoUrl }),
-            headers: {
-                'Content-Type': 'application/json',
-                ...headers,
-            },
+            ...headers
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 dispatch(fetchChallenges());
             })
             .catch((er) => {

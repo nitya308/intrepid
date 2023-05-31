@@ -96,6 +96,7 @@ const ChallengeInfo = ({ navigation, route }) => {
                                 isLooping={true}
                                 isMuted={true}
                                 shouldPlay
+                                key={url}
                             />
                         )
                     })}
