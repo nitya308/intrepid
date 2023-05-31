@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     },
     allChallengeBox: {
         width: 329,
-        height: 76,
+        height: 85,
         borderStyle: 'solid',
         borderWidth: 1,
         marginBottom: 10,
@@ -338,16 +338,20 @@ const styles = StyleSheet.create({
     allRight: {
         marginRight: 20,
         marginBottom: 10,
+        paddingVertical:4,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
     },
     allTitle: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 17,
         flex: 1,
         textAlign: 'center',
         marginRight: 20,
+        marginLeft:10,
+        lineHeight:25,
+        marginVertical:2
     },
     aPoints: {
         fontSize: 25,
