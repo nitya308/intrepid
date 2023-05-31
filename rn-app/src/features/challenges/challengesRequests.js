@@ -69,14 +69,14 @@ export function createChallenge(challenge_obj, navigation) {
     }
 }
 
-export function submitChallenge(videoUrl, challengeId) {
+export function submitChallenge(challengeId, videoUrl) {
     return async (dispatch) => {
         const headers = getHeaders();
         console.log(`videoUrl: ${videoUrl}`);
         fetch(`${ROOT_URL}/api/challenges/${challengeId}/submit`, {
             method: 'POST',
             body: JSON.stringify({ videoUrl }),
-            headers,
+            ...headers
         })
             .then((response) => response.json())
             .then((data) => {
