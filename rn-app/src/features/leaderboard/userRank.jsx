@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: 500,
         color: 'rgb(201, 170, 232)',
-        paddingTop: '4%',
+        paddingTop: '3.25%',
         paddingLeft: '3%',
         textShadowColor: '#C9AAE8',
         textShadowRadius: 10,

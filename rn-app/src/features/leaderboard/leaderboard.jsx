@@ -5,18 +5,9 @@ import {
 import UserRank from './userRank';
 import LeaderboardHeader from './../../../assets/images/leaderboard.png'
 import { ScrollView } from 'react-native-gesture-handler';
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from 'react';
-import { fetchTopUsers } from './leaderboardRequests';
+import PointsBox from '../pointsBox';
 
 const Leaderboard = (props) => {
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchTopUsers());
-    }, []);
-    const topUsers = useSelector((state) => state.leaderboard.topUsers) || [];
-    console.log('topUsers', topUsers);
 
     const leaderboardArray = [
         {
@@ -103,14 +94,16 @@ const Leaderboard = (props) => {
 
     return (
         <ScrollView style={styles.screen}>
+            <PointsBox />
             <Image 
                 source={LeaderboardHeader}
                 style={styles.leaderboardHeader}
             />
 
             <View style={styles.leaderboardContainer}>
-                {topUsers.map((user, idx) => (
-                    <UserRank key={idx} rank={idx + 1} userObj={user} />
+                {leaderboardArray.map((leaderboardObject, idx) => (
+                    console.log("lb", leaderboardObject),
+                    <UserRank key={idx} rank={leaderboardObject.rank} userObj={leaderboardObject.userObj} />
                 ))}
             </View>
         </ScrollView>
@@ -119,9 +112,9 @@ const Leaderboard = (props) => {
 
 const styles = StyleSheet.create({
     screen: {
-        paddingHorizontal: 35,
+        paddingHorizontal: 20,
         paddingTop: 55,
-        backgroundColor: '#262626',
+        backgroundColor: '#121212',
     },
 
     leaderboardHeader: {
