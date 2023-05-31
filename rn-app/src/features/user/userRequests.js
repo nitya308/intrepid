@@ -50,7 +50,7 @@ export function signoutUser() {
     return async (dispatch) => {
         dispatch(emptyUser());
         setToken('');
-    };
+    }
 }
 
 export function fetchUser() {
@@ -59,6 +59,7 @@ export function fetchUser() {
         fetch(`${ROOT_URL}/api/profile`, headers )
             .then((response) => response.json())
             .then((data) => {
+                console.log("USER: ", data);
                 dispatch(setUser(data));
             })
             .catch((er) => {

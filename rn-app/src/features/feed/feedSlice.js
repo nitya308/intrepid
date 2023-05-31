@@ -1,48 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {
+    createSlice
+} from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const ROOT_URL = 'https://platform-api-aqkotz.onrender.com/api';
-
 export const feedSlice = createSlice({
-    name: 'leaderboard',
+    name: 'feed',
     initialState: {
         submissions: [],
+        carousel: [],
     },
     reducers: {
         setSubmissions: (state, action) => {
             state.submissions = action.payload;
+            console.log("THING", state.submissions)
+        },
+        setCarousel: (state, action) => {
+            state.carousel = action.payload;
         },
     },
 });
 
-export const { setSubmissions } = feedSlice.actions;
-
-export function fetchFeed(userId) {
-    return async (dispatch) => {
-        fetch(`${ROOT_URL}api/users/${userId}/feed`)
-            .then((response) => {
-                dispatch(setSubmissions(response.data));
-            })
-            .catch((er) => {
-                throw er;
-            });
-    };
-}
-
-export function submitVote(challengeId, userId, voteScore) {
-    return async (dispatch) => {
-        api
-            .post(`/submissions/${challengeId}/vote`, {
-                userId,
-                voteScore,
-            })
-            .then((response) => {
-                dispatch(fetchFeed());
-            })
-            .catch((er) => {
-                throw er;
-            });
-    };
-}
+export const {
+    setSubmissions,
+    setCarousel
+} = feedSlice.actions;
 
 export default feedSlice.reducer;

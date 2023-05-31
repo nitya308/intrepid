@@ -11,27 +11,26 @@ import BackButton from '../../../assets/icons/back-button.png';
 import ExitButton from './../../../assets/icons/exit-button.png';
 import PointsBox from '../pointsBox';
 import AddButton from './../../../assets/icons/add-button.png';
+import { signoutUser } from '../user/userRequests';
 
 const Challenges = ({ navigation }) => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-            dispatch(fetchChallenges(value==='Points'));
-            // Alert.alert("reg use effect");
-            dispatch(fetchTrendingChallenges());
-        
-        
+        dispatch(fetchChallenges(value === 'Points'));
+        // Alert.alert("reg use effect");
+        dispatch(fetchTrendingChallenges());
     }, []);
 
+    // useEffect(() => {
+    //     // This runs after every render
+    //     dispatch(fetchChallenges(value==='Points'));
+    //    });
     useEffect(() => {
-        // This runs after every render
-        dispatch(fetchChallenges(value==='Points'));
-       });
-    useEffect(()=>{
         //call your increment function here
-        dispatch(fetchChallenges(value==='Points'));
+        dispatch(fetchChallenges(value === 'Points'));
         Alert.alert("hello");
-    },[value])
+    }, [value])
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
@@ -46,7 +45,7 @@ const Challenges = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.backAndPoints}>
-                <TouchableOpacity onPress={() => {navigation.navigate('Create Challenge')}}>
+                <TouchableOpacity onPress={() => {  navigation.navigate('Create Challenge')}}>
                     <Image
                         source={AddButton}
                         style={styles.addButton}
