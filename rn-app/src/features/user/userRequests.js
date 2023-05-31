@@ -16,6 +16,7 @@ export function signinUser( email, password ) {
             .then((response) => response.json())
             .then((data) => {
                 dispatch(setUser(data));
+                dispatch(authUser(data.token));
                 setToken(data.token, authUser, dispatch);
             })
             .catch((er) => {
@@ -35,9 +36,8 @@ export function signupUser( username, email, password ) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log('signupUser DATA', data.newUser);
                 dispatch(setUser(data.newUser));
-                console.log('signupUser', data.token);
+                dispatch(authUser(data.token));
                 setToken(data.token);
             })
             .catch((er) => {
@@ -49,6 +49,7 @@ export function signupUser( username, email, password ) {
 export function signoutUser() {
     return async (dispatch) => {
         dispatch(emptyUser());
+        dispatch(deauthUser());
         setToken('');
     }
 }
