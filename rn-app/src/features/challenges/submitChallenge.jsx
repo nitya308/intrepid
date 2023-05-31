@@ -123,7 +123,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => (navigation.navigate('Challenge Info', { paramKey: route.params.paramKey }))}
+                        onPress={() => (navigation.navigate('Challenge Info', { challengeId: route.params.challengeId }))}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     },
 
     exitModal: {
-        backgroundColor: '#121212s',
+        backgroundColor: '#121212',
         borderRadius: 15,
         marginVertical: 320,
         marginHorizontal: 50,

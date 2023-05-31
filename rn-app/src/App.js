@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { LogBox } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import MainTabBar from './navigation/mainTabBar';
@@ -11,6 +11,7 @@ import { useFonts } from 'expo-font';
 LogBox.ignoreAllLogs();
 
 const App = (props) => {
+    const [isSignedIn, setIsSignedIn] = useState(true);
 
     let [fontsLoaded] = useFonts({
         'Glitch-Goblin': require('./../assets/fonts/glitchGoblin/GlitchGoblin.ttf'),
@@ -32,12 +33,23 @@ const App = (props) => {
         'Exo-BoldItalic': require('./../assets/fonts/exo/Exo-BoldItalic.ttf'),
         'Exo-ExtraBoldItalic': require('./../assets/fonts/exo/Exo-ExtraBoldItalic.ttf'),
         'Exo-BlackItalic': require('./../assets/fonts/exo/Exo-BlackItalic.ttf'),
-    })
-    const [isSignedIn, setIsSignedIn] = useState(true);
+    });
+
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+        await SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
+
+
+    if (!fontsLoaded) {
+        return null;
+    } 
+
     console.log(isSignedIn);
 
     return (
-        <Provider store={store}>
+        <Provider store={store} onLayout={onLayoutRootView}>
             {isSignedIn ? <MainTabBar /> : <EntryNavigator />}
         </Provider>
     )
