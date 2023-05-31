@@ -17,6 +17,7 @@ const History = ({navigation}) => {
     }, []);
 
     const history = useSelector((state) => state.history.submissions) || [];
+    console.log("history frontend", history);
 
     const [refreshing, setRefreshing] = useState(false);
 
@@ -28,32 +29,47 @@ const History = ({navigation}) => {
         }, 2000);
     }, []);
 
-    const historyData = [
-        {
-            challengeId: '1',
-            title: 'DYE YOUR HAIR PINK',
-            points: 75,
-            success: 1,
-            isVotingEnded: false,
-        },
+    // const historyData = [
+    //     // {
+    //     //     challengeId: '1',
+    //     //     title: 'DYE YOUR HAIR PINK',
+    //     //     points: 75,
+    //     //     success: 1,
+    //     //     isVotingEnded: false,
+    //     // },
 
-        {
-            challengeId: '2',
-            title: 'GET A DRAGON TATTOO',
-            points: 200,
-            success: 1,
-            isVotingEnded: true,
-        },
+    //     // {
+    //     //     challengeId: '2',
+    //     //     title: 'GET A DRAGON TATTOO',
+    //     //     points: 200,
+    //     //     success: 1,
+    //     //     isVotingEnded: true,
+    //     // },
 
-        {
-            challengeId: '3',
-            title: 'FLEE THE COUNTRY',
-            points: 180,
-            success: -1,
-            isVotingEnded: true,
-        },
+    //     // {
+    //     //     challengeId: '3',
+    //     //     title: 'FLEE THE COUNTRY',
+    //     //     points: 180,
+    //     //     success: -1,
+    //     //     isVotingEnded: true,
+    //     // },
+    //     {"__v": 0, 
+    //     "_id": "6477abe75ffeb6eaf0916d42", 
+    //     "challengeId": 
+    //     {"_id": "6476c4daf8ec6ef5751aff3c", 
+    //     "id": "6476c4daf8ec6ef5751aff3c", 
+    //     "title": "DYE YOUR HAIR PINK"}, 
+    //     "createdAt": "2023-05-31T20:19:51.841Z", 
+    //     "id": "6477abe75ffeb6eaf0916d42", 
+    //     "isVotingEnded": false, 
+    //     "success": 0, 
+    //     "updatedAt": "2023-05-31T20:19:51.841Z", 
+    //     "userId": "6476ae1fb714665fbedb4bda", 
+    //     "userVote": -2, 
+    //     "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", 
+    //     "votingEndsAt": "2023-06-01T20:19:51.840Z"}
 
-    ];
+    // ];
 
     const SubmissionStatus = ({ success, isVotingEnded }) => {
         if (!isVotingEnded) {
@@ -68,6 +84,8 @@ const History = ({navigation}) => {
     }
 
     const HistoryItem = ({ challengeId, title, points, success, isVotingEnded }) => {
+
+        console.log("history item", challengeId, title, points, success, isVotingEnded);
 
         return (
             <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {challengeId: challengeId})}}>
@@ -106,12 +124,12 @@ const History = ({navigation}) => {
             <SafeAreaView style={styles.savedContainer}>
                 <FlatList
                     style={styles.savedList}
-                    data={history}
+                    data={[history]}
                     renderItem={({item}) => 
                         <HistoryItem
-                            challengeId={item.challengeId}
-                            title={item.title}
-                            points={item.points}
+                            challengeId={item.challengeId.id}
+                            title={item.challengeId.title}
+                            points={item.challengeId.points}
                             success={item.success}
                             isVotingEnded={item.isVotingEnded}
                         />
