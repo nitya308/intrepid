@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
     StyleSheet, View, Text, Image, TouchableOpacity, Pressable, SafeAreaView, ActivityIndicator
 } from 'react-native';
+import AutoScroll from "@homielab/react-native-auto-scroll";
+import { Video, ResizeMode } from 'expo-av';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchChallenge, saveChallenge } from '../challenges/challengesRequests';
 import Bookmark from '../../../assets/icons/bookmark.png';
@@ -81,6 +83,19 @@ const ChallengeInfo = ({ navigation, route }) => {
                 </View>
             </View>
 
+            <AutoScroll>
+                <View style={styles.videos}>
+                    <Video
+                        style={styles.video}
+                        source={{ uri: 'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov', }}
+                        resizeMode={ResizeMode.CONTAIN}
+                        isLooping={true}
+                        isMuted={true}
+                        // onPlaybackStatusUpdate={status => setStatus(() => status)}
+                    />
+                </View>
+            </AutoScroll>
+
             <Text style={styles.challengeTitle}>
                 {currentChallenge.title}
             </Text>
@@ -116,6 +131,10 @@ const ChallengeInfo = ({ navigation, route }) => {
 }
 
 const styles = StyleSheet.create({
+    hey: {
+        color: '#fff'
+    },
+
     screen: {
         paddingHorizontal: 35,
         paddingTop: 55,
@@ -134,6 +153,16 @@ const styles = StyleSheet.create({
 
     pointsBoxContainer: {
         width: 71,
+    },
+
+    videos: {
+        flexDirection: 'row',
+        columnGap: 10,
+    },
+
+    video: {
+        width: '100%',
+        height: '30%',
     },
 
     challengeTitle: {
