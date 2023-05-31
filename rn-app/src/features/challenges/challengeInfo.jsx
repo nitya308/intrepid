@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity, Pressable
+    StyleSheet, View, Text, Image, TouchableOpacity, Pressable, SafeAreaView, ActivityIndicator
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchChallenge } from '../challenges/challengesRequests';
@@ -26,10 +26,6 @@ const ChallengeInfo = ({ navigation, route }) => {
         expiresAt: {},
         isExpired: false,
     }
-
-    // let [fontsLoaded] = useFonts({
-    //     'Glitch-Goblin': require('./../../../assets/fonts/glitchGoblin/GlitchGoblin.ttf'),
-    // })
 
     const [challengeSaved, setChallengeSaved] = useState(false);
     const [challengeSubmitted, setChallengeSubmitted] = useState(false);
@@ -67,7 +63,6 @@ const ChallengeInfo = ({ navigation, route }) => {
         return content;
     }
 
-    // TODO: EXPIRATION STRING
     if (currentChallenge) {
     return (
         <View style={styles.screen}>
@@ -90,7 +85,9 @@ const ChallengeInfo = ({ navigation, route }) => {
             </Pressable>
 
             <View style={styles.expirationAndPointValue}>
-                <Text style={styles.expiration}>Expires in 3 days</Text>
+                <Text style={styles.expiration}>
+                    {currentChallenge.expiresIn == 'Expired' ? ('Expired') : `Expires in ${currentChallenge.expiresIn}`}
+                </Text>
                 <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
             </View>
 
@@ -101,11 +98,11 @@ const ChallengeInfo = ({ navigation, route }) => {
             <ChallengeInfoCTA submitted={challengeSubmitted} />
         </View>
     )} else {
-        // TODO: MAKE THIS LOOK NICER
         return (
-            <View style={styles.screen}>
-                <Text style={styles.description}>Loading...</Text>
-            </View>
+            <SafeAreaView style={styles.loadingScreen}>
+                <Text style={styles.loadingText}>Loading this challenge...</Text>
+                <ActivityIndicator size='large' />
+            </SafeAreaView>
         )
     }
 }
@@ -205,6 +202,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
     },
+
+    loadingScreen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        rowGap: 20,
+    },
+
+    loadingText: {
+        color: '#ffffff',
+        fontFamily: 'Exo-Regular',
+        fontSize: 20,
+    }
 })
 
 export default ChallengeInfo;
