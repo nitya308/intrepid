@@ -11,14 +11,12 @@ import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
 import BackButton from '../../../assets/icons/back-button.png';
 import SubmitChallengeButton from '../../../assets/icons/submit-challenge-button.png';
 import VideoUploaded from '../../../assets/icons/video-uploaded.png';
-import { fetchSaved } from '../saved/savedSlice';
 import PointsBox from '../pointsBox';
 
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchChallenge(route.params.challengeId))
-        dispatch(fetchSaved)
     }, [])
 
     const currentChallenge = useSelector((state) => state.challenges.currentChallenge);

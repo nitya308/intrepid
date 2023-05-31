@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
     StyleSheet, View, Text, Image, FlatList, SafeAreaView, Pressable, RefreshControl, TouchableOpacity
 } from 'react-native';
@@ -6,13 +6,23 @@ import PointsBox from '../pointsBox';
 import HistoryHeader from './../../../assets/images/history-header.png'
 import Bookmark from '../../../assets/icons/bookmark.png';
 import BookmarkFilled from '../../../assets/icons/bookmark-filled.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHistory } from './historyRequests';
 
 const History = ({navigation}) => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchHistory());
+    }, []);
+
+    const history = useSelector((state) => state.history.submissions) || [];
 
     const [refreshing, setRefreshing] = useState(false);
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
+        dispatch(fetchHistory());
         setTimeout(() => {
             setRefreshing(false);
         }, 2000);
@@ -84,7 +94,7 @@ const History = ({navigation}) => {
             <SafeAreaView style={styles.savedContainer}>
                 <FlatList
                     style={styles.savedList}
-                    data={historyData}
+                    data={history}
                     renderItem={({item}) => 
                         <HistoryItem
                             challengeId={item.challengeId}
