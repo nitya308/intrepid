@@ -199,7 +199,7 @@ const SubmitChallenge = ({ navigation, route }) => {
 
         </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     screen: {
@@ -319,7 +319,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '30%',
         backgroundColor: '#121212',
-    }
     },
 
     submittingIndicator: {
@@ -333,7 +332,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Exo-Regular',
         fontSize: 18,
     },
-
-})
+});
 
 export default SubmitChallenge;
