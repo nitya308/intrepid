@@ -18,9 +18,11 @@ const Feed=({navigation, route}) => {
 
     const arr = useSelector(state => state.feed.submissions);
 
+    console.log("IN FEED", arr);
+
     const onViewableItemsChanged = useRef(({ changed }) => {
-        console.log("nav", navigation);
-        console.log('onChange', changed);
+        // console.log("nav", navigation);
+        // console.log('onChange', changed);
         // console.log(changed.forEach);
         changed.forEach(element => {
             const cell = mediaRefs.current[element.key];

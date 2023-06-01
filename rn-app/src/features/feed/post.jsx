@@ -69,7 +69,7 @@ const Post = forwardRef(({item, toChallenge}, parentRef) => {
 
     return (
         <>
-             <Overlay post={item} toChallenge={toChallenge}/>
+            <Overlay item={item} toChallenge={toChallenge}/>
             <Video
                 ref={ref}
                 source={{uri: item.videoUrl}}
