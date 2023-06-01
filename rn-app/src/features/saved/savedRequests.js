@@ -1,7 +1,7 @@
 import { getHeaders } from '../../app/store'
 import { setChallenges } from './savedSlice'
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://project-nerve-backend.onrender.com';
 
 export function fetchSaved() {
     return async (dispatch) => {

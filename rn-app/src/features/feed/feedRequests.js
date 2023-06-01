@@ -9,7 +9,7 @@ import {
 } from '../../app/store';
 import store from '../../app/store';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://project-nerve-backend.onrender.com';
 // const ROOT_URL = 'http://127.0.0.1:9090';
 
 export function fetchSubmissions() {

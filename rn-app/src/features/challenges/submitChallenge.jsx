@@ -199,7 +199,7 @@ const SubmitChallenge = ({ navigation, route }) => {
 
         </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     screen: {
@@ -332,7 +332,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Exo-Regular',
         fontSize: 18,
     },
-
-})
+});
 
 export default SubmitChallenge;

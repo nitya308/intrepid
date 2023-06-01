@@ -2,7 +2,7 @@ import { setUser, emptyUser, authUser, deauthUser, authFailed } from './userSlic
 import { setToken, getToken } from '../../app/utils';
 import { getHeaders } from '../../app/store';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://project-nerve-backend.onrender.com';
 
 export function signinUser( email, password ) {
     return async (dispatch) => {

@@ -1,7 +1,7 @@
 import { setTopUsers } from './leaderboardSlice';
 import { getHeaders } from '../../app/store';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://project-nerve-backend.onrender.com';
 
 export function fetchTopUsers() {
     return (dispatch) => {

@@ -17,7 +17,7 @@ import { setCurrentChallenge } from './challengesSlice';
 
 const ChallengeInfo = ({ navigation, route }) => {
     const dispatch = useDispatch();
-    const currentChallenge = useSelector((state) => state.challenges.currentChallenge) || {};
+ 
     useEffect(() => {
         if (route.params.challengeId !== currentChallenge?.id) {
             dispatch(setCurrentChallenge(null))
@@ -25,22 +25,31 @@ const ChallengeInfo = ({ navigation, route }) => {
         dispatch(fetchChallenge(route.params.challengeId))
     }, [])
 
+    const currentChallenge = useSelector((state) => state.challenges.currentChallenge) || {};
     const userId = useSelector((state) => state.user.userId);
-    const createdChallenge = userId === currentChallenge.creator;
 
-    const videosList = [
-        'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov',
-        'https://swerve-bucket.s3.amazonaws.com/07841723-081B-4896-B1CE-547D99961AF7.mov',
-        'https://swerve-bucket.s3.amazonaws.com/2F4688A4-F1CE-4518-826C-DFCCE16CFCCA.mov',
-        'https://swerve-bucket.s3.amazonaws.com/7FDB7F7C-5192-46CE-A018-15819F71F2E9.mov',
-        'https://swerve-bucket.s3.amazonaws.com/E2785B21-B749-4EE0-9BC9-4C491467DE16.mov',
-        'https://swerve-bucket.s3.amazonaws.com/ED6C3E8A-B28D-4F57-93B1-EC6B9F29913B.mov',
-    ]
+    const challengeSubmissions = currentChallenge.submissions || [];
+    const videosList = challengeSubmissions.map((submission) => submission.videoUrl);
 
-    const ChallengeInfoCTA = ({ submitted }) => {
+    // find out if user has submitted to challenge
+    const currUserSubmission = challengeSubmissions.find((submission) => submission.userId === userId);
+    // const hasSubmitted = challengeSubmissions.some((submission) => submission.userId === userId);
+
+    console.log('currentChallenge', currentChallenge);
+
+    // const videosList = [
+    //     'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov',
+    //     'https://swerve-bucket.s3.amazonaws.com/07841723-081B-4896-B1CE-547D99961AF7.mov',
+    //     'https://swerve-bucket.s3.amazonaws.com/2F4688A4-F1CE-4518-826C-DFCCE16CFCCA.mov',
+    //     'https://swerve-bucket.s3.amazonaws.com/7FDB7F7C-5192-46CE-A018-15819F71F2E9.mov',
+    //     'https://swerve-bucket.s3.amazonaws.com/E2785B21-B749-4EE0-9BC9-4C491467DE16.mov',
+    //     'https://swerve-bucket.s3.amazonaws.com/ED6C3E8A-B28D-4F57-93B1-EC6B9F29913B.mov',
+    // ]
+
+    const ChallengeInfoCTA = ({  }) => {
         let content;
 
-        if (!submitted) {
+        if (!currUserSubmission) {
             content = (
                 <View style={styles.submitChallengeButtonContainer}>
                     <TouchableOpacity
@@ -60,9 +69,21 @@ const ChallengeInfo = ({ navigation, route }) => {
                         source={VideoUploaded}
                         style={styles.videoUploaded}
                     />
-                    <View style={styles.votingInfo}>
-                        <Text style={styles.votingTime}>23: 59: 59</Text>
-                        <Text style={styles.votingEnds}>until voting ends</Text>
+                    <View style={styles.row}>
+                     <Video
+                        style={styles.video}
+                        source={{ uri: currUserSubmission.videoUrl }}
+                        resizeMode={ResizeMode.COVER}
+                        isLooping={true}
+                        isMuted={true}
+                        shouldPlay
+                        key={currUserSubmission.videoUrl}
+                    />
+                    <View>
+                        <Text style={styles.votingInfo}>{currUserSubmission.votingEndsAt> Date.now()? 
+                             currentChallenge.success>0? "Voting complete, SUCCESS": "Voting complete, FAIL"
+                        : "Voting ongoing"}</Text>
+                    </View>
                     </View>
                 </View>
             )
@@ -117,20 +138,6 @@ const ChallengeInfo = ({ navigation, route }) => {
                             source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
                         />
                     </Pressable>
-                    
-                    { createdChallenge &&
-                    <TouchableOpacity
-                        onPress={() => { 
-                            navigation.goBack()
-                            dispatch(deleteChallenge(currentChallenge.id))
-                        }}
-                    >
-                        <Image
-                            style={styles.trashCan}
-                            source={TrashCan}
-                        />
-                    </TouchableOpacity>
-                    }
                 </View>
 
                 <View style={styles.expirationAndPointValue}>
@@ -161,7 +168,12 @@ const styles = StyleSheet.create({
     screen: {
         paddingTop: 55,
     },
-
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        width: '100%',
+    },
     backAndPoints: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -261,10 +273,10 @@ const styles = StyleSheet.create({
         borderColor: '#C8FCFF',
         borderRadius: 10,
         alignItems: 'center',
-        paddingVertical: 30,
+        paddingVertical: 20,
         marginHorizontal: 20,
         rowGap: 30,
-        marginTop: 70,
+        marginTop: 20,
     },
 
     videoUploaded: {
@@ -273,7 +285,8 @@ const styles = StyleSheet.create({
     },
 
     votingInfo: {
-        rowGap: 5,
+        color: '#ffffff',
+        fontFamily: 'Exo-Regular',
     },
 
     votingTime: {

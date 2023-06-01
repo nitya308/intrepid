@@ -4,7 +4,7 @@ import { getHeaders } from '../../app/store';
 import store from '../../app/store';
 import { fetchUser } from '../user/userRequests';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://project-nerve-backend.onrender.com';
 
 export function fetchChallenges(sortPoints) {
 
@@ -60,6 +60,7 @@ export function createChallenge(challenge_obj, navigation) {
             .then((response) => response.json())
             .then((data) => {
                 dispatch(fetchChallenges());
+                dispatch(fetchTrendingChallenges());
                 dispatch(fetchUser());
                 navigation.goBack();
             })
@@ -70,6 +71,7 @@ export function createChallenge(challenge_obj, navigation) {
 }
 
 export function submitChallenge(challengeId, videoUrl) {
+    console.log(`inside the dispatch submitting to challengeId: ${challengeId}`);
     return async (dispatch) => {
         const headers = getHeaders();
         console.log(`videoUrl: ${videoUrl}`);
@@ -80,7 +82,7 @@ export function submitChallenge(challengeId, videoUrl) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                console.log("VIDEO SUBMITTED", data);
                 dispatch(fetchChallenges());
             })
             .catch((er) => {
