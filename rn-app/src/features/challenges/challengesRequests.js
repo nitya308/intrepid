@@ -4,7 +4,7 @@ import { getHeaders } from '../../app/store';
 import store from '../../app/store';
 import { fetchUser } from '../user/userRequests';
 
-const ROOT_URL = 'https://project-api-nerve.onrender.com';
+const ROOT_URL = 'https://project-nerve-backend.onrender.com';
 
 export function fetchChallenges(sortPoints) {
 
@@ -60,6 +60,7 @@ export function createChallenge(challenge_obj, navigation) {
             .then((response) => response.json())
             .then((data) => {
                 dispatch(fetchChallenges());
+                dispatch(fetchTrendingChallenges());
                 dispatch(fetchUser());
                 navigation.goBack();
             })

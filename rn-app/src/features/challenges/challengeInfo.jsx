@@ -117,20 +117,6 @@ const ChallengeInfo = ({ navigation, route }) => {
                             source={currentChallenge.isSaved ? BookmarkFilled : Bookmark}
                         />
                     </Pressable>
-                    
-                    { createdChallenge &&
-                    <TouchableOpacity
-                        onPress={() => { 
-                            navigation.goBack()
-                            dispatch(deleteChallenge(currentChallenge.id))
-                        }}
-                    >
-                        <Image
-                            style={styles.trashCan}
-                            source={TrashCan}
-                        />
-                    </TouchableOpacity>
-                    }
                 </View>
 
                 <View style={styles.expirationAndPointValue}>

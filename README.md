@@ -21,7 +21,7 @@ This will be deployed on Expo and possibly TestFlight.
 
 Frontend URL: https://expo.dev/@cs52nerve/rn-app?serviceType=classic&distribution=expo-go
     - not currently on continuous integration, so do ```expo publish``` in the "rn-app" directory to re-publish newest changes
-Backend URL: https://project-api-nerve.onrender.com/
+Backend URL: https://project-nerve-backend.onrender.com/
 
 ## Authors
 
