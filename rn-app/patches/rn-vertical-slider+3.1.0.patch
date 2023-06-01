@@ -1,0 +1,23 @@
+diff --git a/node_modules/rn-vertical-slider/src/index.tsx b/node_modules/rn-vertical-slider/src/index.tsx
+index cb09025..cb2c949 100644
+--- a/node_modules/rn-vertical-slider/src/index.tsx
++++ b/node_modules/rn-vertical-slider/src/index.tsx
+@@ -152,8 +152,9 @@ const VerticalSlider: React.FC<SliderProps> = ({
+     if (disabled) {
+       return;
+     }
+-    onChange(_calculateValue(gestureState));
++    onComplete(_calculateValue(gestureState));
+   };
++  
+   const onPanResponderTerminate = (
+     _event: GestureResponderEvent,
+     gestureState: PanResponderGestureState
+@@ -161,6 +162,7 @@ const VerticalSlider: React.FC<SliderProps> = ({
+     if (disabled) {
+       return;
+     }
++    console.log('onPanResponderTerminate'), _calculateValue(gestureState);
+     onComplete(_calculateValue(gestureState));
+   };
+   // End PanResponder handlers

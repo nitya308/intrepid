@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import VerticalSlider from 'rn-vertical-slider';
 import { useDispatch } from 'react-redux';
+import { voteForSubmission } from './feedRequests';
 
 function debounce(func, timeout = 300) {
     let timer;
@@ -12,7 +13,7 @@ function debounce(func, timeout = 300) {
     };
 }
 
-const VotingSlider = ({hasVoted=false}) => {
+const VotingSlider = ({hasVoted=false, submissionId}) => {
 
     const dispatch = useDispatch();
 
@@ -21,15 +22,26 @@ const VotingSlider = ({hasVoted=false}) => {
 
     const opacity = () => voted ? 0.5 : 1;
 
-    const vote = debounce(() => {
-        // dispatch(voteForChallenge(value));
-        setVoted(true);
-        console.log("voted for challenge");
-    });
+    const vote = (value) => {
+        console.log("value", value);
+        // console.log("about to dispatch with", submissionId, value);
+        // dispatch(voteForSubmission(submissionId, value));
+        // setVoted(true);
+        // console.log("voted for challenge");
+    };
+
+    // const vote = debounce(() => {
+    //     console.log("value", value);
+    //     // console.log("about to dispatch with", submissionId, value);
+    //     // dispatch(voteForSubmission(submissionId, value));
+    //     // setVoted(true);
+    //     // console.log("voted for challenge");
+    // });
 
     return (
         <View style={styles.container}>
-            <Text style={{ ...styles.sliderText, color: `rgb(0, 238, 255)`, opacity: `${opacity()}` }}>SUCCESS</Text>
+            <Text style={{ ...styles.sliderText, color: `rgb(0, 238, 255)`}}>SUCCESS</Text>
+            {/* commented out: opacity: `${opacity()}`  */}
 
             <LinearGradient
                 colors={[`rgb(0, 238, 255)`, `rgb(255, 17, 17)`]}
@@ -41,9 +53,9 @@ const VotingSlider = ({hasVoted=false}) => {
                     onChange={(value) => { setValue(value); vote(); }}
                     height={Dimensions.get('window').height / 3}
                     width={30}
-                    step={0.1}
-                    min={-1}
-                    max={1}
+                    step={1}
+                    min={-5}
+                    max={5}
                     disabled={voted}
                     borderRadius={5000}
                     minimumTrackTintColor="transparent"
@@ -52,6 +64,7 @@ const VotingSlider = ({hasVoted=false}) => {
                     ballIndicatorPosition={0}
                     ballIndicatorColor={`rgb(200, 200, 200)`}
                     ballIndicatorTextColor="transparent"
+                    onComplete={vote}
                     showBackgroundShadow
                     shadowProps={{
                         shadowColor: `rgb(201, 170, 232)`,
@@ -68,7 +81,8 @@ const VotingSlider = ({hasVoted=false}) => {
 
             </LinearGradient>
 
-            <Text style={{ ...styles.sliderText, color: `rgba(255, 17, 17, ${opacity()})`, textShadowColor: `rgba(255, 17, 17, ${opacity})` }}>FAIL</Text>
+            <Text style={{ ...styles.sliderText, color: `rgba(255, 17, 17, ${opacity()})` }}>FAIL</Text>
+            {/* textShadowColor: `rgba(255, 17, 17, ${opacity})` */}
 
         </View>
     );

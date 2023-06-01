@@ -13,7 +13,7 @@ const Overlay = ({item, toChallenge}) => {
     return (
         <View style={styles.container}>
             <View style={styles.sliderContainer}>
-                <VotingSlider />
+                <VotingSlider submissionId={item.id}/>
             </View>
             <LinearGradient
                 colors={['transparent',  'rgba(0,0,0, 0.6)']}

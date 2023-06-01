@@ -43,6 +43,7 @@ export function fetchCarousel(challengeId) {
 }
 
 export function voteForSubmission(submissionId, voteScore) {
+    console.log("IN FEED REQUESTS", submissionId, voteScore);
     return async (dispatch) => {
         const headers = getHeaders();
         fetch(`${ROOT_URL}/api/submissions/${submissionId}/vote`, {
@@ -50,10 +51,7 @@ export function voteForSubmission(submissionId, voteScore) {
                 body: JSON.stringify({
                     voteScore
                 }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...headers,
-                },
+                ...headers
             })
             .then((response) => response.json())
             .then((data) => {
@@ -65,3 +63,25 @@ export function voteForSubmission(submissionId, voteScore) {
             });
     };
 }
+
+// export function submitChallenge(challengeId, videoUrl) {
+//     console.log(`inside the dispatch submitting to challengeId: ${challengeId}`);
+//     return async (dispatch) => {
+//         const headers = getHeaders();
+//         console.log(`videoUrl: ${videoUrl}`);
+//         fetch(`${ROOT_URL}/api/challenges/${challengeId}/submit`, {
+//             method: 'POST',
+//             body: JSON.stringify({ videoUrl }),
+//             ...headers
+//         })
+//             .then((response) => response.json())
+//             .then((data) => {
+//                 console.log("VIDEO SUBMITTED", data);
+//                 dispatch(fetchChallenges());
+//             })
+//             .catch((er) => {
+//                 throw er;
+//             });
+//     }
+// }
+
