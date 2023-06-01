@@ -8,19 +8,8 @@ import {LinearGradient} from 'expo-linear-gradient'
 
 const Overlay = ({item, toChallenge}) => {
 
-    console.log('overlay item', item);
+    // console.log('overlay item', item);
 
-    const [challenge, setChallenge] = useState({title: 'DYE YOUR HAIR PINK', expiration: 'Expires in 2 days'});
-
-    const getChallenge = async (challengeId) => {
-        const response = await fetch(`http://localhost:3000/challenges/${challengeId}`);
-        const data = await response.json();
-        setChallenge(data);
-    }
-
-    useEffect(() => {
-        // getChallenge(post.challengeId);
-}, []);
     return (
         <View style={styles.container}>
             <View style={styles.sliderContainer}>

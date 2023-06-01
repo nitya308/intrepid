@@ -12,18 +12,18 @@ function debounce(func, timeout = 300) {
     };
 }
 
-const VotingSlider = () => {
+const VotingSlider = ({hasVoted=false}) => {
 
     const dispatch = useDispatch();
 
     const [value, setValue] = useState(0);
-    const [voted, setVoted] = useState(false);
+    const [voted, setVoted] = useState(hasVoted);
 
     const opacity = () => voted ? 0.5 : 1;
 
     const vote = debounce(() => {
-        setVoted(true);
         // dispatch(voteForChallenge(value));
+        setVoted(true);
         console.log("voted for challenge");
     });
 
@@ -44,6 +44,7 @@ const VotingSlider = () => {
                     step={0.1}
                     min={-1}
                     max={1}
+                    disabled={voted}
                     borderRadius={5000}
                     minimumTrackTintColor="transparent"
                     maximumTrackTintColor="transparent"
