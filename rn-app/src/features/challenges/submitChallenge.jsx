@@ -80,7 +80,7 @@ const SubmitChallenge = ({ navigation, route }) => {
         }
 
         try {
-
+            console.log("uploading video: " + video.uri);
             const response = await fetch(video.uri);
             const blob = await response.blob();
             const fileName = video.uri.split('/').pop();

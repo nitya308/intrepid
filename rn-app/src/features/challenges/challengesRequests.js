@@ -71,6 +71,7 @@ export function createChallenge(challenge_obj, navigation) {
 }
 
 export function submitChallenge(challengeId, videoUrl) {
+    console.log(`inside the dispatch submitting to challengeId: ${challengeId}`);
     return async (dispatch) => {
         const headers = getHeaders();
         console.log(`videoUrl: ${videoUrl}`);
@@ -81,7 +82,7 @@ export function submitChallenge(challengeId, videoUrl) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                console.log("VIDEO SUBMITTED", data);
                 dispatch(fetchChallenges());
             })
             .catch((er) => {
