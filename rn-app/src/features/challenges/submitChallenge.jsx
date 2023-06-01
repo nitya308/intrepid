@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity, Button
+    StyleSheet, View, Text, Image, TouchableOpacity, Button, ActivityIndicator
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchChallenge, submitChallenge } from '../challenges/challengesRequests';
@@ -29,6 +29,7 @@ const SubmitChallenge = ({ navigation, route }) => {
     const [exitModalVisible, setExitModalVisible] = useState(false);
     const [video, setVideo] = useState(null);
     const [status, setStatus] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const pickVideo = async () => {
         // No permissions request is necessary for launching the image library
@@ -80,7 +81,7 @@ const SubmitChallenge = ({ navigation, route }) => {
         }
 
         try {
-            console.log("uploading video: " + video.uri);
+            setIsSubmitting(true);
             const response = await fetch(video.uri);
             const blob = await response.blob();
             const fileName = video.uri.split('/').pop();
@@ -89,10 +90,10 @@ const SubmitChallenge = ({ navigation, route }) => {
             console.log('url at handleSubmit', url);
             // create a new submission object with the url
             dispatch(submitChallenge(route.params.challengeId, url));
-            navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })
+            navigation.navigate('Challenge Info', { challengeId: route.params.challengeId })
         } catch (error) {
             const onPress = () => {
-                navigation.navigate('Challenge Info', { paramKey: route.params.paramKey })
+                navigation.navigate('Challenge Info', { challengeId: route.params.challengeId })
             }
             Alert.alert(
                 'Error',
@@ -102,8 +103,15 @@ const SubmitChallenge = ({ navigation, route }) => {
                 ]
             );
         }
+    }
 
-
+    const SubmittingIndicator = () => {
+        return (
+            <View style={styles.submittingIndicator}>
+                <Text style={styles.submittingIndicatorText}>Submitting your video...</Text>
+                <ActivityIndicator size='large' />
+            </View>
+        )
     }
 
     useEffect(() => {
@@ -150,7 +158,7 @@ const SubmitChallenge = ({ navigation, route }) => {
 
             <Text style={styles.title}>{currentChallenge.title}</Text>
             <View style={styles.expirationAndPointValue}>
-                <Text style={styles.expiration}>Expires in 3 days</Text>
+                <Text style={styles.expiration}>Expires in {currentChallenge.expiresIn}</Text>
                 <Text style={styles.pointValue}>{currentChallenge.points} PTS</Text>
             </View>
 
@@ -186,6 +194,8 @@ const SubmitChallenge = ({ navigation, route }) => {
                     />
                 </TouchableOpacity>
             </View>
+
+            {isSubmitting ? <SubmittingIndicator /> : null}
 
         </View>
     )
@@ -310,6 +320,19 @@ const styles = StyleSheet.create({
         height: '30%',
         backgroundColor: '#121212',
     }
+    },
+
+    submittingIndicator: {
+        alignItems: 'center',
+        rowGap: 15,
+        marginTop: 30,
+    },
+
+    submittingIndicatorText: {
+        color: '#fff',
+        fontFamily: 'Exo-Regular',
+        fontSize: 18,
+    },
 
 })
 
