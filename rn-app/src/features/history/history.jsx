@@ -18,6 +18,10 @@ const History = ({navigation}) => {
 
     const history = useSelector((state) => state.history.submissions) || [];
 
+    console.log("HISTORY DATA", history);
+
+    console.log("HISTORY DATA 0", history[0]);
+
     const [refreshing, setRefreshing] = useState(false);
 
     const onRefresh = useCallback(() => {
@@ -124,9 +128,9 @@ const History = ({navigation}) => {
                     data={history}
                     renderItem={({item}) => 
                         <HistoryItem
-                            challengeId={item.challengeId.id}
-                            title={item.challengeId.title}
-                            points={item.challengeId.points}
+                            challengeId={item.challengeId?.id}
+                            title={item.challengeId?.title}
+                            points={item.challengeId?.points}
                             success={item.success}
                             isVotingEnded={item.isVotingEnded}
                         />
