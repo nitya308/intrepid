@@ -6,10 +6,9 @@ import challengesSlice from '../challenges/challengesSlice';
 import VotingSlider from './votingSlider';
 import {LinearGradient} from 'expo-linear-gradient'
 
+const Overlay = ({item, toChallenge}) => {
 
-
-
-const Overlay = ({post, toChallenge}) => {
+    console.log('overlay item', item);
 
     const [challenge, setChallenge] = useState({title: 'DYE YOUR HAIR PINK', expiration: 'Expires in 2 days'});
 
@@ -33,12 +32,12 @@ const Overlay = ({post, toChallenge}) => {
                 <View style={styles.nonSlider}>
                     
                     <View style={styles.description}>
-                        <Text style={styles.challengeTitle}>{challenge.title}</Text>
-                        <Text style={styles.expiration}>{challenge.expiration}</Text>
+                        <Text style={styles.challengeTitle}>{item.challengeId?.title}</Text>
+                        <Text style={styles.points}>{item.challengeId?.points} points</Text>
                     </View>
                     <View style={styles.tryContainer}>
                         <TouchableOpacity onPress={() => {
-                            toChallenge(post.challengeId)
+                            toChallenge(item.challengeId?.id)
                             console.log('TRY button pressed')
                             }}>
                             <Image
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
         marginLeft: 7,
     },
 
-    expiration: {
+    points: {
         color: '#fff',
         textShadowColor: '#CCFF00',
         textShadowRadius: 4,
