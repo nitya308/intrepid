@@ -28,48 +28,6 @@ const History = ({navigation}) => {
         }, 2000);
     }, []);
 
-    // const historyData = [
-    //     // {
-    //     //     challengeId: '1',
-    //     //     title: 'DYE YOUR HAIR PINK',
-    //     //     points: 75,
-    //     //     success: 1,
-    //     //     isVotingEnded: false,
-    //     // },
-
-    //     // {
-    //     //     challengeId: '2',
-    //     //     title: 'GET A DRAGON TATTOO',
-    //     //     points: 200,
-    //     //     success: 1,
-    //     //     isVotingEnded: true,
-    //     // },
-
-    //     // {
-    //     //     challengeId: '3',
-    //     //     title: 'FLEE THE COUNTRY',
-    //     //     points: 180,
-    //     //     success: -1,
-    //     //     isVotingEnded: true,
-    //     // },
-    //     {"__v": 0, 
-    //     "_id": "6477abe75ffeb6eaf0916d42", 
-    //     "challengeId": 
-    //     {"_id": "6476c4daf8ec6ef5751aff3c", 
-    //     "id": "6476c4daf8ec6ef5751aff3c", 
-    //     "title": "DYE YOUR HAIR PINK"}, 
-    //     "createdAt": "2023-05-31T20:19:51.841Z", 
-    //     "id": "6477abe75ffeb6eaf0916d42", 
-    //     "isVotingEnded": false, 
-    //     "success": 0, 
-    //     "updatedAt": "2023-05-31T20:19:51.841Z", 
-    //     "userId": "6476ae1fb714665fbedb4bda", 
-    //     "userVote": -2, 
-    //     "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4", 
-    //     "votingEndsAt": "2023-06-01T20:19:51.840Z"}
-
-    // ];
-
     const SubmissionStatus = ({ success, isVotingEnded }) => {
         if (!isVotingEnded) {
             return <Text style={styles.votingStatus}>VOTING</Text>
@@ -124,9 +82,9 @@ const History = ({navigation}) => {
                     data={history}
                     renderItem={({item}) => 
                         <HistoryItem
-                            challengeId={item.challengeId.id}
-                            title={item.challengeId.title}
-                            points={item.challengeId.points}
+                            challengeId={item.challengeId?.id}
+                            title={item.challengeId?.title}
+                            points={item.challengeId?.points}
                             success={item.success}
                             isVotingEnded={item.isVotingEnded}
                         />
