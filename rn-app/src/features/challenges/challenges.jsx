@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     neonRed: {
         shadowOpacity: 1,
         borderColor: '#FFA8A8',
-        shadowRadius: 15,
+        shadowRadius: 8,
         shadowColor: '#FF1C1C',
         backgroundColor: '#41151b',
     },
