@@ -4,11 +4,15 @@
 
 Our mobile app gamifies getting out of your comfort zone. It encourages people to take risks and do things that they wouldn't necessarily do otherwise. 
 
+## Some screenshots
+
 ## Architecture
 This uses React Native running on Expo.
 
 Some packages we use are:
 
+* [rn-vertical slider](https://github.com/sacmii/rn-vertical-slider). please note we made a patch to this package to fix a bug in it! It should be auto-applied when you run npm install but see the patches folder for more details.
+* [expo-image-picker](https://github.com/expo/expo/tree/main/packages/expo-image-picker)
 
 ## Setup/Deployment
 
