@@ -4,6 +4,9 @@
 
 Our mobile app gamifies getting out of your comfort zone. It encourages people to take risks and do things that they wouldn't necessarily do otherwise. 
 
+### Note
+If nothing loads, this may be due to backend issues with render free hosting. Please click on https://project-nerve-backend.onrender.com/api in your browser until a hello message loads. This means render has started running the deployed backend and the app should now work.
+
 ## Some screenshots
 
 ## Architecture
