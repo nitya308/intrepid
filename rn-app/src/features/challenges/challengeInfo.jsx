@@ -106,7 +106,7 @@ const ChallengeInfo = ({ navigation, route }) => {
                 </View>
             </View>
 
-            <AutoScroll>
+            <AutoScroll style={styles.videoCarousel}>
                 <View style={styles.videos}>
                     {videosList.map((url) => {
                         return (
@@ -168,18 +168,20 @@ const styles = StyleSheet.create({
     screen: {
         paddingTop: 55,
     },
+
     row: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
         width: '100%',
     },
+
     backAndPoints: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 25,
-        marginBottom: 20,
+        marginBottom: 10,
     },
 
     backButton: {
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Glitch-Goblin',
         fontSize: 40,
         fontWeight: 700,
-        marginTop: 30,
+        marginTop: 20,
     },
 
     actions: {
@@ -234,7 +236,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 10,
     },
 
     expiration: {
@@ -254,8 +256,8 @@ const styles = StyleSheet.create({
     description: {
         color: '#ffffff',
         fontFamily: 'Exo-Regular',
-        fontSize: 20,
-        marginTop: 20,
+        fontSize: 18,
+        marginTop: 15,
     },
 
     submitChallengeButtonContainer: {
@@ -273,9 +275,9 @@ const styles = StyleSheet.create({
         borderColor: '#C8FCFF',
         borderRadius: 10,
         alignItems: 'center',
-        paddingVertical: 20,
+        paddingVertical: 15,
         marginHorizontal: 20,
-        rowGap: 30,
+        rowGap: 20,
         marginTop: 20,
     },
 
