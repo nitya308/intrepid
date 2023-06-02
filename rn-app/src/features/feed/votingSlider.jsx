@@ -5,38 +5,23 @@ import VerticalSlider from 'rn-vertical-slider';
 import { useDispatch } from 'react-redux';
 import { voteForSubmission } from './feedRequests';
 
-function debounce(func, timeout = 300) {
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { func.apply(this, args); }, timeout);
-    };
-}
-
-const VotingSlider = ({hasVoted=false, submissionId}) => {
+const VotingSlider = ({userVote, submissionId}) => {
 
     const dispatch = useDispatch();
 
-    const [value, setValue] = useState(0);
-    const [voted, setVoted] = useState(hasVoted);
+    const [value, setValue] = useState(userVote);
+    const [voted, setVoted] = useState(userVote != -10);
 
     const opacity = () => voted ? 0.5 : 1;
 
     const vote = (value) => {
-        console.log("value", value);
-        // console.log("about to dispatch with", submissionId, value);
-        // dispatch(voteForSubmission(submissionId, value));
-        // setVoted(true);
-        // console.log("voted for challenge");
+        // console.log("value", value);
+        if (value){
+            setVoted(true);
+            dispatch(voteForSubmission(submissionId, value));
+        }
     };
 
-    // const vote = debounce(() => {
-    //     console.log("value", value);
-    //     // console.log("about to dispatch with", submissionId, value);
-    //     // dispatch(voteForSubmission(submissionId, value));
-    //     // setVoted(true);
-    //     // console.log("voted for challenge");
-    // });
 
     return (
         <View style={styles.container}>
@@ -50,7 +35,7 @@ const VotingSlider = ({hasVoted=false, submissionId}) => {
                 <VerticalSlider
                     style={styles.slider}
                     value={value}
-                    onChange={(value) => { setValue(value); vote(); }}
+                    onChange={(value) => { setValue(value) }}
                     height={Dimensions.get('window').height / 3}
                     width={30}
                     step={1}

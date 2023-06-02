@@ -39,7 +39,7 @@ const SubmitChallenge = ({ navigation, route }) => {
             quality: 0,
         });
 
-        console.log(result);
+        // console.log(result);
 
         if (result.canceled) return;
 
@@ -132,7 +132,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 backdropTransitionOutTiming={0}
             >
                 <Text
-                    style={styles.editModalText}>Are you sure you want to stop uploading?</Text>
+                    style={styles.editModalText}>Are you sure you want to leav this page? it will keep uploading</Text>
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
@@ -187,7 +187,7 @@ const SubmitChallenge = ({ navigation, route }) => {
             </View>
 
             <View style={styles.submitButtonContainer}>
-                <TouchableOpacity onPress={handleSubmit}>
+                <TouchableOpacity onPress={handleSubmit} disabled={isSubmitting}>
                     <Image
                         style={styles.submitButton}
                         source={SubmitButton}

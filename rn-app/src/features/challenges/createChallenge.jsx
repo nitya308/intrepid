@@ -34,7 +34,7 @@ const CreateChallenge = ({navigation}) => {
             }
             console.log(challenge);
             dispatch(createChallenge(challenge, navigation));
-            navigation.navigate('Challenges Main');
+            // navigation.navigate('Challenges Main');
             
         }
     }

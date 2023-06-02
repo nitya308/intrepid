@@ -1,5 +1,6 @@
 import {
-    setSubmissions
+    setHasVoted,
+    setSubmissions,
 } from './feedSlice';
 import {
     setChallenges
@@ -23,7 +24,7 @@ export function fetchSubmissions() {
                 console.log("data: ", data);
             })
             .catch((er) => {
-                throw er;
+                console.log("error", er);
             });
     };
 }
@@ -43,7 +44,6 @@ export function fetchCarousel(challengeId) {
 }
 
 export function voteForSubmission(submissionId, voteScore) {
-    console.log("IN FEED REQUESTS", submissionId, voteScore);
     return async (dispatch) => {
         const headers = getHeaders();
         fetch(`${ROOT_URL}/api/submissions/${submissionId}/vote`, {
@@ -55,8 +55,8 @@ export function voteForSubmission(submissionId, voteScore) {
             })
             .then((response) => response.json())
             .then((data) => {
-                dispatch(setSubmissions(data));
-                console.log("data: ", data);
+                // dispatch(setSubmissions(data));
+                dispatch(setHasVoted(submissionId));
             })
             .catch((er) => {
                 throw er;

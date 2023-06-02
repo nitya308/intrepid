@@ -18,7 +18,7 @@ const Feed=({navigation, route}) => {
 
     const arr = useSelector(state => state.feed.submissions);
 
-    console.log("IN FEED", arr);
+    // console.log("IN FEED", arr);
 
     const onViewableItemsChanged = useRef(({ changed }) => {
         // console.log("nav", navigation);

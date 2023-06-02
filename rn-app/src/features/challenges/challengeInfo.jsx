@@ -35,7 +35,7 @@ const ChallengeInfo = ({ navigation, route }) => {
     const currUserSubmission = challengeSubmissions.find((submission) => submission.userId === userId);
     // const hasSubmitted = challengeSubmissions.some((submission) => submission.userId === userId);
 
-    console.log('currentChallenge', currentChallenge);
+    // console.log('currentChallenge', currentChallenge);
 
     // const videosList = [
     //     'https://swerve-bucket.s3.amazonaws.com/04D29E3F-E8B5-41C4-A100-3BF798620659.mov',

@@ -40,7 +40,7 @@ export function fetchChallenge(id) {
         fetch(`${ROOT_URL}/api/challenges/${id}`, headers)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 dispatch(setCurrentChallenge(data));
             })
             .catch((er) => {
@@ -71,10 +71,10 @@ export function createChallenge(challenge_obj, navigation) {
 }
 
 export function submitChallenge(challengeId, videoUrl) {
-    console.log(`inside the dispatch submitting to challengeId: ${challengeId}`);
+    // console.log(`inside the dispatch submitting to challengeId: ${challengeId}`);
     return async (dispatch) => {
         const headers = getHeaders();
-        console.log(`videoUrl: ${videoUrl}`);
+        // console.log(`videoUrl: ${videoUrl}`);
         fetch(`${ROOT_URL}/api/challenges/${challengeId}/submit`, {
             method: 'POST',
             body: JSON.stringify({ videoUrl }),
@@ -82,8 +82,8 @@ export function submitChallenge(challengeId, videoUrl) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("VIDEO SUBMITTED", data);
-                dispatch(fetchChallenges());
+                // console.log("VIDEO SUBMITTED", data);
+                dispatch(fetchChallenge(data.challengeId));
             })
             .catch((er) => {
                 throw er;

@@ -12,7 +12,13 @@ export const feedSlice = createSlice({
     reducers: {
         setSubmissions: (state, action) => {
             state.submissions = action.payload;
-            console.log("THING", state.submissions)
+        },
+        setHasVoted: (state, action) => {
+            const submissionId = action.payload;
+            const submission = state.submissions.find(
+                (submission) => submission.id === submissionId
+            );
+            submission.hasVoted = true;
         },
         setCarousel: (state, action) => {
             state.carousel = action.payload;

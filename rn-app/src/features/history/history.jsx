@@ -59,7 +59,7 @@ const History = ({navigation}) => {
         <View style={styles.screen}>
             <View style={styles.signOutAndPoints}>
                 <TouchableOpacity
-                    onPress={() =>  dispatch(signoutUser()) }
+                    onPress={() =>  {dispatch(signoutUser()) }}
                 >
                     <Image
                         source={SignOutButton}
