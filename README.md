@@ -7,15 +7,18 @@ Our mobile app gamifies getting out of your comfort zone. It encourages people t
 ## Architecture
 This uses React Native running on Expo.
 
-We will be using packages such as [react-native-maps](https://github.com/react-native-maps/react-native-maps)
+Some packages we use are:
+
 
 ## Setup/Deployment
 
 First, run ```git clone``` to clone the repository.
 
-Then, run ```cd project-nerve/rn-app``` and ```npm install``` to set up packages.
+Then, run ```cd project-nerve/rn-app``` 
 
-Run ```npx expo start``` to start the app. If it doesn't load on your phone and recommends tunneling, run ```expo start --tunnel``` in the rn-app directory.
+Then ```npm install``` to set up packages. Please make sure you are in the ```rn-app``` directory before doing this!!
+
+Run ```npx expo start``` to start the app. If it doesn't load on your phone and recommends tunneling, run ```expo start --tunnel``` in the rn-app directory. Make sure your phone and computer are on the same wifi.
 
 This will be deployed on Expo and possibly TestFlight.
 
