@@ -132,7 +132,7 @@ const SubmitChallenge = ({ navigation, route }) => {
                 backdropTransitionOutTiming={0}
             >
                 <Text
-                    style={styles.editModalText}>Are you sure you want to leav this page? it will keep uploading</Text>
+                    style={styles.editModalText}>Are you sure you want to leave this page? it will keep uploading</Text>
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
@@ -208,9 +208,9 @@ const styles = StyleSheet.create({
     },
 
     exitModal: {
-        backgroundColor: '#121212',
+        backgroundColor: '#1E1E1E',
         borderRadius: 15,
-        marginVertical: 320,
+        marginVertical: 300,
         marginHorizontal: 50,
         paddingHorizontal: 40,
         rowGap: 40,
@@ -219,10 +219,10 @@ const styles = StyleSheet.create({
     editModalText: {
         color: '#ffffff',
         fontFamily: 'Exo-Medium',
-        fontSize: 23,
+        fontSize: 20,
         fontWeight: 500,
         textAlign: 'center',
-        lineHeight: 35,
+        lineHeight: 30,
     },
 
     exitModalActions: {

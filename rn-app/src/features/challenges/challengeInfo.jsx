@@ -91,7 +91,7 @@ const ChallengeInfo = ({ navigation, route }) => {
         return content;
     }
 
-    if (currentChallenge) {
+    if (currentChallenge.expiresIn) {
     return (
         <View style={styles.screen}>
             <View style={styles.backAndPoints}>

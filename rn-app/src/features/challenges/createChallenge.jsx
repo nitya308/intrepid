@@ -49,6 +49,7 @@ const CreateChallenge = ({navigation}) => {
                 animationInTiming={100}
                 animationOut={'fadeOut'}
                 animationOutTiming={100}
+                backdropTransitionOutTiming={0}
             >
                 <Text
                     style={styles.editModalTextHeader}>Are you sure you want to leave this page?</Text>
@@ -57,7 +58,9 @@ const CreateChallenge = ({navigation}) => {
                 <View style={styles.exitModalActions}>
                     <Text
                         style={styles.exitModalExitText}
-                        onPress={() => {navigation.navigate('Challenges Main')}}
+                        onPress={() => {
+                            setExitModalVisible(false)
+                            navigation.navigate('Challenges Main')}}
                     >Exit</Text>
                     <TouchableOpacity onPress={() => { setExitModalVisible(false) }}>
                         <Image
@@ -83,11 +86,11 @@ const CreateChallenge = ({navigation}) => {
             <View styles={styles.createChallengeContainer}> 
                 <Text style = {styles.h1}> CREATE A CHALLENGE </Text>
                 <View style={styles.illegalWarning}>
-                <Image
-                            style={styles.white_exclamation}
-                            source={WhiteExclamation}
-                        />
-                    <Text style={styles.text}> Challenges involving illegal activities or encouraging users to harm themselves or others <Text style={styles.redText}>will be removed.</Text> </Text>
+                    <Image
+                        style={styles.white_exclamation}
+                        source={WhiteExclamation}
+                    />
+                    <Text style={styles.text}>Challenges involving illegal activities or encouraging users to harm themselves or others <Text style={styles.redText}>will be removed.</Text> </Text>
                 </View>
 
                 <View style={styles.inputContainer}> 
@@ -97,6 +100,7 @@ const CreateChallenge = ({navigation}) => {
                       value={title}
                       onChangeText={setTitle}
                       placeholder="Input a title"
+                      placeholderTextColor="#5E5E5E"
                       maxLength={32}
                   />
                 </View>
@@ -108,6 +112,7 @@ const CreateChallenge = ({navigation}) => {
                       value={description}
                       onChangeText={setDescription}
                       placeholder="Input a description"
+                      placeholderTextColor="#5E5E5E"
                       multiline={true}
                       maxLength={200}
                   />
@@ -199,9 +204,7 @@ justifyContent:'center',
         fontFamily: 'Glitch-Goblin',
     },
     illegalWarning: {
-        borderStyle:'solid',
-        borderWidth:1,
-        borderColor:'black',
+        borderRadius: 10,
         width:336,
         height:75,
         backgroundColor: '#262626',
@@ -230,14 +233,12 @@ justifyContent:'center',
         fontFamily: 'Exo-Medium'
     },
     input: {
-        
       borderColor: '#CCCCCC',
-      borderWidth: 1,
+      borderWidth: 0.5,
       paddingHorizontal: 10,
-      backgroundColor: 'black',
       marginTop: 5,
       color: 'white',
-      borderRadius: 10,
+      borderRadius: 6,
       width: 335,
       height:28,
       fontFamily: 'Exo-Medium'
@@ -245,15 +246,14 @@ justifyContent:'center',
     inputDescription: {
         height: 143,
       borderColor: '#CCCCCC',
-      borderWidth: 1,
+      borderWidth: 0.5,
       paddingHorizontal: 10,
-      backgroundColor: 'black',
       marginTop: 5,
       color: 'white',
-      borderRadius: 10,
+      borderRadius: 6,
       width: 335,
-      
-paddingBottom: 0,
+      paddingBottom: 0,
+      fontFamily: 'Exo-Medium',
     },
     inputLabelPoints: {
         fontSize: 25,
@@ -261,20 +261,17 @@ paddingBottom: 0,
     inputPoints: {
         height: 49,
       borderColor: '#CCCCCC',
-      borderWidth: 1,
+      borderWidth: 0.5,
       paddingHorizontal: 10,
-      backgroundColor: 'black',
       marginTop: 5,
       color: 'white',
-      borderRadius: 10,
+      borderRadius: 6,
       width: 60,
       fontFamily:'Exo-SemiBold'
       
     },
     pointsWarning: {
-        borderStyle:'solid',
-        borderWidth:1,
-        borderColor:'black',
+        borderRadius: 10,
         width:336,
         height:57,
         borderRadius:6,
@@ -324,10 +321,9 @@ paddingBottom: 0,
         fontFamily: 'Exo-Medium',
     },
     exitModal: {
-        backgroundColor: '#303030',
-        width:280,
+        backgroundColor: '#1E1E1E',
         borderRadius: 15,
-        marginVertical: 200,
+        marginVertical: 270,
         marginHorizontal: 50,
         paddingHorizontal: 20,
         rowGap: 15,
