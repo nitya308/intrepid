@@ -17,6 +17,9 @@ const Feed=({navigation, route}) => {
     }, []);
 
     const arr = useSelector(state => state.feed.submissions);
+    // filter out submissions that have userId as current user
+    const userId = useSelector((state) => state.user.userId);
+    const filteredArr = arr.filter((submission) => submission.userId !== userId);
 
     // console.log("IN FEED", arr);
 
@@ -52,6 +55,7 @@ const Feed=({navigation, route}) => {
             </View>
         )
     }
+    
     return (
         <View style={styles.container}>
             <Text style={styles.title}>FEED</Text>
@@ -62,7 +66,7 @@ const Feed=({navigation, route}) => {
                 />
             </SafeAreaView> */}
             <FlatList
-                data = {arr}
+                data = {filteredArr}
                 windowSize={4}
                 maxToRenderPerBatch={2}
                 removeClippedSubviews={true}
