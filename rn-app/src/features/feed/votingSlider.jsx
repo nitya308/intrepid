@@ -26,7 +26,6 @@ const VotingSlider = ({userVote, submissionId}) => {
     return (
         <View style={styles.container}>
             <Text style={{ ...styles.sliderText, color: `rgb(0, 238, 255)`}}>SUCCESS</Text>
-            {/* commented out: opacity: `${opacity()}`  */}
 
             <LinearGradient
                 colors={[`rgb(0, 238, 255)`, `rgb(255, 17, 17)`]}
@@ -66,8 +65,7 @@ const VotingSlider = ({userVote, submissionId}) => {
 
             </LinearGradient>
 
-            <Text style={{ ...styles.sliderText, color: `rgba(255, 17, 17, ${opacity()})` }}>FAIL</Text>
-            {/* textShadowColor: `rgba(255, 17, 17, ${opacity})` */}
+            <Text style={{ ...styles.sliderText, color: `rgb(255, 17, 17)` }}>FAIL</Text>
 
         </View>
     );

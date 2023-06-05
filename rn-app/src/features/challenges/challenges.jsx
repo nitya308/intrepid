@@ -328,20 +328,15 @@ const styles = StyleSheet.create({
     allTitle: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 24,
         textAlign: 'center',
         width: 160,
-        // marginRight: 20,
-        // marginLeft:10,
         lineHeight:25,
         fontFamily: 'Groupe',
         letterSpacing: -1.5,
     },
 
     allRight: {
-        // marginRight: 20,
-        // marginBottom: 10,
-        // paddingVertical:4,
         justifyContent: 'center',
         alignItems: 'flex-end',
         rowGap: 5,
@@ -352,19 +347,15 @@ const styles = StyleSheet.create({
         textShadowColor: '#CCFF00',
         textShadowRadius: 4,
         fontFamily: 'Exo-Medium',
-        
-        // color: 'white',
-        // marginHorizontal: 20,
-        // marginTop: 15,
         fontSize: 14.67,
-        // color: '#FAE3BD',
     },
 
     aPoints: {
-        fontSize: 25,
+        fontSize: 28,
         color: 'white',
         fontStyle: 'italic',
         fontWeight: 'bold',
+        fontFamily: 'Glitch-Goblin',
     },
 
 });
