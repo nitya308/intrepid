@@ -21,7 +21,7 @@ const Overlay = ({item, toChallenge}) => {
                 <View style={styles.nonSlider}>
                     
                     <View style={styles.description}>
-                        <Text style={styles.challengeTitle}>{item.challengeId?.title}</Text>
+                        <Text style={styles.challengeTitle}>{!item.challengeId?.title ? null : item.challengeId?.title.toUpperCase()}</Text>
                         <Text style={styles.points}>{item.challengeId?.points} points</Text>
                     </View>
                     <View style={styles.tryContainer}>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     challengeTitle: {
         color: '#ffffff',
         fontFamily: 'Groupe',
-        fontSize: 30,
+        fontSize: 29,
         letterSpacing: -2.5,
         marginLeft: 7,
     },

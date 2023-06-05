@@ -48,7 +48,7 @@ const Saved = ({ navigation }) => {
                 // );
             }}>
                 <View style={styles.savedItem}>
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.title}>{!title ? null : title.toUpperCase()}</Text>
                     <View style={styles.expirationAndPointsAndBookmark}>
                         <Text style={styles.expiresAt}>Expires in {expiresIn}</Text>
                         <View style={styles.pointsAndBookmark}>
@@ -103,7 +103,7 @@ const Saved = ({ navigation }) => {
 const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 20,
-        paddingTop: 55,
+        paddingTop: 57,
     },
 
     savedHeader: {
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
 
     savedContainer: {
         marginTop: 20,
+        paddingBottom: 90
     },
 
     savedItem: {

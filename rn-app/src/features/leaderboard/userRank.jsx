@@ -15,7 +15,7 @@ const UserRank = (props) => {
             <Text style={styles.username}>{!userObj.username ? null : userObj.username.toUpperCase()}</Text>
             <View style={styles.challengesAndPoints}>
                 <Text style={styles.points}>{userObj.currentPoints} PTS</Text>
-                <Text style={styles.numChallenges}>{userObj.numChallengesSucceeded} suceeded</Text>
+                <Text style={styles.numChallenges}>{userObj.numChallengesSucceeded} succeeded</Text>
             </View>
         </View>
     )
