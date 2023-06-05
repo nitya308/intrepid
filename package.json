@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@expo/ngrok": "^4.1.1",
-    "react-native-auto-scroll": "^0.0.1",
-    "rn-vertical-slider": "^2.0.2"
-  }
-}
