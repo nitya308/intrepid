@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Entry from './entry';
 import Signup from './signup';
 import Login from './login';
+import Onboarding from './onboarding';
 
 const EntryStack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const EntryNavigator = () => {
                 cardStyle: { backgroundColor: '#121212' }
             }}
             >
+                <EntryStack.Screen name='Onboarding' component={Onboarding} />
                 <EntryStack.Screen name='Entry' component={Entry} />
                 <EntryStack.Screen name='Signup' component={Signup} />
                 <EntryStack.Screen name='Login' component={Login} />
