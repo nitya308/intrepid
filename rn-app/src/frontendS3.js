@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ROOT_URL = 'https://devon-api-6xwz.onrender.com/api';
+const ROOT_URL = 'https://project-nerve-backend.onrender.com/api';
 
 async function getSignedRequest(file) {
     const fileName = encodeURIComponent(file.name);
