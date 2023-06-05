@@ -1,14 +1,18 @@
 import React from 'react';
 import {
-    StyleSheet, View, Text, Image, TouchableOpacity,
+    ImageBackground, StyleSheet, View, Text, Image, TouchableOpacity,
 } from 'react-native';
 import EntryLogo from './../../assets/images/entry-logo.png'
 import SignupButton from './../../assets/images/sign-up-button.png'
 import LoginButton from './../../assets/images/log-in-button.png'
+import background from './../../assets/images/background.gif'
 
 const Entry = ({navigation}) => {
     return (
         <View>
+            <ImageBackground
+                style={styles.background}
+                source={background} >  
             <View style={styles.entryInfoContainer}>
                 <Image
                     style={styles.entryLogo}
@@ -35,6 +39,7 @@ const Entry = ({navigation}) => {
                     />
                 </TouchableOpacity>
             </View>
+            </ImageBackground>
         </View>
     )
 }
