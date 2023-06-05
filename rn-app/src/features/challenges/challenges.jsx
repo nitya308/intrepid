@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
-    StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, SafeAreaView, Alert
+    StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions, SafeAreaView, Alert
 } from 'react-native';
 import { fetchChallenges, fetchTrendingChallenges } from './challengesRequests';
 import { useSelector, useDispatch } from 'react-redux';
@@ -59,9 +59,7 @@ const Challenges = ({ navigation }) => {
                         style={styles.addButton}
                     />
                 </TouchableOpacity>
-                <View style={styles.pointsBoxContainer}>
-                    <PointsBox />
-                </View>
+                <PointsBox/>
             </View>
            
                 
@@ -161,19 +159,14 @@ const Challenges = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // justifyContent: 'space-around',
-        // alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
+        paddingTop: 57,
     },
     backAndPoints: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: 370,
-        marginTop: 20,
-        paddingTop:40,
+        // alignItems: 'center',
+        // width: 370,
     },
 
     exitButton: {
@@ -181,19 +174,11 @@ const styles = StyleSheet.create({
         height: 30,
     },
 
-    pointsBoxContainer: {
-        width: 71,
-        marginRight:20,
-    },
-
     addButton: {
         width: 40,
-        height: 40,
-        marginLeft:20
-    },
-
-    pointsBoxContainer: {
-        width: 71,
+        height: 28,
+        marginLeft:20,
+        marginRight:  Dimensions.get(`window`).width - 147,
     },
 
     h1: {
@@ -212,7 +197,6 @@ const styles = StyleSheet.create({
     },
 
     h2: {
-        // marginBottom:10,
         fontSize: 20,
         color: 'white',
         alignSelf: 'center',
@@ -327,6 +311,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 15,
+        paddingBottom: 70
     },
 
     allChallengeBox: {
@@ -343,12 +328,14 @@ const styles = StyleSheet.create({
     allTitle: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 17,
+        fontSize: 20,
         textAlign: 'center',
         width: 160,
         // marginRight: 20,
         // marginLeft:10,
         lineHeight:25,
+        fontFamily: 'Groupe',
+        letterSpacing: -1.5,
     },
 
     allRight: {

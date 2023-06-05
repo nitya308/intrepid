@@ -42,7 +42,7 @@ const Leaderboard = (props) => {
 const styles = StyleSheet.create({
     screen: {
         paddingHorizontal: 20,
-        paddingTop: 55,
+        paddingTop: 57,
         backgroundColor: '#121212',
     },
 
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         flexDirection: 'column',
         rowGap: 20,
+        paddingBottom: 90
     },
 })
 

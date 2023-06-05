@@ -45,7 +45,7 @@ const History = ({navigation}) => {
         return (
             <TouchableOpacity onPress={() => {navigation.navigate('Challenge Info', {challengeId: challengeId})}}>
                 <View style={styles.historyItem}>
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.title}>{!title ? null : title.toUpperCase()}</Text>
                     <View style={styles.expirationAndPoints}>
                         <SubmissionStatus success={success} isVotingEnded={isVotingEnded}/>
                         <Text style={[styles.points, isVotingEnded && success < 0 ? styles.pointsStrikethrough : null]}>{points} PTS</Text>
@@ -76,9 +76,8 @@ const History = ({navigation}) => {
                 style={styles.historyHeader}
             />
 
-            <SafeAreaView style={styles.savedContainer}>
+            <SafeAreaView style={styles.historyContainer}>
                 <FlatList
-                    style={styles.savedList}
                     data={history}
                     renderItem={({item}) => 
                         <HistoryItem
@@ -132,11 +131,9 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
 
-    savedContainer: {
+    historyContainer: {
         marginTop: 20,
-    },
-
-    savedList: {
+        paddingBottom: 90
     },
 
     historyItem: {
