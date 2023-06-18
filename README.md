@@ -9,6 +9,18 @@ If nothing loads, this may be due to backend issues with render free hosting. Pl
 
 ## Some screenshots
 
+![create2](https://github.com/nitya308/intrepid/assets/64368452/5def5f12-d1d9-4f20-807c-d14680aa574a)
+
+
+![feed](https://github.com/nitya308/intrepid/assets/64368452/f9e24f88-8429-42fb-a2e4-acedb491afde)
+
+
+![submit3](https://github.com/nitya308/intrepid/assets/64368452/3368cbfd-f92d-4e15-8f59-0f767cabbea2)
+
+
+![saved](https://github.com/nitya308/intrepid/assets/64368452/e3470f43-1e5b-4de0-ad4d-3aadc01a0500)
+
+
 ## Architecture
 This uses React Native running on Expo.
 
