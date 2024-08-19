@@ -42,12 +42,12 @@ Backend URL: https://project-nerve-backend.onrender.com/
 
 ## Authors
 
-Andy Kotz
-Ashna Kumar
-Devon Starr
-Justin Chong
-Nitya Agarwala
-Sarah Chacko
+* Andy Kotz
+* Ashna Kumar
+* Devon Starr
+* Justin Chong
+* Nitya Agarwala
+* Sarah Chacko
 
 ## Acknowledgments
 
